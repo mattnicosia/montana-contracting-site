@@ -105,6 +105,14 @@ if (!index.includes("if(featured)featured.scrollIntoView()")) {
   fail("index.html: leaving a deep-linked project must reveal Featured Projects");
 }
 
+if (!index.includes("montanaProjectGateway:lastGateway==='all'?'all':'featured'")) {
+  fail("index.html: project history entries must record their gateway");
+}
+
+if (!index.includes("if(history.state&&history.state.montanaProjectGateway)")) {
+  fail("index.html: project exit must return to an existing gateway entry");
+}
+
 if (!index.includes("else{lastGateway='';closeOverlays();}")) {
   fail("index.html: homepage routes must clear the project gateway");
 }
