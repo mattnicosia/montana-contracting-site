@@ -18,10 +18,10 @@ const contentTypes = {
 };
 
 createServer((request, response) => {
-  const pathname = new URL(request.url, `http://${request.headers.host}`).pathname;
-  const route = pathname === "/" ? "/index.html" : pathname === "/pre-construction" ? "/pre-construction.html" : pathname;
   let decodedRoute;
   try {
+    const pathname = new URL(request.url, `http://${request.headers.host}`).pathname;
+    const route = pathname === "/" ? "/index.html" : pathname === "/pre-construction" ? "/pre-construction.html" : pathname;
     decodedRoute = decodeURIComponent(route);
   } catch {
     response.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });

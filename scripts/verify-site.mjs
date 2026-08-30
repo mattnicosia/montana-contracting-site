@@ -95,8 +95,8 @@ if (!preConstruction.includes("mobileMQ.addEventListener('change',reloadTimeline
 }
 
 const server = readFileSync(resolve(root, "scripts/serve.mjs"), "utf8");
-if (!server.includes("decodedRoute = decodeURIComponent(route)") || !server.includes('response.writeHead(400')) {
-  fail("scripts/serve.mjs: malformed URL encoding must return a client error");
+if (!server.includes("const pathname = new URL(request.url") || !server.includes("decodedRoute = decodeURIComponent(route)") || !server.includes('response.writeHead(400')) {
+  fail("scripts/serve.mjs: malformed request URLs must return a client error");
 }
 
 if (errors.length) {
