@@ -1315,12 +1315,11 @@ a{color:inherit;text-decoration:none}
   function paint(){
     track.style.transform='translateX(-'+(idx*slotWidth())+'px)';
     var pos=realPos();
-    originals.forEach(function(card,i){
-      var isVisible=false;
-      for(var offset=0;offset<visible;offset++){
-        if((pos+offset)%cardsCount===i){isVisible=true;break;}
-      }
+    Array.prototype.forEach.call(track.children,function(card,domIndex){
+      var isVisible=domIndex>=idx&&domIndex<idx+visible;
       card.setAttribute('aria-hidden',isVisible?'false':'true');
+      if(isVisible)card.removeAttribute('tabindex');
+      else card.setAttribute('tabindex','-1');
       card.querySelectorAll('a').forEach(function(link){
         if(isVisible)link.removeAttribute('tabindex');
         else link.setAttribute('tabindex','-1');

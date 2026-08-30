@@ -77,8 +77,8 @@ if (!index.includes("c.setAttribute('tabindex','-1')")) {
   fail("index.html: carousel clones must stay out of the tab order");
 }
 
-if (!index.includes("card.setAttribute('aria-hidden',isVisible?'false':'true')")) {
-  fail("index.html: carousel originals must expose only visible cards to keyboard users");
+if (!index.includes("var isVisible=domIndex>=idx&&domIndex<idx+visible")) {
+  fail("index.html: carousel must expose only rendered DOM slots to keyboard users");
 }
 
 if (!index.includes("closeLightbox(false)")) {
