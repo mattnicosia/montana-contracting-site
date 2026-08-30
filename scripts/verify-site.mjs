@@ -93,6 +93,10 @@ if (!index.includes("if(pall.classList.contains('open'))allScrollTop=pall.scroll
   fail("index.html: All Projects must preserve its scroll position when opening a project");
 }
 
+if (!index.includes("history.replaceState('',document.title,location.pathname+location.search)")) {
+  fail("index.html: closing All Projects must replace its history entry");
+}
+
 const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
@@ -113,6 +117,15 @@ if (!preConstruction.includes("mobileMQ.addEventListener('change',reloadTimeline
 const server = readFileSync(resolve(root, "scripts/serve.mjs"), "utf8");
 if (!server.includes("const pathname = new URL(request.url") || !server.includes("decodedRoute = decodeURIComponent(route)") || !server.includes('response.writeHead(400')) {
   fail("scripts/serve.mjs: malformed request URLs must return a client error");
+}
+
+if (!server.includes('response.writeHead(206') || !server.includes('"Content-Range"')) {
+  fail("scripts/serve.mjs: media requests must support byte ranges");
+}
+
+const sitemap = readFileSync(resolve(root, "sitemap.xml"), "utf8");
+if (sitemap.includes("#")) {
+  fail("sitemap.xml: fragment URLs are not separate crawlable documents");
 }
 
 if (errors.length) {

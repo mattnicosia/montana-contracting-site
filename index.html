@@ -1868,8 +1868,8 @@ a{color:inherit;text-decoration:none}
   function go(slug){location.hash='#'+slug;}
   function goHome(){
     unlockScroll();
-    if(location.hash){history.pushState('',document.title,location.pathname+location.search);}
-    // hashchange doesn't fire on pushState, so close + route explicitly
+    if(location.hash){history.replaceState('',document.title,location.pathname+location.search);}
+    // hashchange doesn't fire on replaceState, so close + route explicitly
     closeOverlays();
     route();
   }
