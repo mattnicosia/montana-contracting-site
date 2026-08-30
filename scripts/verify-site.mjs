@@ -101,6 +101,10 @@ if (!index.includes("location.pathname+location.search+target")) {
   fail("index.html: leaving a project detail must replace its history entry");
 }
 
+if (!index.includes("if(featured)featured.scrollIntoView()")) {
+  fail("index.html: leaving a deep-linked project must reveal Featured Projects");
+}
+
 if (!index.includes("else{lastGateway='';closeOverlays();}")) {
   fail("index.html: homepage routes must clear the project gateway");
 }

@@ -1881,6 +1881,10 @@ a{color:inherit;text-decoration:none}
     history.replaceState('',document.title,location.pathname+location.search+target);
     closeOverlays();
     route();
+    if(target==='#featured'){
+      var featured=document.getElementById('featured');
+      if(featured)featured.scrollIntoView();
+    }
   }
 
   document.addEventListener('click',function(e){
