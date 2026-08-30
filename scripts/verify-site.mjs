@@ -77,6 +77,10 @@ if (!index.includes("closeLightbox(false)")) {
   fail("index.html: hash routing must close the image viewer");
 }
 
+if (!index.includes("minmax(min(320px,100%),1fr)")) {
+  fail("index.html: project cards must fit narrow phone viewports");
+}
+
 const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
@@ -88,6 +92,11 @@ if (!preConstruction.includes(".timeline__phase{grid-area:auto;opacity:1;pointer
 
 if (!preConstruction.includes("mobileMQ.addEventListener('change',reloadTimeline)")) {
   fail("pre-construction.html: timeline must reinitialize after a breakpoint change");
+}
+
+const server = readFileSync(resolve(root, "scripts/serve.mjs"), "utf8");
+if (!server.includes("decodedRoute = decodeURIComponent(route)") || !server.includes('response.writeHead(400')) {
+  fail("scripts/serve.mjs: malformed URL encoding must return a client error");
 }
 
 if (errors.length) {
