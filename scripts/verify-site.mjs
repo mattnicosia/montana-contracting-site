@@ -133,6 +133,10 @@ if (!index.includes("if(history.state&&history.state.montanaProjectGateway)")) {
   fail("index.html: project exit must return to an existing gateway entry");
 }
 
+if (!index.includes("window.addEventListener('popstate',function finishHome()")) {
+  fail("index.html: project-to-home navigation must consume its gateway entry");
+}
+
 if (!index.includes("else{lastGateway='';closeOverlays();}")) {
   fail("index.html: homepage routes must clear the project gateway");
 }
