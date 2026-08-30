@@ -81,6 +81,18 @@ if (!index.includes("minmax(min(320px,100%),1fr)")) {
   fail("index.html: project cards must fit narrow phone viewports");
 }
 
+if (!index.includes("title:'Dunkin Fort Montgomery'") || index.includes("title:'Dunkin Eastchester'")) {
+  fail("index.html: Dunkin project name must match the Fort Montgomery image");
+}
+
+if (index.includes("PR+'catch-air-nanuet-05.jpg'")) {
+  fail("index.html: Catch Air gallery must not include the duplicate fifth image");
+}
+
+if (!index.includes("if(pall.classList.contains('open'))allScrollTop=pall.scrollTop")) {
+  fail("index.html: All Projects must preserve its scroll position when opening a project");
+}
+
 const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
