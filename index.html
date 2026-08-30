@@ -146,8 +146,10 @@ a{color:inherit;text-decoration:none}
 @media(max-width:860px){
   .nav__links{display:none}
   .nav__cta{display:none}
-  .nav__burger{display:block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
+  .nav__burger{display:block;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
   .nav--solid .nav__burger{color:var(--ink)}
+  .nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+  .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
 }
 
 /* ============================== HERO ============================== */
@@ -693,7 +695,7 @@ a{color:inherit;text-decoration:none}
 <!-- NAV -->
 <nav class="nav" id="nav" aria-label="Main navigation">
   <a href="#" class="nav__logo"><img class="logo-light" src="assets/montana-logo-white.svg" alt="Montana Contracting"><img class="logo-dark" src="assets/montana-logo.svg" alt="Montana Contracting"></a>
-  <div class="nav__links">
+  <div class="nav__links" id="main-nav-links">
     <a href="#story">Approach</a>
     <a href="#values">Values</a>
     <a href="#featured">Work</a>
@@ -702,7 +704,7 @@ a{color:inherit;text-decoration:none}
     <a href="#contact">Contact</a>
   </div>
   <a href="#contact" class="nav__cta" data-open-form>Start a Project</a>
-  <a href="#contact" class="nav__burger">Menu</a>
+  <button type="button" class="nav__burger" aria-expanded="false" aria-controls="main-nav-links">Menu</button>
 </nav>
 
 <!-- HERO -->
@@ -1152,10 +1154,22 @@ a{color:inherit;text-decoration:none}
   setTimeout(function(){if(!pre.classList.contains('done')){pre.classList.add('done');document.getElementById('hero').classList.add('in');}},3500);
 })();
 
-/* ============================== NAV SOLID ON SCROLL ============================== */
+/* ============================== NAV SCROLL AND MOBILE MENU ============================== */
 (function(){
   var nav=document.getElementById('nav');
-  function onScroll(){nav.classList.toggle('nav--solid',window.scrollY>window.innerHeight*0.75);}
+  var burger=nav.querySelector('.nav__burger');
+  var links=nav.querySelector('.nav__links');
+  function isOpen(){return nav.classList.contains('nav--open');}
+  function onScroll(){nav.classList.toggle('nav--solid',isOpen()||window.scrollY>window.innerHeight*0.75);}
+  function setOpen(open){
+    nav.classList.toggle('nav--open',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.textContent=open?'Close':'Menu';
+    onScroll();
+  }
+  burger.addEventListener('click',function(){setOpen(!isOpen());});
+  links.addEventListener('click',function(event){if(event.target.closest('a'))setOpen(false);});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&isOpen()){setOpen(false);burger.focus();}});
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 })();
 
@@ -1213,6 +1227,7 @@ a{color:inherit;text-decoration:none}
     var p=video.play();
     if(p&&p.catch)p.catch(function(){section.classList.add('video--fallback');});
   }
+  video.addEventListener('playing',function(){section.classList.remove('video--fallback');});
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if(en.isIntersecting&&video.paused)attemptPlay();
@@ -1264,7 +1279,7 @@ a{color:inherit;text-decoration:none}
       return c;
     });
   }
-  cloneSet().forEach(function(c){track.insertBefore(c,track.firstChild);});
+  cloneSet().reverse().forEach(function(c){track.insertBefore(c,track.firstChild);});
   cloneSet().forEach(function(c){track.appendChild(c);});
 
   var visible=1,idx=cardsCount; /* start on the first real card, past the left clone segment */

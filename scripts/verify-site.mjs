@@ -60,6 +60,15 @@ for (const file of ["favicon.svg", "robots.txt", "sitemap.xml", "vercel.json"]) 
   if (!existsSync(resolve(root, file))) fail(`Missing required file: ${file}`);
 }
 
+const robots = readFileSync(resolve(root, "robots.txt"), "utf8");
+if (!robots.includes("Sitemap: https://montanacontracting.com/sitemap.xml")) {
+  fail("robots.txt: sitemap must use the production host");
+}
+
+if (!index.includes('class="nav__burger" aria-expanded="false" aria-controls="main-nav-links"')) {
+  fail("index.html: mobile menu control must expose its navigation target and state");
+}
+
 if (errors.length) {
   console.error(errors.map((error) => `- ${error}`).join("\n"));
   process.exit(1);
