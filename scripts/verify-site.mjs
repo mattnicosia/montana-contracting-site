@@ -77,6 +77,10 @@ if (!index.includes("c.setAttribute('tabindex','-1')")) {
   fail("index.html: carousel clones must stay out of the tab order");
 }
 
+if (!index.includes("card.setAttribute('aria-hidden',isVisible?'false':'true')")) {
+  fail("index.html: carousel originals must expose only visible cards to keyboard users");
+}
+
 if (!index.includes("closeLightbox(false)")) {
   fail("index.html: hash routing must close the image viewer");
 }
@@ -111,6 +115,14 @@ if (!index.includes("if(featured)featured.scrollIntoView()")) {
 
 if (!index.includes("if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)")) {
   fail("index.html: film autoplay must respect reduced-motion settings");
+}
+
+if (!index.includes("var allowVideo=p.video&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches")) {
+  fail("index.html: project videos must respect reduced-motion settings");
+}
+
+if (!index.includes("function stopDetailMedia()")) {
+  fail("index.html: hidden project videos must stop loading and playing");
 }
 
 if (!index.includes("montanaProjectGateway:lastGateway==='all'?'all':'featured'")) {

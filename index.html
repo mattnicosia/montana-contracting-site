@@ -1315,6 +1315,17 @@ a{color:inherit;text-decoration:none}
   function paint(){
     track.style.transform='translateX(-'+(idx*slotWidth())+'px)';
     var pos=realPos();
+    originals.forEach(function(card,i){
+      var isVisible=false;
+      for(var offset=0;offset<visible;offset++){
+        if((pos+offset)%cardsCount===i){isVisible=true;break;}
+      }
+      card.setAttribute('aria-hidden',isVisible?'false':'true');
+      card.querySelectorAll('a').forEach(function(link){
+        if(isVisible)link.removeAttribute('tabindex');
+        else link.setAttribute('tabindex','-1');
+      });
+    });
     nav.querySelectorAll('.press__dot').forEach(function(d,i){d.classList.toggle('is-active',i===pos);});
   }
   function update(){
@@ -1759,7 +1770,8 @@ a{color:inherit;text-decoration:none}
     }
 
     var nx=nextProject(p);
-    var heroMedia=p.video
+    var allowVideo=p.video&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var heroMedia=allowVideo
       ?'<video src="'+esc(p.video)+'" autoplay loop muted playsinline poster="'+esc(p.images[0])+'"></video>'
       :'<img src="'+esc(p.images[0])+'" alt="'+esc(p.title)+'">';
 
@@ -1817,9 +1829,18 @@ a{color:inherit;text-decoration:none}
   var allBuilt=false;
   var allScrollTop=0;
 
+  function stopDetailMedia(){
+    pdetail.querySelectorAll('video').forEach(function(video){
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    });
+  }
+
   function openDetail(p){
     if(pall.classList.contains('open'))allScrollTop=pall.scrollTop;
     pall.classList.remove('open');pall.setAttribute('aria-hidden','true');
+    stopDetailMedia();
     pdetail.innerHTML=detailHTML(p);
     pdetail.scrollTop=0;
     // reflow so the transition plays from hidden state
@@ -1832,6 +1853,7 @@ a{color:inherit;text-decoration:none}
   }
 
   function openAll(restoreScroll){
+    stopDetailMedia();
     pdetail.classList.remove('open');pdetail.setAttribute('aria-hidden','true');
     if(!allBuilt){pall.innerHTML=allHTML();allBuilt=true;}
     if(!restoreScroll)allScrollTop=0;
@@ -1844,6 +1866,7 @@ a{color:inherit;text-decoration:none}
   }
 
   function closeOverlays(){
+    stopDetailMedia();
     pdetail.classList.remove('open');pdetail.setAttribute('aria-hidden','true');
     pall.classList.remove('open');pall.setAttribute('aria-hidden','true');
     unlockScroll();
