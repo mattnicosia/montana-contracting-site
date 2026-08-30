@@ -1277,6 +1277,7 @@ a{color:inherit;text-decoration:none}
   function cloneSet(){
     return originals.map(function(el){
       var c=el.cloneNode(true);
+      c.classList.add('vis');
       c.setAttribute('aria-hidden','true');
       c.querySelectorAll('a').forEach(function(a){a.setAttribute('tabindex','-1');});
       return c;

@@ -147,7 +147,7 @@ a{color:inherit;text-decoration:none}
 .nav--solid{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;box-shadow:0 1px 0 var(--line)}
 .nav__logo{display:flex;align-items:center;height:26px}
 .nav__logo img{height:100%;width:auto;display:block}
-.nav .nav__logo,.nav .nav__links a,.nav .nav__cta{color:#fff}
+.nav .nav__logo,.nav .nav__links a,.nav .nav__cta,.nav .nav__burger{color:#fff}
 .nav--solid .nav__logo,.nav--solid .nav__links a{color:var(--ink)}
 .nav__logo{text-shadow:0 1px 18px rgba(0,0,0,.35)}
 .nav--solid .nav__logo{text-shadow:none}
@@ -162,7 +162,15 @@ a{color:inherit;text-decoration:none}
 }
 .nav--solid .nav__cta{color:var(--navy);border-color:var(--navy)}
 .nav__cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-@media(max-width:860px){.nav__links{display:none}.nav__cta{display:none}}
+.nav__burger{display:none}
+@media(max-width:860px){
+  .nav__links{display:none}
+  .nav__cta{display:none}
+  .nav__burger{display:block;background:none;color:var(--ink);font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
+  .nav--solid .nav__burger{color:var(--ink)}
+  .nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+  .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
+}
 
 /* Sections */
 .sec{padding:clamp(3.4rem,8vh,6rem) clamp(1.2rem,4vw,3.5rem)}
@@ -183,6 +191,7 @@ a{color:inherit;text-decoration:none}
 .trust{background:var(--dark);padding:0 clamp(1.2rem,4vw,3.5rem) clamp(3rem,6vh,4.5rem)}
 .trust__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
 .trust__card{border-top:3px solid var(--navy);padding-top:1.5rem;color:#fff}
+@media(max-width:860px){.trust__grid{grid-template-columns:1fr}}
 .trust__num{font-weight:600;font-size:clamp(2rem,3.4vw,2.8rem);letter-spacing:-.03em;line-height:1;margin-bottom:.4rem}
 .trust__lab{font-size:.82rem;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase}
 
@@ -316,20 +325,13 @@ a{color:inherit;text-decoration:none}
 .timeline__accuracy-detail p{color:var(--muted);font-size:.9rem;line-height:1.45;margin-bottom:.35rem;max-width:none}
 .timeline__accuracy-detail p strong{color:var(--ink)}
 .timeline__accuracy-detail p:last-child{margin-bottom:0}
-/* Mobile: stages stack vertically along a vertical progress bar */
+/* Mobile: show each phase in normal document flow so every card remains readable. */
 @media(max-width:767px){
-  .timeline__sticky{top:clamp(84px,12vh,120px);height:calc(100vh - clamp(84px,12vh,120px))}
-  .timeline__flow{height:300px;padding-top:0;margin-bottom:1.6rem}
-  .timeline__bar{position:absolute;left:14px;top:8px;bottom:8px;width:4px;height:auto}
-  .timeline__fill{transform-origin:center top}
-  .timeline__marker{left:50%;top:var(--p);transform:translate(-50%,-50%) rotate(45deg);width:26px;height:26px}
-  .timeline__marker b{font-size:.56rem}
-  .timeline__dot{top:0;left:50%;margin:-8px 0 0 -8px}
-  .timeline__labels{position:absolute;left:2.6rem;right:0;top:8px;bottom:8px;height:auto;margin:0}
-  .timeline__label{
-    left:0;top:var(--p);transform:translateY(-50%);
-    flex-direction:row;align-items:center;gap:.55rem;text-align:left;white-space:normal;
-  }
+  .timeline__scroll{height:auto}
+  .timeline__sticky{position:static;height:auto;padding:clamp(1.5rem,3vh,2rem) clamp(1.2rem,4vw,3.5rem) clamp(2.5rem,6vh,4rem)}
+  .timeline__flow{display:none}
+  .timeline__phases{display:grid;gap:1rem}
+  .timeline__phase{grid-area:auto;opacity:1;pointer-events:auto}
 }
 @media(max-width:480px){
   .timeline__bar-label{min-width:5.2rem;font-size:.74rem}
@@ -409,7 +411,7 @@ a{color:inherit;text-decoration:none}
 
 <nav class="nav nav--solid" id="nav">
   <a href="/" class="nav__logo"><img src="assets/montana-logo.svg" alt="Montana Contracting"></a>
-  <div class="nav__links">
+  <div class="nav__links" id="precon-nav-links">
     <a href="/#story">Approach</a>
     <a href="/#featured">Work</a>
     <a href="/#precon">Pre-Con</a>
@@ -418,6 +420,7 @@ a{color:inherit;text-decoration:none}
     <a href="/#contact">Contact</a>
   </div>
   <a href="/#contact" class="nav__cta">Start a Project</a>
+  <button type="button" class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links">Menu</button>
 </nav>
 
 <section class="hero">
@@ -588,9 +591,23 @@ a{color:inherit;text-decoration:none}
 
 <script>
 (function(){
-  // Nav scroll
+  // Nav scroll and mobile menu
   var nav=document.getElementById('nav');
-  window.addEventListener('scroll',function(){nav.classList.toggle('nav--solid',window.scrollY>40);},{passive:true});
+  var burger=nav.querySelector('.nav__burger');
+  var navLinks=nav.querySelector('.nav__links');
+  function isNavOpen(){return nav.classList.contains('nav--open');}
+  function updateNav(){nav.classList.add('nav--solid');}
+  function setNavOpen(open){
+    nav.classList.toggle('nav--open',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.textContent=open?'Close':'Menu';
+    updateNav();
+  }
+  burger.addEventListener('click',function(){setNavOpen(!isNavOpen());});
+  navLinks.addEventListener('click',function(event){if(event.target.closest('a'))setNavOpen(false);});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&isNavOpen()){setNavOpen(false);burger.focus();}});
+  window.addEventListener('scroll',updateNav,{passive:true});
+  updateNav();
 
   // Reveal animations
   var obs=new IntersectionObserver(function(entries){
@@ -638,7 +655,10 @@ a{color:inherit;text-decoration:none}
     }
   }
 
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if(mobileMQ.matches){
+    tlSection.classList.add('timeline--mobile');
+    phases.forEach(function(phase){phase.classList.add('active');phase.setAttribute('aria-hidden','false');});
+  }else if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     // Static fallback: labels become click-to-switch tabs
     tlSection.classList.add('timeline--static');
     paint(0);

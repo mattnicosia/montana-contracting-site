@@ -69,6 +69,15 @@ if (!index.includes('class="nav__burger" aria-expanded="false" aria-controls="ma
   fail("index.html: mobile menu control must expose its navigation target and state");
 }
 
+const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
+if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
+  fail("pre-construction.html: mobile menu control must expose its navigation target and state");
+}
+
+if (!preConstruction.includes(".timeline__phase{grid-area:auto;opacity:1;pointer-events:auto}")) {
+  fail("pre-construction.html: mobile timeline phases must use normal document flow");
+}
+
 if (errors.length) {
   console.error(errors.map((error) => `- ${error}`).join("\n"));
   process.exit(1);
