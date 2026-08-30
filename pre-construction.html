@@ -627,6 +627,10 @@ a{color:inherit;text-decoration:none}
   var mobileMQ=window.matchMedia('(max-width: 767px)');
   var current=0;
 
+  function reloadTimeline(){window.location.reload();}
+  if(mobileMQ.addEventListener)mobileMQ.addEventListener('change',reloadTimeline);
+  else mobileMQ.addListener(reloadTimeline);
+
   function setPhase(idx){
     if(idx===current)return;
     current=idx;

@@ -69,6 +69,14 @@ if (!index.includes('class="nav__burger" aria-expanded="false" aria-controls="ma
   fail("index.html: mobile menu control must expose its navigation target and state");
 }
 
+if (!index.includes("c.classList.remove('reveal')")) {
+  fail("index.html: carousel clones must not depend on the reveal observer");
+}
+
+if (!index.includes("closeLightbox(false)")) {
+  fail("index.html: hash routing must close the image viewer");
+}
+
 const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
@@ -76,6 +84,10 @@ if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-co
 
 if (!preConstruction.includes(".timeline__phase{grid-area:auto;opacity:1;pointer-events:auto}")) {
   fail("pre-construction.html: mobile timeline phases must use normal document flow");
+}
+
+if (!preConstruction.includes("mobileMQ.addEventListener('change',reloadTimeline)")) {
+  fail("pre-construction.html: timeline must reinitialize after a breakpoint change");
 }
 
 if (errors.length) {
