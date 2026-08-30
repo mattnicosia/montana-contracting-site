@@ -1225,7 +1225,10 @@ a{color:inherit;text-decoration:none}
 
   function attemptPlay(){
     var p=video.play();
-    if(p&&p.catch)p.catch(function(){section.classList.add('video--fallback');});
+    if(p&&p.then){
+      p.then(function(){section.classList.remove('video--fallback');})
+       .catch(function(){section.classList.add('video--fallback');});
+    }
   }
   video.addEventListener('playing',function(){section.classList.remove('video--fallback');});
   var io=new IntersectionObserver(function(entries){
