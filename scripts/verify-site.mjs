@@ -135,6 +135,10 @@ if (!server.includes('response.writeHead(206') || !server.includes('"Content-Ran
   fail("scripts/serve.mjs: media requests must support byte ranges");
 }
 
+if (!server.includes('const pathFromRoot = relative(root, filePath)') || !server.includes('isAbsolute(pathFromRoot)')) {
+  fail("scripts/serve.mjs: path containment must work across operating systems");
+}
+
 const sitemap = readFileSync(resolve(root, "sitemap.xml"), "utf8");
 if (sitemap.includes("#")) {
   fail("sitemap.xml: fragment URLs are not separate crawlable documents");

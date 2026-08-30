@@ -1,6 +1,6 @@
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
-import { extname, join, normalize } from "node:path";
+import { extname, isAbsolute, normalize, relative, resolve, sep } from "node:path";
 
 const port = Number(process.env.PORT || 4173);
 const root = process.cwd();
@@ -29,9 +29,11 @@ createServer((request, response) => {
     return;
   }
   const relativePath = normalize(decodedRoute).replace(/^[/\\]+/, "");
-  const filePath = join(root, relativePath);
+  const filePath = resolve(root, relativePath);
+  const pathFromRoot = relative(root, filePath);
+  const outsideRoot = pathFromRoot === ".." || pathFromRoot.startsWith(`..${sep}`) || isAbsolute(pathFromRoot);
 
-  if (!filePath.startsWith(`${root}/`) || !existsSync(filePath) || !statSync(filePath).isFile()) {
+  if (outsideRoot || !existsSync(filePath) || !statSync(filePath).isFile()) {
     response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     response.end("Not found");
     return;
