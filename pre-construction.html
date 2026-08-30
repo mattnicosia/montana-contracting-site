@@ -325,8 +325,8 @@ a{color:inherit;text-decoration:none}
 .timeline__accuracy-detail p{color:var(--muted);font-size:.9rem;line-height:1.45;margin-bottom:.35rem;max-width:none}
 .timeline__accuracy-detail p strong{color:var(--ink)}
 .timeline__accuracy-detail p:last-child{margin-bottom:0}
-/* Mobile: show each phase in normal document flow so every card remains readable. */
-@media(max-width:767px){
+/* Phones and tablets: show each phase in normal document flow so every card remains readable. */
+@media(max-width:899px){
   .timeline__scroll{height:auto}
   .timeline__sticky{position:static;height:auto;padding:clamp(1.5rem,3vh,2rem) clamp(1.2rem,4vw,3.5rem) clamp(2.5rem,6vh,4rem)}
   .timeline__flow{display:none}
@@ -624,7 +624,7 @@ a{color:inherit;text-decoration:none}
   var labels=[].slice.call(document.querySelectorAll('.timeline__label'));
   var markers=[].slice.call(document.querySelectorAll('.timeline__marker'));
   var phases=[].slice.call(document.querySelectorAll('.timeline__phase'));
-  var mobileMQ=window.matchMedia('(max-width: 767px)');
+  var mobileMQ=window.matchMedia('(max-width: 899px)');
   var current=0;
 
   function reloadTimeline(){window.location.reload();}

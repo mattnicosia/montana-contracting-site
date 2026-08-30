@@ -90,6 +90,10 @@ if (!preConstruction.includes(".timeline__phase{grid-area:auto;opacity:1;pointer
   fail("pre-construction.html: mobile timeline phases must use normal document flow");
 }
 
+if (!preConstruction.includes("@media(max-width:899px)")) {
+  fail("pre-construction.html: normal-flow timeline must include narrow tablets");
+}
+
 if (!preConstruction.includes("mobileMQ.addEventListener('change',reloadTimeline)")) {
   fail("pre-construction.html: timeline must reinitialize after a breakpoint change");
 }
