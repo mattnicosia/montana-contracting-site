@@ -73,6 +73,10 @@ if (!index.includes("c.classList.remove('reveal')")) {
   fail("index.html: carousel clones must not depend on the reveal observer");
 }
 
+if (!index.includes("c.setAttribute('tabindex','-1')")) {
+  fail("index.html: carousel clones must stay out of the tab order");
+}
+
 if (!index.includes("closeLightbox(false)")) {
   fail("index.html: hash routing must close the image viewer");
 }
@@ -103,6 +107,10 @@ if (!index.includes("location.pathname+location.search+target")) {
 
 if (!index.includes("if(featured)featured.scrollIntoView()")) {
   fail("index.html: leaving a deep-linked project must reveal Featured Projects");
+}
+
+if (!index.includes("if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)")) {
+  fail("index.html: film autoplay must respect reduced-motion settings");
 }
 
 if (!index.includes("montanaProjectGateway:lastGateway==='all'?'all':'featured'")) {

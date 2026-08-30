@@ -1222,6 +1222,11 @@ a{color:inherit;text-decoration:none}
   if(!section)return;
   var video=section.querySelector('.video__frame video');
   if(!video)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    video.pause();
+    section.classList.add('video--fallback');
+    return;
+  }
 
   function attemptPlay(){
     var p=video.play();
@@ -1279,6 +1284,7 @@ a{color:inherit;text-decoration:none}
       var c=el.cloneNode(true);
       c.classList.remove('reveal');
       c.classList.remove('vis');
+      c.setAttribute('tabindex','-1');
       c.setAttribute('aria-hidden','true');
       c.querySelectorAll('a').forEach(function(a){a.setAttribute('tabindex','-1');});
       return c;
