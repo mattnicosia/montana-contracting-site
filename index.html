@@ -1859,7 +1859,7 @@ a{color:inherit;text-decoration:none}
       openAll(restoreScroll);
     }
     else if(h && bySlug[h]){openDetail(bySlug[h]);}
-    else{if(h==='')lastGateway='';closeOverlays();}
+    else{lastGateway='';closeOverlays();}
   }
 
   window.addEventListener('hashchange',route);
@@ -1877,7 +1877,10 @@ a{color:inherit;text-decoration:none}
   // the all-projects grid if that's the gateway they entered through, otherwise the homepage.
   function backToProjects(){
     unlockScroll();
-    location.hash=(lastGateway==='all')?'#all':'#featured';
+    var target=(lastGateway==='all')?'#all':'#featured';
+    history.replaceState('',document.title,location.pathname+location.search+target);
+    closeOverlays();
+    route();
   }
 
   document.addEventListener('click',function(e){

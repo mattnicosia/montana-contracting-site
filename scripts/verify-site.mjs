@@ -97,6 +97,14 @@ if (!index.includes("history.replaceState('',document.title,location.pathname+lo
   fail("index.html: closing All Projects must replace its history entry");
 }
 
+if (!index.includes("location.pathname+location.search+target")) {
+  fail("index.html: leaving a project detail must replace its history entry");
+}
+
+if (!index.includes("else{lastGateway='';closeOverlays();}")) {
+  fail("index.html: homepage routes must clear the project gateway");
+}
+
 const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
