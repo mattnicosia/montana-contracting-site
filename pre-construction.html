@@ -172,6 +172,29 @@ a{color:inherit;text-decoration:none}
   .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
 }
 
+
+/* ============================== MOBILE CTA BAR (≤860px) ============================== */
+.mbar{display:none}
+@media(max-width:860px){
+  .mbar{
+    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;
+    gap:.55rem;align-items:stretch;
+    padding:.65rem clamp(.9rem,3vw,1.2rem);
+    padding-bottom:max(.65rem,env(safe-area-inset-bottom));
+    background:var(--dark);
+    box-shadow:0 -8px 28px rgba(0,0,0,.28);
+  }
+  .mbar__start,.mbar__call{
+    flex:1;display:inline-flex;align-items:center;justify-content:center;
+    min-height:46px;border-radius:4px;box-sizing:border-box;
+    font-family:inherit;font-size:.78rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;
+  }
+  .mbar__start{background:var(--navy);color:#fff;border:none}
+  .mbar__call{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+  body{padding-bottom:calc(4.35rem + env(safe-area-inset-bottom,0px))}
+}
+
 /* Sections */
 .sec{padding:clamp(3.4rem,8vh,6rem) clamp(1.2rem,4vw,3.5rem)}
 .sec__index{font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
@@ -566,7 +589,7 @@ a{color:inherit;text-decoration:none}
     <div>
       <div class="sec__index"><i></i>Get Started</div>
       <h2>Bring us your drawings at schematic design.</h2>
-      <a href="/#contact" class="contact__cta">Start a Conversation <i></i></a>
+      <a href="/#contact" class="contact__cta">Start a Project <i></i></a>
     </div>
     <div class="contact__details">
       <div class="cdetail">
@@ -700,5 +723,11 @@ a{color:inherit;text-decoration:none}
   }
 })();
 </script>
+
+<!-- MOBILE CTA BAR (≤860px) -->
+<div class="mbar" id="mobileBar" role="navigation" aria-label="Quick actions">
+  <a class="mbar__start" href="/#contact">Start a Project</a>
+  <a class="mbar__call" href="tel:+18453981778">Call</a>
+</div>
 </body>
 </html>
