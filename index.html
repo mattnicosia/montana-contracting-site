@@ -1480,9 +1480,12 @@ a{color:inherit;text-decoration:none}
     document.body.style.overflow='';
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
-  // open triggers
-  document.querySelectorAll('[data-open-form]').forEach(function(el){
-    el.addEventListener('click',function(e){e.preventDefault();open();});
+  // open triggers (delegate so late DOM like #mobileBar still binds)
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-open-form]');
+    if(!el)return;
+    e.preventDefault();
+    open();
   });
   // close triggers
   modal.querySelectorAll('[data-close-form]').forEach(function(el){
