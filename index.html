@@ -152,6 +152,34 @@ a{color:inherit;text-decoration:none}
   .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
 }
 
+
+/* ============================== MOBILE CTA BAR (≤860px) ============================== */
+.mbar{display:none}
+@media(max-width:860px){
+  .mbar{
+    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;
+    gap:.55rem;align-items:stretch;
+    padding:.65rem clamp(.9rem,3vw,1.2rem);
+    padding-bottom:max(.65rem,env(safe-area-inset-bottom));
+    background:var(--dark);
+    box-shadow:0 -8px 28px rgba(0,0,0,.28);
+  }
+  .mbar__start,.mbar__call{
+    flex:1;display:inline-flex;align-items:center;justify-content:center;
+    min-height:46px;border-radius:4px;box-sizing:border-box;
+    font-family:inherit;font-size:.78rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;
+  }
+  .mbar__start{background:var(--navy);color:#fff;border:none}
+  .mbar__call{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+  .mbar__call:hover{border-color:#fff}
+  body{padding-bottom:calc(4.35rem + env(safe-area-inset-bottom,0px))}
+  body.modal-open .mbar{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .mbar{transition:none}
+}
+
 /* ============================== HERO ============================== */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;z-index:2}
 .hero__bg{position:absolute;inset:-8% 0;z-index:0;will-change:transform}
@@ -161,6 +189,21 @@ a{color:inherit;text-decoration:none}
 .hero__inner{position:relative;z-index:2;width:100%;padding:0 clamp(1.2rem,4vw,3.5rem) clamp(4rem,9vh,8rem);color:#fff}
 .hero__eyebrow{display:flex;align-items:center;gap:.8rem;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;opacity:.9;margin-bottom:1.4rem}
 .hero__eyebrow--below{margin-bottom:0;margin-top:1.6rem}
+
+.hero__cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:1.5rem;padding:.72rem 1.45rem;border-radius:40px;
+  background:#fff;color:var(--navy);
+  font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:none;cursor:pointer;font-family:inherit;
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+  opacity:0;transform:translateY(14px);
+}
+.hero.in .hero__cta{opacity:1;transform:none;transition-delay:.42s}
+.hero__cta:hover{opacity:.88}
+@media(prefers-reduced-motion:reduce){
+  .hero__cta,.hero.in .hero__cta{opacity:1;transform:none;transition:none}
+}
 .hero__eyebrow i{width:34px;height:1px;background:#fff;display:inline-block}
 .hero h1{
   font-weight:600;line-height:1.02;letter-spacing:-.02em;
@@ -532,6 +575,8 @@ a{color:inherit;text-decoration:none}
 }
 .mform__submit:hover{background:#001ea3;transform:translateY(-2px)}
 .mform__note{grid-column:1 / -1;font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.mform__note a{text-decoration:underline;text-underline-offset:2px}
+.mform__note a:hover{color:var(--navy)}
 .mform__done{grid-column:1 / -1;color:var(--navy);font-weight:600;font-size:1rem;display:none}
 @media(max-width:520px){.mform{grid-template-columns:1fr}}
 
@@ -718,6 +763,7 @@ a{color:inherit;text-decoration:none}
       <span class="ln"><span>Work</span></span>
     </h1>
     <div class="hero__eyebrow hero__eyebrow--below"><i></i>Since 1984 · NY + NJ</div>
+    <button type="button" class="hero__cta" data-open-form>Start a Project</button>
   </div>
   <div class="hero__scroll">Scroll<i></i></div>
 </header>
@@ -865,8 +911,8 @@ a{color:inherit;text-decoration:none}
 <!-- STATS -->
 <section class="stats">
   <div class="stats__grid">
-    <div class="stat reveal"><div class="stat__num" data-count="200" data-suffix="+">0</div><div class="stat__lab">Projects Delivered</div></div>
-    <div class="stat reveal" data-d="1"><div class="stat__num" data-count="1984" data-plain="1">0</div><div class="stat__lab">Since</div></div>
+    <div class="stat reveal"><div class="stat__num" data-count="200" data-suffix="+">200+</div><div class="stat__lab">Projects Delivered</div></div>
+    <div class="stat reveal" data-d="1"><div class="stat__num" data-count="1984" data-plain="1">1984</div><div class="stat__lab">Since</div></div>
     <div class="stat reveal" data-d="2"><div class="stat__num" data-static="NY+NJ">NY+NJ</div><div class="stat__lab">Licensed &amp; Operating</div></div>
   </div>
 </section>
@@ -1024,7 +1070,7 @@ a{color:inherit;text-decoration:none}
     <div class="finance__cta-col">
       <strong>Request financing</strong>
       <p>Loan sizes from $5M to $150M+. Construction, bridge, mezzanine, and preferred equity.</p>
-      <a href="#contact" class="btn">Start a Conversation</a>
+      <a href="#contact" class="btn btn--ghost" data-open-form>Request financing</a>
     </div>
     <div class="finance__cta-col">
       <strong>Financing partner</strong>
@@ -1038,7 +1084,7 @@ a{color:inherit;text-decoration:none}
     <div>
       <div class="sec__index reveal"><i></i>06 / Contact</div>
       <h2 class="reveal" data-d="1">Start a project.</h2>
-      <button type="button" class="contact__cta reveal" data-d="2" data-open-form>Let's Talk <i></i></button>
+      <button type="button" class="contact__cta reveal" data-d="2" data-open-form>Start a Project <i></i></button>
     </div>
     <div class="contact__details">
       <div class="cdetail reveal" data-d="1">
@@ -1125,7 +1171,7 @@ a{color:inherit;text-decoration:none}
         <textarea id="pf-message" name="message" placeholder="Location, scope, timeline, anything else we should know."></textarea>
       </div>
       <button type="submit" class="mform__submit">Send Inquiry</button>
-      <p class="mform__note">Or call (845) 398-1778 · info@montanacontracting.com</p>
+      <p class="mform__note">Or call <a href="tel:+18453981778">(845) 398-1778</a> · <a href="mailto:info@montanacontracting.com">info@montanacontracting.com</a></p>
       <p class="mform__done" id="pf-done" aria-live="polite">Your email app should open with a ready-to-send inquiry.</p>
     </form>
   </div>
@@ -1384,37 +1430,20 @@ a{color:inherit;text-decoration:none}
 })();
 
 /* ============================== COUNTERS ============================== */
+/* T-018: SSR finals stay in HTML (200+, 1984, NY+NJ). JS must never flash 0. */
 (function(){
   var nums=document.querySelectorAll('.stat__num');
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      var el=en.target;
-      if(el.dataset.static!==undefined)return;
-      /* bi-directional: count up when scrolled into view, reset to 0 when scrolled back
-         out so the counter re-animates on the next entry. Never unobserve. */
-      if(!en.isIntersecting){
-        if(el._raf)cancelAnimationFrame(el._raf);el._raf=null;
-        el.textContent='0';
-        return;
-      }
-      if(el._raf)return; /* already counting */
-      var target=parseInt(el.dataset.count,10);
-      var suffix=el.dataset.suffix||'';
-      var plain=el.dataset.plain!==undefined;
-      var start=null,dur=1600;
-      function step(ts){
-        if(!start)start=ts;
-        var p=Math.min((ts-start)/dur,1);
-        var eased=1-Math.pow(1-p,3);
-        var val=Math.floor(eased*target);
-        el.textContent=(plain?String(val):val.toLocaleString('en-US'))+(p===1?suffix:'');
-        if(p<1){el._raf=requestAnimationFrame(step);}
-        else{el._raf=null;el.textContent=(plain?String(target):target.toLocaleString('en-US'))+suffix;}
-      }
-      el._raf=requestAnimationFrame(step);
-    });
-  },{threshold:0.4});
-  nums.forEach(function(n){io.observe(n);});
+  function finalText(el){
+    if(el.dataset.static!==undefined)return el.dataset.static;
+    var target=parseInt(el.dataset.count,10);
+    if(isNaN(target))return el.textContent;
+    var suffix=el.dataset.suffix||'';
+    var plain=el.dataset.plain!==undefined;
+    return (plain?String(target):target.toLocaleString('en-US'))+suffix;
+  }
+  nums.forEach(function(el){
+    el.textContent=finalText(el);
+  });
 })();
 
 /* ============================== (particles removed) ============================== */
@@ -1437,6 +1466,7 @@ a{color:inherit;text-decoration:none}
     lastFocus=document.activeElement;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
     setPageInert(true);
     document.body.style.overflow='hidden';
     var first=form.querySelector('input,select,textarea,button');
@@ -1445,6 +1475,7 @@ a{color:inherit;text-decoration:none}
   function close(){
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
     setPageInert(false);
     document.body.style.overflow='';
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
@@ -2073,5 +2104,11 @@ a{color:inherit;text-decoration:none}
 
 })();
 </script>
+
+<!-- MOBILE CTA BAR (≤860px) -->
+<div class="mbar" id="mobileBar" role="navigation" aria-label="Quick actions">
+  <button type="button" class="mbar__start" data-open-form>Start a Project</button>
+  <a class="mbar__call" href="tel:+18453981778">Call</a>
+</div>
 </body>
 </html>
