@@ -2,32 +2,22 @@
   "redirects": [
     {
       "source": "/commercial-projects",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/commercial-projects/",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/residential-projects",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/residential-projects/",
-      "destination": "/#featured",
-      "permanent": true
-    },
-    {
-      "source": "/projects",
-      "destination": "/#featured",
-      "permanent": true
-    },
-    {
-      "source": "/projects/",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
@@ -102,22 +92,22 @@
     },
     {
       "source": "/portfolio",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/portfolio/",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/gallery",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
       "source": "/gallery/",
-      "destination": "/#featured",
+      "destination": "/projects/",
       "permanent": true
     },
     {
