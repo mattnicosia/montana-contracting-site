@@ -1,50 +1,204 @@
 {
   "redirects": [
-    { "source": "/commercial-projects", "destination": "/#featured", "permanent": true },
-    { "source": "/commercial-projects/", "destination": "/#featured", "permanent": true },
-    { "source": "/residential-projects", "destination": "/#featured", "permanent": true },
-    { "source": "/residential-projects/", "destination": "/#featured", "permanent": true },
-    { "source": "/projects", "destination": "/#featured", "permanent": true },
-    { "source": "/projects/", "destination": "/#featured", "permanent": true },
-    { "source": "/about", "destination": "/#story", "permanent": true },
-    { "source": "/about/", "destination": "/#story", "permanent": true },
-    { "source": "/about-us", "destination": "/#story", "permanent": true },
-    { "source": "/about-us/", "destination": "/#story", "permanent": true },
-    { "source": "/contact", "destination": "/#contact", "permanent": true },
-    { "source": "/contact/", "destination": "/#contact", "permanent": true },
-    { "source": "/contact-us", "destination": "/#contact", "permanent": true },
-    { "source": "/contact-us/", "destination": "/#contact", "permanent": true },
-    { "source": "/services", "destination": "/#precon", "permanent": true },
-    { "source": "/services/", "destination": "/#precon", "permanent": true },
-    { "source": "/our-team", "destination": "/#story", "permanent": true },
-    { "source": "/our-team/", "destination": "/#story", "permanent": true },
-    { "source": "/team", "destination": "/#story", "permanent": true },
-    { "source": "/team/", "destination": "/#story", "permanent": true },
-    { "source": "/core-values", "destination": "/#values", "permanent": true },
-    { "source": "/core-values/", "destination": "/#values", "permanent": true },
-    { "source": "/portfolio", "destination": "/#featured", "permanent": true },
-    { "source": "/portfolio/", "destination": "/#featured", "permanent": true },
-    { "source": "/gallery", "destination": "/#featured", "permanent": true },
-    { "source": "/gallery/", "destination": "/#featured", "permanent": true },
-    { "source": "/pre-construction", "destination": "/#precon", "permanent": true },
-    { "source": "/pre-construction/", "destination": "/#precon", "permanent": true },
-    { "source": "/financing", "destination": "/#financing", "permanent": true },
-    { "source": "/financing/", "destination": "/#financing", "permanent": true },
-    { "source": "/press", "destination": "/#press", "permanent": true },
-    { "source": "/press/", "destination": "/#press", "permanent": true },
-    { "source": "/news", "destination": "/#press", "permanent": true },
-    { "source": "/news/", "destination": "/#press", "permanent": true },
-    { "source": "/media", "destination": "/#press", "permanent": true },
-    { "source": "/media/", "destination": "/#press", "permanent": true },
-    { "source": "/testimonials", "destination": "/#press", "permanent": true },
-    { "source": "/testimonials/", "destination": "/#press", "permanent": true },
-    { "source": "/careers", "destination": "/#contact", "permanent": true },
-    { "source": "/careers/", "destination": "/#contact", "permanent": true },
-    { "source": "/employment", "destination": "/#contact", "permanent": true },
-    { "source": "/employment/", "destination": "/#contact", "permanent": true },
-    { "source": "/wp-content/:path*", "destination": "/", "permanent": true },
-    { "source": "/wp-admin/:path*", "destination": "/", "permanent": true },
-    { "source": "/wp-includes/:path*", "destination": "/", "permanent": true },
-    { "source": "/:path(.+\\.php)$", "destination": "/", "permanent": true }
+    {
+      "source": "/commercial-projects",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/commercial-projects/",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/residential-projects",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/residential-projects/",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/projects/",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/#precon",
+      "permanent": true
+    },
+    {
+      "source": "/services/",
+      "destination": "/#precon",
+      "permanent": true
+    },
+    {
+      "source": "/our-team",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/our-team/",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/team",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/team/",
+      "destination": "/#story",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/",
+      "destination": "/#featured",
+      "permanent": true
+    },
+    {
+      "source": "/press",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/press/",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/news",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/news/",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/media",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/media/",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials/",
+      "destination": "/#press",
+      "permanent": true
+    },
+    {
+      "source": "/careers",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/careers/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/employment",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/employment/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-admin/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-includes/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.+\\.php)$",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
