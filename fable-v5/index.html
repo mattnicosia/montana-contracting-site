@@ -143,10 +143,14 @@ a{color:inherit;text-decoration:none}
 .nav--solid .nav__cta{color:var(--navy);border-color:var(--navy)}
 .nav__cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .nav__burger{display:none}
+.nav__links a:focus-visible,.nav__burger:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 @media(max-width:860px){
+  .nav{gap:1rem}
+  .nav__logo{min-width:0}
+  .nav__logo img{object-fit:contain}
   .nav__links{display:none}
   .nav__cta{display:none}
-  .nav__burger{display:block;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
+  .nav__burger{display:block;flex-shrink:0;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
   .nav--solid .nav__burger{color:var(--ink)}
   .nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}
   .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
@@ -294,6 +298,7 @@ a{color:inherit;text-decoration:none}
 .pitem__meta span:not(:last-child)::after{content:'·';position:absolute;right:0}
 .pitem__meta .navy{color:rgba(255,255,255,.72)}
 .pitem__img{display:none}
+.pitem:focus-visible{outline:2px solid #fff;outline-offset:4px}
 
 /* permanent sticky preview panel */
 .projects__preview{
@@ -317,9 +322,15 @@ a{color:inherit;text-decoration:none}
 .viewall:hover i{width:60px}
 @media(max-width:980px){
   .projects__split{grid-template-columns:1fr;gap:1.6rem}
-  .projects__preview{position:relative;top:auto;height:min(48vh,420px);order:-1}
-  .pitem__left h3{font-size:clamp(1.5rem,6vw,2.2rem)}
-  .pitem:hover .pitem__left h3{transform:none}
+  .projects__preview{display:none}
+  .pitem{display:grid;grid-template-columns:clamp(96px,26vw,176px) minmax(0,1fr);align-items:center;gap:clamp(.9rem,3vw,1.5rem);padding:1.25rem 0}
+  .pitem__img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+  .pitem__left{display:block}
+  .pitem__no{display:none}
+  .pitem__left h3{font-size:clamp(1.25rem,4.5vw,2.2rem);overflow-wrap:anywhere}
+  .pitem__meta{gap:.25rem .5rem;color:rgba(255,255,255,.72)}
+  .pitem.is-active .pitem__left h3,
+  .pitem:hover .pitem__left h3{color:#fff;transform:none}
 }
 
 /* ============================== PRE-CONSTRUCTION (03) ============================== */
@@ -826,6 +837,7 @@ a{color:inherit;text-decoration:none}
     <div class="plist">
 
     <a class="pitem reveal is-active" href="#piaule-catskill" data-preview="assets/photos/projects/piaule-catskill-14.jpg">
+      <img class="pitem__img" src="assets/photos/projects/piaule-catskill-14.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">01</span>
         <div><h3>Piaule Catskill Retreat</h3>
@@ -834,6 +846,7 @@ a{color:inherit;text-decoration:none}
     </a>
 
     <a class="pitem reveal" href="#hudson-river-house" data-preview="assets/photos/projects/hudson-river-house-16.jpg">
+      <img class="pitem__img" src="assets/photos/projects/hudson-river-house-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">02</span>
         <div><h3>Hudson River House</h3>
@@ -842,6 +855,7 @@ a{color:inherit;text-decoration:none}
     </a>
 
     <a class="pitem reveal" href="#gym-englewood" data-preview="assets/photos/projects/gym-englewood-06.jpg">
+      <img class="pitem__img" src="assets/photos/projects/gym-englewood-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">03</span>
         <div><h3>The Gym Englewood</h3>
@@ -850,6 +864,7 @@ a{color:inherit;text-decoration:none}
     </a>
 
     <a class="pitem reveal" href="#multi-generational-house" data-preview="assets/photos/projects/germantown-compound-06.jpg">
+      <img class="pitem__img" src="assets/photos/projects/germantown-compound-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">04</span>
         <div><h3>Germantown Compound</h3>
@@ -858,6 +873,7 @@ a{color:inherit;text-decoration:none}
     </a>
 
     <a class="pitem reveal" href="#twisted-ridge" data-preview="assets/photos/projects/twisted-ridge-16.jpg">
+      <img class="pitem__img" src="assets/photos/projects/twisted-ridge-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">05</span>
         <div><h3>Twisted Ridge</h3>
@@ -1061,6 +1077,7 @@ a{color:inherit;text-decoration:none}
     burger.setAttribute('aria-expanded',open?'true':'false');
     burger.textContent=open?'Close':'Menu';
     onScroll();
+    if(open)links.querySelector('a').focus();
   }
   burger.addEventListener('click',function(){setOpen(!isOpen());});
   links.addEventListener('click',function(event){if(event.target.closest('a'))setOpen(false);});
