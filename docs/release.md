@@ -1,0 +1,9 @@
+# Montana release preparation
+
+This branch starts at GitHub main 0635c32. It maps the tested fable-v5 site from local commit c55648a into this repository's root layout. That local branch started with the verified September 6 production snapshot at 027fe7a. This preserves the existing GitHub history without merging unrelated histories or force-pushing.
+
+The mapped changes include the approved Haviland gallery and new-construction tag, selected-work order, recognition image sizing, contact form, 25 static project pages, and mobile project thumbnails. Source HTML, CSS, JavaScript, project data, and media retain the tested content. Tests move to the root tests folder. The existing local server retains byte-range support and now serves only public files. The verifier retains page, asset, carousel, mobile, and timeline checks; the new tests replace checks for the retired hash overlay. The robots sitemap now points to the production domain rather than the old preview hostname.
+
+The Resend browser workspace bldgestimating, signed in as matt@bldgestimating.com, owns the verified montanacontracting.com domain. The connected Resend tool points to a different workspace and must not manage this sender. A sending-only Montana Website Inquiries key restricted to montanacontracting.com is saved as a production-only Secret in Vercel. INQUIRY_FROM is website@montanacontracting.com. The recipient is matt@montanacontracting.com.
+
+Matt approved deployment and one labeled test inquiry. The firewall rule is live in logging mode, counting POST /api/inquiry at 10 requests per minute per IP. It does not block yet. The Vercel firewall skill requires user review and publication of preview enforcement, then production enforcement, before the public form release. No new production deployment or real test email has occurred. Inbox receipt remains a release check.

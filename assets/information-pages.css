@@ -1,0 +1,88 @@
+@font-face{
+  font-family:'TT Commons Pro';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('TT_Commons_Pro_Regular.woff2') format('woff2');
+}
+@font-face{
+  font-family:'TT Commons Pro';
+  font-style:normal;
+  font-weight:600 700;
+  font-display:swap;
+  src:url('TT_Commons_Pro_Bold.woff2') format('woff2');
+}
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0028cc;--white:#fff;--offwhite:#f4f5f8;--ink:#0a0d18;--muted:#5a6174;--line:rgba(10,13,24,.10);--dark:#070912;--ease:cubic-bezier(.2,.7,.2,1)}
+body{font-family:'TT Commons Pro',sans-serif;line-height:1.5;color:var(--ink);background:var(--offwhite)}
+a{color:inherit}img{display:block;max-width:100%}
+a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
+.skip{position:absolute;left:1rem;top:-5rem;background:white;padding:1rem}.skip:focus{top:1rem}
+.page-header{background:#fff;padding:1rem clamp(1.2rem,4vw,3.5rem);border-bottom:1px solid var(--line)}
+.page-header__inner,.page-footer__inner{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-logo{display:flex;align-items:center;min-height:44px}.page-logo img{width:240px;height:auto}
+.page-nav,.page-footer nav{display:flex;align-items:center;gap:.3rem 1.4rem;flex-wrap:wrap}
+.page-nav a,.page-footer a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem;text-underline-offset:5px}
+.page-nav a{text-decoration:none}.page-nav a:hover,.page-nav a[aria-current="page"]{color:var(--navy);text-decoration:underline}
+.sec{padding:clamp(3rem,7vw,6rem) clamp(1.2rem,4vw,3.5rem)}
+.sec__index{font-size:.85rem;color:var(--navy);margin-bottom:1rem}
+.page-title{font-size:clamp(2.6rem,6vw,5rem);line-height:1.03;letter-spacing:-.035em;font-weight:600;margin-bottom:clamp(2rem,4vw,3.5rem)}
+.page-footer{background:var(--navy);color:#fff;padding:2.5rem clamp(1.2rem,4vw,3.5rem)}
+@media(max-width:600px){.page-nav{gap:0 1.2rem}.page-logo img{width:230px}.page-header__inner{gap:.25rem}}
+.finance{background:var(--dark);color:#fff}
+.finance__head{max-width:1280px;margin:0 auto 1rem}
+.finance__head .sec__index{color:#fff;font-weight:600}
+.finance__head .sec__index i{background:#fff}
+.finance__head h2{font-weight:600;font-size:clamp(2rem,4.6vw,3.8rem);letter-spacing:-.02em;line-height:1.02;color:#fff}
+.finance__grid{max-width:1280px;margin:0 auto clamp(2.8rem,5vw,4rem);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+.finance__intro{font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.55;color:rgba(255,255,255,.7)}
+.finance__intro strong{color:#fff;font-weight:600}
+.finance__steps{list-style:none;counter-reset:fstep;display:flex;flex-direction:column;gap:1.6rem}
+.finance__steps li{counter-increment:fstep;font-size:.94rem;line-height:1.5;color:rgba(255,255,255,.7);padding-left:2.8rem;position:relative}
+.finance__steps li::before{content:counter(fstep);position:absolute;left:0;top:0;width:1.8rem;height:1.8rem;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:600;color:var(--navy)}
+.finance__steps li strong{color:#fff;font-weight:600;display:block;margin-bottom:.2rem}
+
+.finance__table{max-width:1280px;margin:0 auto clamp(2.8rem,5vw,4rem)}
+.finance__table h2,.finance__who h2{font-weight:600;font-size:1.06rem;letter-spacing:.02em;color:#fff;margin-bottom:1.2rem}
+.finance__cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.6rem)}
+.fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:1.2rem 1.4rem;border-radius:4px}
+.fcard__lab{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:600;margin-bottom:.35rem}
+.fcard__val{font-size:.92rem;line-height:1.35;color:rgba(255,255,255,.85)}
+
+.finance__who{max-width:1280px;margin:0 auto clamp(2.8rem,5vw,4rem)}
+.finance__who ul{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 2rem;list-style:none}
+.finance__who li{font-size:.92rem;line-height:1.45;color:rgba(255,255,255,.7);padding-left:1.4rem;position:relative}
+.finance__who li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--navy)}
+
+.finance__cta{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,3vw,3rem)}
+.finance__cta-col strong{display:block;font-weight:600;font-size:1.05rem;letter-spacing:.02em;color:#fff;margin-bottom:.6rem}
+.finance__cta-col p{font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.7);margin-bottom:1.1rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;font-family:inherit;font-size:.84rem;font-weight:600;letter-spacing:.04em;border-radius:4px;background:var(--navy);color:#fff;text-decoration:none;transition:opacity .25s var(--ease)}
+.btn:hover{opacity:.88}
+.btn--ghost{background:transparent;color:#fff;border:2px solid var(--navy)}
+.btn--ghost:hover{background:var(--navy);color:#fff}
+
+@media(max-width:860px){
+  .finance__grid,.finance__cols,.finance__cta,.finance__who ul{grid-template-columns:1fr;gap:1.4rem}
+}
+.values{background:var(--offwhite)}
+.values__head{max-width:1280px;margin:0 auto 1rem}
+.values__preamble{max-width:720px;margin:0 auto clamp(2.4rem,5vw,3.6rem);font-size:.95rem;line-height:1.6;color:var(--ink);opacity:.8}
+.values__preamble p+p{margin-top:1rem}
+.vlist{max-width:1280px;margin:0 auto}
+.vitem{
+  position:relative;display:grid;grid-template-columns:auto 1fr;gap:clamp(1.4rem,5vw,4rem);
+  align-items:center;padding:clamp(2rem,5vh,3.4rem) 0;border-bottom:1px solid var(--line);overflow:hidden;
+}
+.vitem:first-child{border-top:1px solid var(--line)}
+.vitem__wm{font-weight:600;font-size:clamp(4rem,12vw,10rem);line-height:.8;color:var(--navy);opacity:.1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;user-select:none}
+.vitem__body h2{font-weight:600;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.02em;margin-bottom:.8rem}
+.vitem__body blockquote{color:var(--muted);font-size:clamp(1rem,1.5vw,1.2rem);max-width:60ch;font-style:italic}
+.vitem__body cite{display:block;margin-top:.8rem;font-style:normal;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:600}
+@media(max-width:600px){.vitem{grid-template-columns:1fr;gap:.4rem}.vitem__wm{font-size:5rem}}
+
+
+.values__preamble{font-size:1rem}.finance__head{margin-bottom:2.5rem}
+.finance__steps li::before{border-color:#8faaff;color:#8faaff}.fcard__lab{color:#8faaff}.finance__who li::before{background:#8faaff}.finance__col{display:grid;gap:1rem}

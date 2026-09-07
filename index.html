@@ -143,41 +143,17 @@ a{color:inherit;text-decoration:none}
 .nav--solid .nav__cta{color:var(--navy);border-color:var(--navy)}
 .nav__cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .nav__burger{display:none}
+.nav__links a:focus-visible,.nav__burger:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 @media(max-width:860px){
+  .nav{gap:1rem}
+  .nav__logo{min-width:0}
+  .nav__logo img{object-fit:contain}
   .nav__links{display:none}
   .nav__cta{display:none}
-  .nav__burger{display:block;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
+  .nav__burger{display:block;flex-shrink:0;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
   .nav--solid .nav__burger{color:var(--ink)}
   .nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}
   .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
-}
-
-
-/* ============================== MOBILE CTA BAR (≤860px) ============================== */
-.mbar{display:none}
-@media(max-width:860px){
-  .mbar{
-    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;
-    gap:.55rem;align-items:stretch;
-    padding:.65rem clamp(.9rem,3vw,1.2rem);
-    padding-bottom:max(.65rem,env(safe-area-inset-bottom));
-    background:var(--dark);
-    box-shadow:0 -8px 28px rgba(0,0,0,.28);
-  }
-  .mbar__start,.mbar__call{
-    flex:1;display:inline-flex;align-items:center;justify-content:center;
-    min-height:46px;border-radius:4px;box-sizing:border-box;
-    font-family:inherit;font-size:.78rem;font-weight:600;
-    letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;
-  }
-  .mbar__start{background:var(--navy);color:#fff;border:none}
-  .mbar__call{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
-  .mbar__call:hover{border-color:#fff}
-  body{padding-bottom:calc(4.35rem + env(safe-area-inset-bottom,0px))}
-  body.modal-open .mbar{display:none}
-}
-@media(prefers-reduced-motion:reduce){
-  .mbar{transition:none}
 }
 
 /* ============================== HERO ============================== */
@@ -189,21 +165,6 @@ a{color:inherit;text-decoration:none}
 .hero__inner{position:relative;z-index:2;width:100%;padding:0 clamp(1.2rem,4vw,3.5rem) clamp(4rem,9vh,8rem);color:#fff}
 .hero__eyebrow{display:flex;align-items:center;gap:.8rem;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;opacity:.9;margin-bottom:1.4rem}
 .hero__eyebrow--below{margin-bottom:0;margin-top:1.6rem}
-
-.hero__cta{
-  display:inline-flex;align-items:center;justify-content:center;
-  margin-top:1.5rem;padding:.72rem 1.45rem;border-radius:40px;
-  background:#fff;color:var(--navy);
-  font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  border:none;cursor:pointer;font-family:inherit;
-  transition:opacity .3s var(--ease),transform .3s var(--ease);
-  opacity:0;transform:translateY(14px);
-}
-.hero.in .hero__cta{opacity:1;transform:none;transition-delay:.42s}
-.hero__cta:hover{opacity:.88}
-@media(prefers-reduced-motion:reduce){
-  .hero__cta,.hero.in .hero__cta{opacity:1;transform:none;transition:none}
-}
 .hero__eyebrow i{width:34px;height:1px;background:#fff;display:inline-block}
 .hero h1{
   font-weight:600;line-height:1.02;letter-spacing:-.02em;
@@ -251,10 +212,10 @@ a{color:inherit;text-decoration:none}
 .press__head{text-align:center;margin-bottom:clamp(2.6rem,6vw,4rem)}
 .press__head h2{font-weight:600;font-size:clamp(2rem,4.4vw,3.6rem);letter-spacing:-.02em;line-height:1;color:var(--ink)}
 /* single row, manual arrow nav only: no auto-play, 5 visible on desktop, arrows sit clear of the images */
-.press__row{max-width:1280px;margin:0 auto;position:relative;padding:0 clamp(2.8rem,5.5vw,4.2rem)}
+.press__row{--press-gap:clamp(.8rem,1.5vw,1.2rem);max-width:1400px;margin:0 auto;position:relative;padding:0 clamp(2.8rem,5.5vw,4.2rem)}
 .press__viewport{overflow:hidden;position:relative}
-.press__cards{display:flex;flex-wrap:nowrap;gap:clamp(1rem,2vw,1.7rem);transition:transform .5s var(--ease)}
-.press__card{position:relative;flex:0 0 calc((100% - clamp(1rem,2vw,1.7rem)*4)/5)}
+.press__cards{display:flex;flex-wrap:nowrap;gap:var(--press-gap);transition:transform .5s var(--ease)}
+.press__card{position:relative;flex:0 0 calc((100% - var(--press-gap)*4)/5)}
 .press__frame{aspect-ratio:1080/1350;overflow:hidden;border-radius:3px;position:relative;box-shadow:0 8px 24px -10px rgba(0,0,0,.18);border:1px solid rgba(0,0,0,.08)}
 .press__link{display:block;cursor:pointer}
 .press__frame img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
@@ -275,7 +236,7 @@ a{color:inherit;text-decoration:none}
 .press__nav{display:flex;justify-content:center;align-items:center;gap:.7rem;margin-top:2.2rem}
 .press__dot{width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid transparent;padding:0;cursor:pointer;transition:background .3s var(--ease),width .3s var(--ease)}
 .press__dot.is-active{background:var(--navy);width:22px;border-radius:5px}
-@media(max-width:860px){.press__row{padding:0 clamp(2.4rem,7vw,3.2rem)}.press__card{flex-basis:calc((100% - clamp(1rem,2vw,1.7rem))/2)}.press__arrow{width:42px;height:42px}}
+@media(max-width:860px){.press__row{padding:0 clamp(2.4rem,7vw,3.2rem)}.press__card{flex-basis:calc((100% - var(--press-gap))/2)}.press__arrow{width:42px;height:42px}}
 @media(max-width:480px){.press__row{padding:0 2.2rem}.press__card{flex-basis:100%}.press__arrow{width:38px;height:38px}}
 
 /* ============================== SECTION SHELL ============================== */
@@ -337,6 +298,7 @@ a{color:inherit;text-decoration:none}
 .pitem__meta span:not(:last-child)::after{content:'·';position:absolute;right:0}
 .pitem__meta .navy{color:rgba(255,255,255,.72)}
 .pitem__img{display:none}
+.pitem:focus-visible{outline:2px solid #fff;outline-offset:4px}
 
 /* permanent sticky preview panel */
 .projects__preview{
@@ -354,15 +316,21 @@ a{color:inherit;text-decoration:none}
   transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);
 }
 .projects__preview-stack img.is-active{opacity:1;transform:scale(1)}
-.projects__foot{max-width:1280px;margin:2.6rem auto 0;display:flex;justify-content:flex-end}
+.projects__foot{max-width:1280px;margin:2.6rem auto 0;display:flex;justify-content:flex-start}
 .viewall{display:inline-flex;align-items:center;gap:.8rem;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:600}
 .viewall i{width:36px;height:1px;background:rgba(255,255,255,.6);transition:width .35s var(--ease)}
 .viewall:hover i{width:60px}
 @media(max-width:980px){
   .projects__split{grid-template-columns:1fr;gap:1.6rem}
-  .projects__preview{position:relative;top:auto;height:min(48vh,420px);order:-1}
-  .pitem__left h3{font-size:clamp(1.5rem,6vw,2.2rem)}
-  .pitem:hover .pitem__left h3{transform:none}
+  .projects__preview{display:none}
+  .pitem{display:grid;grid-template-columns:clamp(96px,26vw,176px) minmax(0,1fr);align-items:center;gap:clamp(.9rem,3vw,1.5rem);padding:1.25rem 0}
+  .pitem__img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+  .pitem__left{display:block}
+  .pitem__no{display:none}
+  .pitem__left h3{font-size:clamp(1.25rem,4.5vw,2.2rem);overflow-wrap:anywhere}
+  .pitem__meta{gap:.25rem .5rem;color:rgba(255,255,255,.72)}
+  .pitem.is-active .pitem__left h3,
+  .pitem:hover .pitem__left h3{color:#fff;transform:none}
 }
 
 /* ============================== PRE-CONSTRUCTION (03) ============================== */
@@ -575,8 +543,6 @@ a{color:inherit;text-decoration:none}
 }
 .mform__submit:hover{background:#001ea3;transform:translateY(-2px)}
 .mform__note{grid-column:1 / -1;font-size:.78rem;color:var(--muted);margin-top:.2rem}
-.mform__note a{text-decoration:underline;text-underline-offset:2px}
-.mform__note a:hover{color:var(--navy)}
 .mform__done{grid-column:1 / -1;color:var(--navy);font-weight:600;font-size:1rem;display:none}
 @media(max-width:520px){.mform{grid-template-columns:1fr}}
 
@@ -702,6 +668,8 @@ a{color:inherit;text-decoration:none}
   .pd__hero img{animation:none}
 }
 
+.contact__page-links{display:flex;flex-wrap:wrap;gap:1.5rem}.contact__page-links a{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:underline;text-underline-offset:4px}
+
 /* ============================== PROJECT MAP ============================== */
 .map{background:var(--dark);padding:clamp(3.4rem,8vh,6rem) clamp(1.2rem,4vw,3.5rem)}
 .map__head{max-width:1280px;margin:0 auto 1.4rem}
@@ -724,6 +692,14 @@ a{color:inherit;text-decoration:none}
 .leaflet-marker-pane .pulse-dot{width:12px;height:12px;background:var(--navy);border-radius:50%;border:2px solid rgba(255,255,255,.6);box-shadow:0 0 0 4px rgba(0,40,204,.25)}
 @media(max-width:860px){.map__canvas{height:clamp(360px,52vh,480px)}}
 </style>
+<style>
+.mform__trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.mform__submit:disabled{opacity:.6;cursor:wait}
+.mform__note a{text-decoration:underline;text-underline-offset:3px}
+.mform__done.is-error{color:#a32323}
+</style>
+<script src="/assets/legacy-project-routes.js" defer></script>
+<noscript><style>#preloader{display:none}.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -742,10 +718,10 @@ a{color:inherit;text-decoration:none}
   <a href="#" class="nav__logo"><img class="logo-light" src="assets/montana-logo-white.svg" alt="Montana Contracting"><img class="logo-dark" src="assets/montana-logo.svg" alt="Montana Contracting"></a>
   <div class="nav__links" id="main-nav-links">
     <a href="#story">Approach</a>
-    <a href="#values">Values</a>
+    <a href="core-values/index.html">Values</a>
     <a href="#featured">Work</a>
     <a href="#precon">Pre-Con</a>
-    <a href="#financing">Financing</a>
+    <a href="financing/index.html">Financing</a>
     <a href="#contact">Contact</a>
   </div>
   <a href="#contact" class="nav__cta" data-open-form>Start a Project</a>
@@ -763,7 +739,6 @@ a{color:inherit;text-decoration:none}
       <span class="ln"><span>Work</span></span>
     </h1>
     <div class="hero__eyebrow hero__eyebrow--below"><i></i>Since 1984 · NY + NJ</div>
-    <button type="button" class="hero__cta" data-open-form>Start a Project</button>
   </div>
   <div class="hero__scroll">Scroll<i></i></div>
 </header>
@@ -849,70 +824,13 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- CORE VALUES (02) -->
-<section class="sec values" id="values">
-  <div class="values__head">
-    <div class="sec__index reveal"><i></i>02 / Core Values</div>
-  </div>
-  <div class="values__preamble reveal">
-    <p>Most companies frame their values and hang them on a wall. We run the entire business off ours.</p>
-    <p>These aren't a poster. They're the filter we run every decision through. We hire by them, because skill gets you an interview but values get you the job. We review our own people by them, leadership included, on a regular basis. And when someone stops living them, we have the hard conversation, no exceptions for being good at the job.</p>
-    <p>We hold our vendors, subcontractors, and clients to the same standard. The subs we put on your project, the clients we take on, all of it runs through these five values. Not words we say. The code we operate by.</p>
-  </div>
-  <div class="vlist">
 
-    <div class="vitem reveal">
-      <div class="vitem__wm">1</div>
-      <div class="vitem__body">
-        <h3>Family First</h3>
-        <blockquote>"The homemaker has the ultimate career. All other careers exist for one purpose only - and that is to support the ultimate career."</blockquote>
-        <cite>C.S. Lewis</cite>
-      </div>
-    </div>
-
-    <div class="vitem reveal">
-      <div class="vitem__wm">2</div>
-      <div class="vitem__body">
-        <h3>Mutual Respect</h3>
-        <blockquote>"True greatness will be achieved through the abundant mind that works selflessly - with mutual respect, for mutual benefit."</blockquote>
-        <cite>Stephen Covey</cite>
-      </div>
-    </div>
-
-    <div class="vitem reveal">
-      <div class="vitem__wm">3</div>
-      <div class="vitem__body">
-        <h3>Collaboration</h3>
-        <blockquote>"Individual commitment to a group effort - that is what makes a team work, a company work, a society work, a civilization work."</blockquote>
-        <cite>Vince Lombardi</cite>
-      </div>
-    </div>
-
-    <div class="vitem reveal">
-      <div class="vitem__wm">4</div>
-      <div class="vitem__body">
-        <h3>Absolute Ownership</h3>
-        <blockquote>"Responsibility equals accountability equals ownership. And a sense of ownership is the most powerful weapon a team or organization can have."</blockquote>
-        <cite>Pat Summitt</cite>
-      </div>
-    </div>
-
-    <div class="vitem reveal">
-      <div class="vitem__wm">5</div>
-      <div class="vitem__body">
-        <h3>Attitude</h3>
-        <blockquote>"Your living is determined not so much by what life brings to you as by the attitude you bring to life; not so much by what happens to you as by the way your mind looks at what happens."</blockquote>
-        <cite>Khalil Gibran</cite>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <!-- STATS -->
 <section class="stats">
   <div class="stats__grid">
-    <div class="stat reveal"><div class="stat__num" data-count="200" data-suffix="+">200+</div><div class="stat__lab">Projects Delivered</div></div>
-    <div class="stat reveal" data-d="1"><div class="stat__num" data-count="1984" data-plain="1">1984</div><div class="stat__lab">Since</div></div>
+    <div class="stat reveal"><div class="stat__num" data-count="200" data-suffix="+">0</div><div class="stat__lab">Projects Delivered</div></div>
+    <div class="stat reveal" data-d="1"><div class="stat__num" data-count="1984" data-plain="1">0</div><div class="stat__lab">Since</div></div>
     <div class="stat reveal" data-d="2"><div class="stat__num" data-static="NY+NJ">NY+NJ</div><div class="stat__lab">Licensed &amp; Operating</div></div>
   </div>
 </section>
@@ -920,13 +838,14 @@ a{color:inherit;text-decoration:none}
 <!-- PROJECTS (03) -->
 <section class="sec projects" id="featured">
   <div class="projects__head">
-    <div class="sec__index reveal"><i></i>03 / Selected Works</div>
+    <div class="sec__index reveal"><i></i>02 / Selected Works</div>
     <h2 class="reveal" data-d="1">Featured projects.</h2>
   </div>
   <div class="projects__split">
     <div class="plist">
 
-    <a class="pitem reveal is-active" href="#piaule-catskill" data-preview="assets/photos/projects/piaule-catskill-14.jpg">
+    <a class="pitem reveal is-active" href="/projects/piaule-catskill/" data-preview="assets/photos/projects/piaule-catskill-14.jpg">
+      <img class="pitem__img" src="assets/photos/projects/piaule-catskill-14.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">01</span>
         <div><h3>Piaule Catskill Retreat</h3>
@@ -934,7 +853,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="#hudson-river-house" data-preview="assets/photos/projects/hudson-river-house-16.jpg">
+    <a class="pitem reveal" href="/projects/hudson-river-house/" data-preview="assets/photos/projects/hudson-river-house-16.jpg">
+      <img class="pitem__img" src="assets/photos/projects/hudson-river-house-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">02</span>
         <div><h3>Hudson River House</h3>
@@ -942,7 +862,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="#gym-englewood" data-preview="assets/photos/projects/gym-englewood-06.jpg">
+    <a class="pitem reveal" href="/projects/gym-englewood/" data-preview="assets/photos/projects/gym-englewood-06.jpg">
+      <img class="pitem__img" src="assets/photos/projects/gym-englewood-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">03</span>
         <div><h3>The Gym Englewood</h3>
@@ -950,7 +871,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="#multi-generational-house" data-preview="assets/photos/projects/germantown-compound-06.jpg">
+    <a class="pitem reveal" href="/projects/multi-generational-house/" data-preview="assets/photos/projects/germantown-compound-06.jpg">
+      <img class="pitem__img" src="assets/photos/projects/germantown-compound-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">04</span>
         <div><h3>Germantown Compound</h3>
@@ -958,7 +880,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="#twisted-ridge" data-preview="assets/photos/projects/twisted-ridge-16.jpg">
+    <a class="pitem reveal" href="/projects/twisted-ridge/" data-preview="assets/photos/projects/twisted-ridge-16.jpg">
+      <img class="pitem__img" src="assets/photos/projects/twisted-ridge-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">05</span>
         <div><h3>Twisted Ridge</h3>
@@ -978,14 +901,14 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
   <div class="projects__foot reveal">
-    <a class="viewall" href="#all">View All Projects <i></i></a>
+    <a class="viewall" href="/projects/">View All Projects <i></i></a>
   </div>
 </section>
 
 <!-- PRE-CONSTRUCTION (04) -->
 <section class="sec precon" id="precon">
   <div class="precon__head">
-    <div class="sec__index reveal"><i></i>04 / Pre-Construction</div>
+    <div class="sec__index reveal"><i></i>03 / Pre-Construction</div>
     <h2 class="reveal" data-d="1">Brought in early.<br>Trust built on certainty.</h2>
   </div>
   <div class="precon__lead reveal">
@@ -1027,64 +950,13 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- FINANCING (05) -->
-<section class="sec finance" id="financing">
-  <div class="finance__head">
-    <div class="sec__index reveal"><i></i>05 / Financing</div>
-    <h2 class="reveal" data-d="1">The capital to build.<br>The team to deliver.</h2>
-  </div>
-  <div class="finance__grid reveal">
-    <div class="finance__intro">
-      <p>Montana Contracting has partnered with <strong>Procida Funding</strong> to provide construction financing for multi-family, affordable housing, and large-scale commercial projects. One conversation. One team. The build and the balance sheet, handled together.</p>
-    </div>
-    <ol class="finance__steps">
-      <li><strong>Project review.</strong> Send us the deal. We assess scope, timeline, and budget together - construction and capital under one roof.</li>
-      <li><strong>Capital structuring.</strong> Procida Funding structures the loan. Terms are built around the project, not a bank committee's template. Construction loans. Bridge financing. Mezzanine debt. Preferred equity.</li>
-      <li><strong>Execution.</strong> Montana Contracting builds it. Four decades of GC experience. The capital partner and the construction partner are in the room together from day one.</li>
-    </ol>
-  </div>
-  <div class="finance__table reveal">
-    <h3>What we finance</h3>
-    <div class="finance__cols">
-      <div class="finance__col">
-        <div class="fcard"><div class="fcard__lab">Multi-family</div><div class="fcard__val">20 to 200+ units</div></div>
-        <div class="fcard"><div class="fcard__lab">Affordable housing</div><div class="fcard__val">LIHTC, workforce, mixed-income</div></div>
-        <div class="fcard"><div class="fcard__lab">Mixed-use</div><div class="fcard__val">Ground-floor retail + residential</div></div>
-      </div>
-      <div class="finance__col">
-        <div class="fcard"><div class="fcard__lab">Large-scale commercial</div><div class="fcard__val">Office, industrial, retail</div></div>
-        <div class="fcard"><div class="fcard__lab">Hospitality</div><div class="fcard__val">Hotels, resorts</div></div>
-        <div class="fcard"><div class="fcard__lab">Geography</div><div class="fcard__val">NY, NJ, CT, PA - eastern US</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="finance__who reveal">
-    <h3>Who this is for</h3>
-    <ul>
-      <li>Developers with shovel-ready projects who need capital that moves faster than a bank</li>
-      <li>Municipalities and housing authorities with land and a vision</li>
-      <li>Non-profits and CDCs building affordable and workforce housing</li>
-      <li>Property owners repositioning or recapitalizing existing assets</li>
-    </ul>
-  </div>
-  <div class="finance__cta reveal">
-    <div class="finance__cta-col">
-      <strong>Request financing</strong>
-      <p>Loan sizes from $5M to $150M+. Construction, bridge, mezzanine, and preferred equity.</p>
-      <a href="#contact" class="btn btn--ghost" data-open-form>Request financing</a>
-    </div>
-    <div class="finance__cta-col">
-      <strong>Financing partner</strong>
-      <p>Procida Funding has originated over $5 billion in loans since 1995. Led by Billy Procida, a builder turned financier with 30+ years in real estate and construction. Based in Old Tappan, New Jersey.</p>
-      <a href="https://procida.com" target="_blank" rel="noopener" class="btn btn--ghost">Visit Procida.com</a>
-    </div>
-  </div>
-</section>
+
 <section class="sec contact" id="contact">
   <div class="contact__grid">
     <div>
-      <div class="sec__index reveal"><i></i>06 / Contact</div>
+      <div class="sec__index reveal"><i></i>04 / Contact</div>
       <h2 class="reveal" data-d="1">Start a project.</h2>
-      <button type="button" class="contact__cta reveal" data-d="2" data-open-form>Start a Project <i></i></button>
+      <button type="button" class="contact__cta reveal" data-d="2" data-open-form>Let's Talk <i></i></button>
     </div>
     <div class="contact__details">
       <div class="cdetail reveal" data-d="1">
@@ -1104,6 +976,7 @@ a{color:inherit;text-decoration:none}
   <div class="contact__foot reveal">
     <span>© 2026 <b>Montana Contracting</b> · The Hudson Valley's Most Ambitious Work</span>
     <span>Since 1984 · NY + NJ</span>
+    <nav class="contact__page-links" aria-label="More about Montana"><a href="core-values/index.html">Our values</a><a href="financing/index.html">Financing</a></nav>
   </div>
 </section>
 
@@ -1120,21 +993,6 @@ a{color:inherit;text-decoration:none}
   <ul class="map__sr-list" id="mapSrList" aria-label="Project locations list"></ul>
 </section>
 
-<!-- PROJECT DETAIL VIEW (populated by JS) -->
-<div class="pdetail" id="pdetail" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project detail"></div>
-
-<!-- ALL PROJECTS GRID (populated by JS) -->
-<div class="pall" id="pall" aria-hidden="true" role="dialog" aria-modal="true" aria-label="All projects"></div>
-
-<!-- GALLERY LIGHTBOX -->
-<div class="pd__lightbox" id="pdLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button type="button" class="pd__lb-btn pd__lb-close" id="lbClose" aria-label="Close">&times;</button>
-  <button type="button" class="pd__lb-btn pd__lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
-  <img id="lbImg" src="" alt="">
-  <button type="button" class="pd__lb-btn pd__lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
-  <div class="pd__lb-count" id="lbCount"></div>
-</div>
-
 <!-- START A PROJECT MODAL -->
 <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal__panel" role="document">
@@ -1145,15 +1003,15 @@ a{color:inherit;text-decoration:none}
     <form class="mform" id="projectForm" novalidate>
       <div class="mfield">
         <label for="pf-name">Name</label>
-        <input type="text" id="pf-name" name="name" autocomplete="name" required>
+        <input type="text" id="pf-name" maxlength="120" name="name" autocomplete="name" required>
       </div>
       <div class="mfield">
         <label for="pf-email">Email</label>
-        <input type="email" id="pf-email" name="email" autocomplete="email" required>
+        <input type="email" id="pf-email" maxlength="254" name="email" autocomplete="email" required>
       </div>
       <div class="mfield">
         <label for="pf-phone">Phone</label>
-        <input type="tel" id="pf-phone" name="phone" autocomplete="tel">
+        <input type="tel" id="pf-phone" maxlength="50" name="phone" autocomplete="tel">
       </div>
       <div class="mfield">
         <label for="pf-type">Project Type</label>
@@ -1168,11 +1026,13 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="mfield mfield--full">
         <label for="pf-message">Message</label>
-        <textarea id="pf-message" name="message" placeholder="Location, scope, timeline, anything else we should know."></textarea>
+        <textarea id="pf-message" maxlength="5000" name="message" placeholder="Location, scope, timeline, anything else we should know."></textarea>
       </div>
+      <div class="mform__trap" aria-hidden="true"><label for="pf-website">Leave this field empty</label><input id="pf-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <button type="submit" class="mform__submit">Send Inquiry</button>
-      <p class="mform__note">Or call <a href="tel:+18453981778">(845) 398-1778</a> · <a href="mailto:info@montanacontracting.com">info@montanacontracting.com</a></p>
-      <p class="mform__done" id="pf-done" aria-live="polite">Your email app should open with a ready-to-send inquiry.</p>
+      <p class="mform__note">You can also <a href="tel:+18453981778">call (845) 398-1778</a> or <a href="mailto:matt@montanacontracting.com">email Matt</a>.</p>
+      <noscript><p>Please email <a href="mailto:matt@montanacontracting.com">matt@montanacontracting.com</a> to send your inquiry.</p></noscript>
+      <p class="mform__done" id="pf-done" role="status" aria-live="polite" aria-atomic="true"></p>
     </form>
   </div>
 </div>
@@ -1212,6 +1072,7 @@ a{color:inherit;text-decoration:none}
     burger.setAttribute('aria-expanded',open?'true':'false');
     burger.textContent=open?'Close':'Menu';
     onScroll();
+    if(open)links.querySelector('a').focus();
   }
   burger.addEventListener('click',function(){setOpen(!isOpen());});
   links.addEventListener('click',function(event){if(event.target.closest('a'))setOpen(false);});
@@ -1430,20 +1291,37 @@ a{color:inherit;text-decoration:none}
 })();
 
 /* ============================== COUNTERS ============================== */
-/* T-018: SSR finals stay in HTML (200+, 1984, NY+NJ). JS must never flash 0. */
 (function(){
   var nums=document.querySelectorAll('.stat__num');
-  function finalText(el){
-    if(el.dataset.static!==undefined)return el.dataset.static;
-    var target=parseInt(el.dataset.count,10);
-    if(isNaN(target))return el.textContent;
-    var suffix=el.dataset.suffix||'';
-    var plain=el.dataset.plain!==undefined;
-    return (plain?String(target):target.toLocaleString('en-US'))+suffix;
-  }
-  nums.forEach(function(el){
-    el.textContent=finalText(el);
-  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      var el=en.target;
+      if(el.dataset.static!==undefined)return;
+      /* bi-directional: count up when scrolled into view, reset to 0 when scrolled back
+         out so the counter re-animates on the next entry. Never unobserve. */
+      if(!en.isIntersecting){
+        if(el._raf)cancelAnimationFrame(el._raf);el._raf=null;
+        el.textContent='0';
+        return;
+      }
+      if(el._raf)return; /* already counting */
+      var target=parseInt(el.dataset.count,10);
+      var suffix=el.dataset.suffix||'';
+      var plain=el.dataset.plain!==undefined;
+      var start=null,dur=1600;
+      function step(ts){
+        if(!start)start=ts;
+        var p=Math.min((ts-start)/dur,1);
+        var eased=1-Math.pow(1-p,3);
+        var val=Math.floor(eased*target);
+        el.textContent=(plain?String(val):val.toLocaleString('en-US'))+(p===1?suffix:'');
+        if(p<1){el._raf=requestAnimationFrame(step);}
+        else{el._raf=null;el.textContent=(plain?String(target):target.toLocaleString('en-US'))+suffix;}
+      }
+      el._raf=requestAnimationFrame(step);
+    });
+  },{threshold:0.4});
+  nums.forEach(function(n){io.observe(n);});
 })();
 
 /* ============================== (particles removed) ============================== */
@@ -1466,7 +1344,6 @@ a{color:inherit;text-decoration:none}
     lastFocus=document.activeElement;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
-    document.body.classList.add('modal-open');
     setPageInert(true);
     document.body.style.overflow='hidden';
     var first=form.querySelector('input,select,textarea,button');
@@ -1475,17 +1352,13 @@ a{color:inherit;text-decoration:none}
   function close(){
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
-    document.body.classList.remove('modal-open');
     setPageInert(false);
     document.body.style.overflow='';
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
-  // open triggers (delegate so late DOM like #mobileBar still binds)
-  document.addEventListener('click',function(e){
-    var el=e.target.closest('[data-open-form]');
-    if(!el)return;
-    e.preventDefault();
-    open();
+  // open triggers
+  document.querySelectorAll('[data-open-form]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();open();});
   });
   // close triggers
   modal.querySelectorAll('[data-close-form]').forEach(function(el){
@@ -1505,534 +1378,11 @@ a{color:inherit;text-decoration:none}
       else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
     }
   });
-  // Hand the completed inquiry to the visitor's email app. This keeps the static
-  // site useful without pretending that an unconfigured form backend received it.
-  if(form){
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      if(!form.checkValidity()){form.reportValidity();return;}
-      var data=new FormData(form);
-      var subject='Project inquiry from '+data.get('name');
-      var body=[
-        'Name: '+data.get('name'),
-        'Email: '+data.get('email'),
-        'Phone: '+(data.get('phone')||'Not provided'),
-        'Project type: '+data.get('projectType'),
-        '',
-        data.get('message')||'No additional details provided.'
-      ].join('\n');
-      if(done)done.style.display='block';
-      window.location.href='mailto:info@montanacontracting.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-    });
-  }
+
 })();
 
-/* ============================== PROJECT DETAIL VIEW + ROUTER ============================== */
+/* ============================== PROJECT PREVIEWS ============================== */
 (function(){
-  var P='assets/photos/', PR='assets/photos/projects/';
-
-  // ---- project data ----
-  var PROJECTS=[
-    {
-      slug:'piaule-catskill',title:'Piaule Catskill Retreat',category:'Hospitality',
-      location:'Catskill, NY',type:'Landscape Hotel',architect:'Garrison Architects',
-      description:[
-        'Set on ninety acres above the town of Catskill, Piaule is a landscape hotel of twenty four minimalist cabins, a spa, and a central lodge. Montana Contracting delivered the structures with a precision that lets the architecture recede into the surrounding forest.',
-        'Each cabin is a study in restraint. Floor to ceiling glass, warm timber, and concrete meet at tolerances measured in millimeters, so the building quiets down and the view becomes the room.',
-        'The work called for close coordination between our field teams and the design team: protecting mature trees, managing a sensitive grade, and finishing every surface to a gallery standard.'
-      ],
-      images:[PR+'piaule-catskill-14.jpg',PR+'piaule-catskill-01.jpg',PR+'piaule-catskill-02.jpg',PR+'piaule-catskill-03.jpg',PR+'piaule-catskill-04.jpg',PR+'piaule-catskill-05.jpg',PR+'piaule-catskill-06.jpg',PR+'piaule-catskill-07.jpg',PR+'piaule-catskill-08.jpg',PR+'piaule-catskill-09.jpg',PR+'piaule-catskill-10.jpg',PR+'piaule-catskill-11.jpg',PR+'piaule-catskill-12.jpg',PR+'piaule-catskill-13.jpg',PR+'piaule-catskill-15.jpg',PR+'piaule-catskill-16.png',PR+'piaule-catskill-17.jpg'],
-      press:[
-        {outlet:'Vogue',url:'https://www.vogue.com/article/piaule-catskill-hotel'},
-        {outlet:'Architectural Digest',url:'https://www.architecturaldigest.com/story/12-best-hudson-valley-and-catskills-hotels-and-cabins'},
-        {outlet:'Travel & Leisure',url:'https://www.travelandleisure.com/piaule-catskill-review-11885713'},
-        {outlet:'Forbes',url:'https://www.forbes.com/sites/katebdonnelly/2024/02/20/5-hotel-spa-retreats-close-to-nyc--and-perfect-for-a-winter-weekend/'},
-        {outlet:'Westchester Magazine',url:'https://westchestermagazine.com/life-style/piaule-catskills/'},
-        {outlet:'Design Milk',url:'https://design-milk.com/piaule-catskill-is-a-landscape-hotel-of-cabins-in-upstate-new-york/'}
-      ]
-    },
-    {
-      slug:'hudson-river-house',title:'Hudson River House',category:'Residential',
-      location:'Croton-on-Hudson, NY',type:'Custom Home',architect:null,
-      description:[
-        'A private residence perched to capture the full sweep of the Hudson. The house opens almost entirely to the water, with expanses of glass framed in blackened steel and stone drawn from the region.',
-        'Building on a steep riverfront grade meant engineering foundations and drainage with real care. Our team sequenced the work to keep the site stable through every season of construction.',
-        'Inside, the finish work is quiet and exact. Rift white oak, honed stone, and clean plaster carry through the living spaces without a visible seam.'
-      ],
-      images:[PR+'hudson-river-house-16.jpg',PR+'hudson-river-house-01.jpg',PR+'hudson-river-house-02.jpg',PR+'hudson-river-house-03.jpg',PR+'hudson-river-house-04.jpg',PR+'hudson-river-house-05.jpg',PR+'hudson-river-house-06.jpg',PR+'hudson-river-house-07.jpg',PR+'hudson-river-house-08.jpg',PR+'hudson-river-house-09.jpg',PR+'hudson-river-house-11.jpg',PR+'hudson-river-house-12.jpg',PR+'hudson-river-house-13.jpg',PR+'hudson-river-house-14.jpg',PR+'hudson-river-house-15.jpg',PR+'hudson-river-house-17.jpg']
-    },
-    {
-      slug:'multi-generational-house',title:'Germantown Compound',category:'Residential',
-      location:'Germantown, NY',type:'Custom Compound',architect:null,
-      description:[
-        'Two homes, one family, one site. The first is an artist studio built for the daughter, a single-family residence where floor-to-ceiling glass pulls the wooded landscape indoors and every surface was finished to a gallery standard. The second is Meadow House, a 2,800-square-foot ground-up residence set within a gently sloping meadow, bordered to the south by dense forest.',
-        'Meadow House reinterprets the barn typology through a contemporary lens. Three distinct volumes pivot outward to create intimate covered inner courtyards, integrating indoor and outdoor living while preserving privacy. An entrance pavilion houses the garage, office, and workout area. A central living pavilion with a lofted ceiling opens southward to capture natural light and long forest views. A separate bedroom wing is set back into the landscape, creating a quieter, more secluded domain.',
-        'The approach is carefully choreographed. A curved brick wall defines the northern facade, concealing the scale of the home and guiding circulation along a meandering path. The moment of compression gives way to openness upon entry, where expansive south-facing glazing reveals the forest and meadow. An undulating roof plane with integrated solar panels unifies all three volumes, and a geothermal system heats and cools the highly efficient envelope. The orientation follows principles of feng shui, aligning the home to welcome light, warmth, and integration with the landscape.'
-      ],
-      images:[PR+'germantown-compound-06.jpg',PR+'germantown-compound-01.jpg',PR+'germantown-compound-02.jpg',PR+'germantown-compound-03.jpg',PR+'germantown-compound-04.jpg',PR+'germantown-compound-05.jpg',PR+'germantown-compound-07.jpg',PR+'germantown-compound-08.jpg',PR+'germantown-compound-09.jpg',PR+'germantown-compound-10.jpg',PR+'germantown-compound-12.jpg',PR+'germantown-compound-13.jpg',PR+'germantown-compound-14.jpg',PR+'germantown-compound-15.jpg',PR+'germantown-compound-16.jpg',PR+'germantown-compound-17.jpg',PR+'germantown-compound-18.jpg',PR+'germantown-compound-19.jpg',PR+'germantown-compound-20.jpg',PR+'germantown-compound-21.jpg',PR+'germantown-compound-22.jpg',PR+'germantown-compound-23.jpg',PR+'germantown-compound-24.jpg',PR+'germantown-compound-25.jpg',PR+'germantown-compound-26.jpg',PR+'germantown-compound-27.jpg',PR+'germantown-compound-28.jpg',PR+'germantown-compound-29.jpg',PR+'germantown-compound-30.jpg',PR+'germantown-compound-31.jpg',PR+'germantown-compound-32.jpg'],
-      press:[
-        {outlet:'The New York Times',url:'https://www.nytimes.com/2026/04/27/realestate/germantown-ny-art-studio-home.html'},
-        {outlet:'Architectural Digest',url:'https://www.architecturaldigest.com/gallery/tour-an-artists-hudson-valley-homestead-brimming-with-good-feng-shui'}
-      ]
-    },
-    {
-      slug:'twisted-ridge',title:'Twisted Ridge',category:'Residential',
-      location:'Hudson Valley, NY',type:'Custom Home',architect:null,
-      description:[
-        'A sculptural residence set into a wooded ridge, its roofline twisting to follow the slope and open each room to a different piece of the valley.',
-        'The geometry was unforgiving. Every framing member met the next at a shifting angle, so we modeled the entire structure before a single board was cut.',
-        'The result is a home that feels carved from the site, with cantilevers and glass that make the woods part of the interior.'
-      ],
-      images:[PR+'twisted-ridge-16.jpg',PR+'twisted-ridge-01.jpg',PR+'twisted-ridge-02.jpg',PR+'twisted-ridge-03.jpg',PR+'twisted-ridge-04.jpg',PR+'twisted-ridge-05.jpg',PR+'twisted-ridge-06.jpg',PR+'twisted-ridge-07.jpg',PR+'twisted-ridge-08.jpg',PR+'twisted-ridge-09.jpg',PR+'twisted-ridge-10.jpg',PR+'twisted-ridge-11.jpg',PR+'twisted-ridge-12.jpg',PR+'twisted-ridge-13.jpg',PR+'twisted-ridge-14.jpg',PR+'twisted-ridge-15.jpg'],
-      press:[
-        {outlet:'Vogue Living',url:'https://www.vogue.com.au/vogue-living/interiors/the-up-studio-hudson-home/image-gallery/2dfd4b7fefe975b528768f0ae1e49799'},
-        {outlet:'Upstate House',url:'https://upstatehouse.com/twisted-ridge-offers-a-new-slant-on-a-roof-line/'},
-        {outlet:'Archello',url:'https://archello.com/project/twisted-ridge'}
-      ]
-    },
-    {
-      slug:'gym-englewood',title:'The Gym Englewood',category:'Commercial',
-      location:'Englewood, NJ',type:'Phased Renovation',architect:null,
-      description:[
-        'A full reimagining of a fitness club, delivered in stages so the doors never closed. We rebuilt the floors, systems, and finishes around an operating business.',
-        'Staged work on a live site takes planning. We isolated construction from members, and turned over finished zones on a schedule the client could count on.',
-        'New training floors, group rooms, and locker rooms were finished in a clean, durable palette built to take heavy daily use for years.'
-      ],
-      images:[PR+'gym-englewood-06.jpg',PR+'gym-englewood-01.jpg',PR+'gym-englewood-02.jpg',PR+'gym-englewood-03.jpg',PR+'gym-englewood-04.jpg',PR+'gym-englewood-05.jpg'],
-      video:'assets/videos/gym-englewood.mp4'
-    },
-
-    /* --- Dairyland, Chef's Warehouse (real) --- */
-    {
-      slug:'dairyland-chefs-warehouse',
-      title:"Dairyland, Chef's Warehouse",
-      category:'Commercial',
-      location:'Bronx, NY',
-      type:'Office Conversion',
-      architect:'GMA Architects, St. Louis, MO',
-      description:[
-        "A full-gut conversion of 26,000 square feet of raw industrial space into a considered, design-forward workplace. The building was stripped to its shell and rebuilt around a new organizational logic: open workspaces, private offices, and a showpiece test kitchen that anchors the floor plan.",
-        "The technical scope was deep. All-new mechanical, electrical, and plumbing systems run through the structure. Helical piles were driven to stabilize the foundation on Bronx soil. A custom interior storefront system wrapped in decorative steel partitions the space while keeping sightlines open and light moving between zones.",
-        "The finishes tell the story. A state-of-the-art test kitchen with commercial-grade equipment. Local graffiti artists commissioned to bring original work onto the walls, giving the office a sense of place and texture that reads more gallery than corporate. High-end materials and tight tolerances throughout, executed off plans by GMA Architects of St. Louis."
-      ],
-      images:[
-        PR+'dairyland-chefs-warehouse-01.jpg',PR+'dairyland-chefs-warehouse-02.jpg',PR+'dairyland-chefs-warehouse-03.jpg',
-        PR+'dairyland-chefs-warehouse-04.jpg',PR+'dairyland-chefs-warehouse-05.jpg',PR+'dairyland-chefs-warehouse-06.jpg',
-        PR+'dairyland-chefs-warehouse-07.jpg',PR+'dairyland-chefs-warehouse-08.jpg',PR+'dairyland-chefs-warehouse-09.jpg',
-        PR+'dairyland-chefs-warehouse-10.jpg',PR+'dairyland-chefs-warehouse-11.jpg',PR+'dairyland-chefs-warehouse-12.jpg',
-        PR+'dairyland-chefs-warehouse-13.jpg',PR+'dairyland-chefs-warehouse-14.jpg',PR+'dairyland-chefs-warehouse-15.jpg',
-        PR+'dairyland-chefs-warehouse-16.jpg',PR+'dairyland-chefs-warehouse-17.jpg',PR+'dairyland-chefs-warehouse-18.jpg',
-        PR+'dairyland-chefs-warehouse-19.jpg'
-      ]
-    },
-
-    /* --- placeholder entries (14) --- */
-    {
-      slug:'dunkin-greenwood-lake',title:"Dunkin' Greenwood Lake",category:'Commercial',
-      location:'Greenwood Lake, NY',type:'Ground-Up Retail',architect:null,
-      description:[
-        'One lot, one road, one drive-thru that had to work. Dunkin\' needed a ground-up store on a tight, high-visibility parcel on a main road in Greenwood Lake, with a full drive-thru lane fit into a site that left almost no margin for one.',
-        'The building and the drive-thru lane were planned together from the first site plan. The lane wraps close along the property line, clear of customer parking and the front entrance, with the menu board and canopy set to the grade break on that side of the lot. Stacked stone at the base and orange trim under the roofline carry the brand without crowding the site.',
-        'Inside, the counter, kitchen, and a full espresso and cold brew bar sit behind digital menu boards, finished in the dark ceiling and warm tile used across Dunkin\' builds. Every utility tie-in, grading line, and curb cut was coordinated against the drive-thru lane before the foundation went in, so cars, customers, and staff move through the same tight site without crossing paths.'
-      ],
-      images:[PR+'dunkin-greenwood-lake-01.jpg',PR+'dunkin-greenwood-lake-02.jpg',PR+'dunkin-greenwood-lake-03.jpg',PR+'dunkin-greenwood-lake-04.jpg',PR+'dunkin-greenwood-lake-05.jpg',PR+'dunkin-greenwood-lake-06.jpg',PR+'dunkin-greenwood-lake-07.jpg',PR+'dunkin-greenwood-lake-08.jpg',PR+'dunkin-greenwood-lake-09.jpg',PR+'dunkin-greenwood-lake-10.jpg']
-    },
-    {
-      slug:'dunkin-new-city',title:"Dunkin' New City",category:'Commercial',
-      location:'New City, NY',type:'Interior Renovation',architect:null,
-      description:[
-        'Three weeks, start to finish. Dunkin\' needed a full interior renovation of an operating store in New City, and the schedule left no room for a slow start or a second mobilization.',
-        'We ran the job with our own crews. Every one of our superintendents came up as a carpenter first, so the people running the schedule are the same people who can pick up a tool and close a gap in it. A three-week interior turn depends on a crew that can move from demo to rough-in to finish without waiting on outside labor to catch up.',
-        'The result is a full rebuild behind the same four walls. New counters, new digital menu boards, a full espresso and cold brew bar, dark tile and black ceiling throughout, and the branded wall signage that anchors the dining room. The store reopened on schedule, finished to the same standard as a ground-up build.'
-      ],
-      images:[PR+'dunkin-new-city-01.jpg',PR+'dunkin-new-city-02.jpg',PR+'dunkin-new-city-03.jpg',PR+'dunkin-new-city-04.jpg',PR+'dunkin-new-city-05.jpg',PR+'dunkin-new-city-06.jpg',PR+'dunkin-new-city-07.jpg',PR+'dunkin-new-city-08.jpg',PR+'dunkin-new-city-09.jpg']
-    },
-    {slug:'palisades-mod-ranch',title:'Palisades Mod Ranch',category:'Residential',
-      location:'Palisades, NY',type:'Custom Ranch',architect:null,
-      description:[
-        "A 4,900-square-foot ranch in Palisades, New York, designed around two principles: open space and natural light. Fourteen-foot Marvin Contemporary Windows and Wasco skylights pull daylight deep into the plan, while ceiling heights shift from 12 to 18 feet to define each zone without walls.",
-        "The exterior is a composition of materials. Clear cedar and ipe siding sit alongside Cembonit fiber cement panels and natural stone veneer, all capped by a black standing-seam metal roof. The material palette feels grounded and modern at once, aging into the wooded Palisades site rather than fighting it.",
-        "Inside, every system was chosen for precision and comfort. Warmboard radiant heating runs underfoot. Three Stuv wood-burning fireplaces anchor the main living spaces. Liberamente kitchen cabinetry, a RadioRa lighting control system, and a fully-finished basement complete a home built to perform as well as it looks."
-      ],
-      images:[
-        PR+'palisades-mod-ranch-01.jpg',PR+'palisades-mod-ranch-02.jpg',PR+'palisades-mod-ranch-03.jpg',
-        PR+'palisades-mod-ranch-04.jpg',PR+'palisades-mod-ranch-05.jpg',PR+'palisades-mod-ranch-06.jpg',
-        PR+'palisades-mod-ranch-07.jpg',PR+'palisades-mod-ranch-08.jpg',PR+'palisades-mod-ranch-09.jpg',
-        PR+'palisades-mod-ranch-10.jpg',PR+'palisades-mod-ranch-11.jpg',PR+'palisades-mod-ranch-12.jpg',
-        PR+'palisades-mod-ranch-13.jpg'
-      ]
-    },
-    {
-      slug:'custom-home-tuxedo-ny',title:'Tuxedo Residence',category:'Residential',
-      location:'Tuxedo, NY',type:'Custom Home',architect:null,
-      description:[
-        'A transitional custom home set on a wooded lot in Tuxedo, built around long sightlines to the trees and a lake below. Arched windows and a two-story great room pull daylight deep into the plan.',
-        'The material palette runs light stucco and dark charcoal accent walls against warm hardwood floors, with brass and gold hardware carried through every room. A curved staircase and a coffered-ceiling foyer anchor the entry.',
-        'The kitchen centers on a black-and-white island with a marble top, flanked by a full wet bar finished in the same stone. Bathrooms throughout mix marble, stacked stone, and brass fixtures, each one built to its own material story.'
-      ],
-      images:[PR+'tuxedo-residence-01.jpg',PR+'tuxedo-residence-02.jpg',PR+'tuxedo-residence-03.jpg',PR+'tuxedo-residence-04.jpg',PR+'tuxedo-residence-05.jpg',PR+'tuxedo-residence-06.jpg',PR+'tuxedo-residence-07.jpg',PR+'tuxedo-residence-08.jpg',PR+'tuxedo-residence-09.jpg',PR+'tuxedo-residence-10.jpg',PR+'tuxedo-residence-11.jpg',PR+'tuxedo-residence-12.jpg',PR+'tuxedo-residence-13.jpg',PR+'tuxedo-residence-14.jpg',PR+'tuxedo-residence-15.jpg']
-    },
-    {slug:'eagles-barn',title:"Eagle's Barn",category:'Residential',location:'Hudson Valley, NY',type:'Barn Conversion',architect:null,placeholder:true,images:[PR+'eagles-barn.jpg']},
-    {slug:'dorotockeys-run',title:"Dorotockey's Run",category:'Residential',location:'Hudson Valley, NY',type:'Custom Home',architect:null,placeholder:true,images:[PR+'dorotockeys-run.jpg']},
-    {slug:'236-west-10th-street',title:'236 West 10th Street',category:'Residential',location:'New York, NY',type:'18-Unit Renovation',architect:null,placeholder:true,images:[PR+'236-west-10th-street-18-unit-reno-slate-.jpg']},
-    {slug:'srt-domes',title:'SRT Domes',category:'Commercial',location:'Hudson Valley, NY',type:'Specialty Structure',architect:null,placeholder:true,images:[PR+'srt-domes.jpg']},
-    {slug:'rockland-plastic-surgery',title:'Rockland Plastic Surgery',category:'Commercial',location:'Rockland County, NY',type:'Medical Office',architect:null,placeholder:true,images:[PR+'rockland-plastic-surgery.jpg']},
-    {slug:'tappan-free-library',title:'Tappan Free Library',category:'Institutional',location:'Tappan, NY',type:'Library',architect:null,placeholder:true,images:[PR+'tappan-free-library.jpg']},
-    {slug:'orange-county-trust',title:'Orange County Trust',category:'Commercial',location:'Middletown, NY',type:'Bank',architect:null,placeholder:true,images:[PR+'orange-county-trust.jpg']},
-    {
-      slug:'monte-nido-new-city',title:'Monte Nido New City',category:'Institutional',
-      location:'New City, NY',type:'Treatment Center',architect:null,
-      description:[
-        'A residential treatment center built inside a converted estate in New City. The brief called for a clinical program to run inside a home that never feels clinical.',
-        'Bedrooms, group rooms, and therapy spaces sit alongside a working kitchen and dining room, each finished in the same warm, residential material palette. Circulation was planned around calm: wide hallways, natural light, and sightlines that never feel institutional.',
-        'The building reads as a home first. It has to, for the people who live and heal inside it.'
-      ],
-      images:[PR+'monte-nido-new-city-01.jpg',PR+'monte-nido-new-city-02.jpg',PR+'monte-nido-new-city-03.jpg',PR+'monte-nido-new-city-04.jpg',PR+'monte-nido-new-city-05.jpg',PR+'monte-nido-new-city-06.jpg',PR+'monte-nido-new-city-07.jpg',PR+'monte-nido-new-city-08.jpg',PR+'monte-nido-new-city-09.jpg',PR+'monte-nido-new-city-10.jpg',PR+'monte-nido-new-city-11.jpg',PR+'monte-nido-new-city-12.jpg',PR+'monte-nido-new-city-13.jpg',PR+'monte-nido-new-city-14.jpg']
-    },
-    {
-      slug:'monte-nido-west-nyack',title:'Monte Nido West Nyack',category:'Institutional',
-      location:'West Nyack, NY',type:'Treatment Center',architect:null,
-      description:[
-        'A second Monte Nido facility, built inside a different estate on Sickletown Road in West Nyack. Same program, same standard, a different property with its own layout to solve around.',
-        'The scope covered a full conversion: bedrooms, a shared kitchen and dining room, a living room, and clinical space, all built into the existing envelope of a large residential home rather than a purpose-built facility.',
-        'Every room was finished to a residential standard, not an institutional one. Natural light, real materials, and a floor plan that supports both daily therapy and daily life.'
-      ],
-      images:[PR+'monte-nido-west-nyack-01.jpg',PR+'monte-nido-west-nyack-02.jpg',PR+'monte-nido-west-nyack-03.jpg',PR+'monte-nido-west-nyack-04.jpg',PR+'monte-nido-west-nyack-05.jpg',PR+'monte-nido-west-nyack-06.jpg',PR+'monte-nido-west-nyack-07.jpg',PR+'monte-nido-west-nyack-08.jpg',PR+'monte-nido-west-nyack-09.jpg',PR+'monte-nido-west-nyack-10.jpg',PR+'monte-nido-west-nyack-11.jpg',PR+'monte-nido-west-nyack-12.jpg',PR+'monte-nido-west-nyack-13.jpg',PR+'monte-nido-west-nyack-14.jpg']
-    },
-    {slug:'dunkin-fort-montgomery',title:'Dunkin Fort Montgomery',category:'Commercial',location:'Fort Montgomery, NY',type:'Retail Buildout',architect:null,placeholder:true,images:[PR+'dunkin-fort-montgomery.jpg']},
-    {slug:'dunkin-yonkers',title:'Dunkin Yonkers',category:'Commercial',location:'Yonkers, NY',type:'Retail Buildout',architect:null,placeholder:true,images:[PR+'dunkin-yonkers.jpg']},
-    {
-      slug:'nyack-fresh-market',title:'Nyack Fresh Market',category:'Commercial',
-      location:'Nyack, NY',type:'Grocery',architect:null,
-      description:[
-        'A full storefront and interior buildout for an independent grocer in downtown Nyack. The signature curved sign and awning needed to read from the street, and the interior needed to move a full grocery format through checkout without a bottleneck.',
-        'Four checkout lanes sit against a branded feature wall, with a customer service counter and full deli, produce, and hot food sections laid out behind it. Exposed ceiling and track lighting keep the industrial shell honest while the finishes stay warm.',
-        'The store opened as a full-service neighborhood market, built to move volume without losing the feel of a local shop.'
-      ],
-      images:[PR+'nyack-fresh-market-01.jpg',PR+'nyack-fresh-market-02.jpg',PR+'nyack-fresh-market-03.jpg',PR+'nyack-fresh-market-04.jpg']
-    },
-    {
-      slug:'catskills-cabin',title:'Catskills Cabin',category:'Residential',
-      location:'Catskills, NY',type:'Custom Home',architect:null,
-      description:[
-        'A modern cabin in the Catskills, built around a single open living, dining, and kitchen room under a vaulted ceiling. A wood-burning stove anchors the space between two runs of tall windows facing the tree line.',
-        'The kitchen runs dark cabinetry against a white island, paired with a natural wood dining table and a loft level tucked above. Every material choice leans toward warmth: wide-plank hardwood floors, leather seating, and tile finishes that read handmade rather than manufactured.',
-        'Bathrooms carry the same restraint, fluted tile and matte black or brushed nickel fixtures against a simple white tub. The whole house is built to disappear into the woods around it.'
-      ],
-      images:[PR+'catskills-cabin-01.jpg',PR+'catskills-cabin-02.jpg',PR+'catskills-cabin-03.jpg',PR+'catskills-cabin-04.jpg',PR+'catskills-cabin-05.jpg',PR+'catskills-cabin-06.jpg',PR+'catskills-cabin-07.jpg',PR+'catskills-cabin-08.jpg',PR+'catskills-cabin-09.jpg',PR+'catskills-cabin-10.jpg',PR+'catskills-cabin-11.jpg',PR+'catskills-cabin-12.jpg',PR+'catskills-cabin-13.jpg',PR+'catskills-cabin-14.jpg',PR+'catskills-cabin-15.jpg',PR+'catskills-cabin-16.jpg',PR+'catskills-cabin-17.jpg',PR+'catskills-cabin-18.jpg',PR+'catskills-cabin-19.jpg']
-    },
-    {
-      slug:'catch-air-nanuet',title:'Catch Air Nanuet',category:'Commercial',
-      location:'Nanuet, NY',type:'Indoor Entertainment',architect:null,
-      description:[
-        'A full buildout of an indoor family entertainment center in Nanuet, built around a space-themed play structure that had to hold up to daily use by kids.',
-        'Multi-level slides, climbing structures, and soft-play zones were built into an existing commercial shell, with exposed structural ceiling left as part of the design rather than covered over. Every surface, from the flooring graphics to the themed wall panels, was coordinated as one build.',
-        'The result is a durable, fully themed space designed to run at full capacity every day it is open.'
-      ],
-      images:[PR+'catch-air-nanuet-01.jpg',PR+'catch-air-nanuet-02.jpg',PR+'catch-air-nanuet-03.jpg',PR+'catch-air-nanuet-04.jpg',PR+'catch-air-nanuet-06.jpg']
-    },
-    {
-      slug:'haviland-court',title:'45 Haviland Court',category:'Residential',
-      location:'Hudson Valley, NY',type:'Renovation',architect:null,
-      description:[
-        'A bathroom renovation at 45 Haviland Court, finished in terracotta subway tile and a dark stone countertop against light cabinetry.',
-        'The vanity wall carries a full-width backlit mirror, giving the room even light without a separate fixture. Every surface, tile, stone, and cabinetry, was chosen to work as one palette rather than compete for attention.'
-      ],
-      images:[PR+'haviland-01.jpg',PR+'haviland-02.jpg']
-    },
-  ];
-
-  var bySlug={};
-  PROJECTS.forEach(function(p){bySlug[p.slug]=p;});
-
-  var pdetail=document.getElementById('pdetail');
-  var pall=document.getElementById('pall');
-  var scrollY=0, locked=false;
-  var overlayLastFocus=null;
-  var pageRoots=document.querySelectorAll('#nav, body > section');
-
-  function lockScroll(){
-    if(locked)return;
-    overlayLastFocus=document.activeElement;
-    scrollY=window.scrollY;locked=true;
-    pageRoots.forEach(function(el){el.inert=true;});
-    document.body.style.overflow='hidden';
-  }
-  function unlockScroll(){
-    if(!locked)return;
-    locked=false;
-    pageRoots.forEach(function(el){el.inert=false;});
-    document.body.style.overflow='';
-    if(overlayLastFocus&&overlayLastFocus.focus)overlayLastFocus.focus();
-  }
-
-  // ---- render helpers ----
-  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-  function galleryHTML(p){
-    if(!p.images||p.images.length<2)return '';
-    // Hero already uses images[0]. Gallery starts at 1 so no duplicate.
-    var shots=p.images.slice(1).map(function(src,i){
-      var full=(i%3===0)?' pd__shot--full':'';
-      return '<button type="button" class="pd__shot'+full+'" data-idx="'+(i+1)+'" aria-label="Open '+esc(p.title)+' image '+(i+2)+'"><img src="'+esc(src)+'" alt="" loading="lazy"></button>';
-    }).join('');
-    return '<div class="pd__gallery"><div class="pd__gallery-head"><i></i>Gallery</div><div class="pd__grid">'+shots+'</div></div>';
-  }
-
-  function nextProject(p){
-    var i=PROJECTS.indexOf(p);
-    return PROJECTS[(i+1)%PROJECTS.length];
-  }
-
-  function detailHTML(p){
-    var tags='<span class="pd__tag">'+esc(p.category)+'</span>'
-            +'<span class="pd__tag pd__tag--ghost">'+esc(p.location)+'</span>'
-            +'<span class="pd__tag pd__tag--ghost">'+esc(p.type)+'</span>';
-
-    var facts='<div><div class="pd__fact-lab">Category</div><div class="pd__fact-val">'+esc(p.category)+'</div></div>'
-             +'<div><div class="pd__fact-lab">Location</div><div class="pd__fact-val">'+esc(p.location)+'</div></div>'
-             +'<div><div class="pd__fact-lab">Type</div><div class="pd__fact-val">'+esc(p.type)+'</div></div>';
-    if(p.architect)facts+='<div><div class="pd__fact-lab">Architect</div><div class="pd__fact-val">'+esc(p.architect)+'</div></div>';
-
-    var desc;
-    if(p.placeholder){
-      desc='<p>This project is part of our portfolio across the Hudson Valley and northern New Jersey. A full case study with photography and detail is being prepared.</p>'
-          +'<p class="pd__note">Reach out and one of the three principals will walk you through the work.</p>';
-    }else{
-      desc=p.description.map(function(t){return '<p>'+t+'</p>';}).join('');
-    }
-
-    var nx=nextProject(p);
-    var allowVideo=p.video&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var heroMedia=allowVideo
-      ?'<video src="'+esc(p.video)+'" autoplay loop muted playsinline poster="'+esc(p.images[0])+'"></video>'
-      :'<img src="'+esc(p.images[0])+'" alt="'+esc(p.title)+'">';
-
-    return ''
-      +'<div class="pd__bar">'
-        +'<a href="#" class="pd__logo" data-home><img src="assets/montana-logo.svg" alt="Montana Contracting"></a>'
-        +'<button type="button" class="back" data-back><i></i>Back to Projects</button>'
-      +'</div>'
-      +'<div class="pd__hero">'
-        +heroMedia
-        +'<div class="pd__hero-scrim"></div>'
-        +'<div class="pd__hero-inner">'
-          +'<div class="pd__tags">'+tags+'</div>'
-          +'<h1 class="pd__title">'+esc(p.title)+'</h1>'
-        +'</div>'
-      +'</div>'
-      +'<div class="pd__body">'
-        +'<div class="pd__lead">'
-          +'<div class="pd__facts">'+facts+'</div>'
-          +'<div class="pd__desc">'+desc+'</div>'
-        +'</div>'
-        +(p.press&&p.press.length?('<div class="pd__press"><div class="pd__gallery-head"><i></i>As featured in</div><div class="pd__press-links">'+p.press.map(function(pr){return '<a href="'+esc(pr.url)+'" target="_blank" rel="noopener">'+esc(pr.outlet)+'</a>';}).join('<span>·</span>')+'</div></div>'):'')
-        +'<div class="pd__precon-link"><i></i><a href="/pre-construction">Built with our pre-construction process.</a></div>'
-        +galleryHTML(p)
-      +'</div>'
-      +'<div class="pd__foot">'
-        +'<button type="button" class="back" data-back><i></i>Back to Projects</button>'
-        +'<div class="pd__next"><div class="k">Next Project</div><a href="#'+esc(nx.slug)+'" data-goto="'+esc(nx.slug)+'">'+esc(nx.title)+'</a></div>'
-      +'</div>';
-  }
-
-  function allHTML(){
-    var cards=PROJECTS.map(function(p){
-      var soon=p.placeholder?'<span class="pcard__soon">Coming soon</span>':'';
-      return '<a class="pcard" href="#'+esc(p.slug)+'" data-goto="'+esc(p.slug)+'">'
-        +'<div class="pcard__img">'+soon+'<img src="'+esc(p.images[0])+'" alt="'+esc(p.title)+'" loading="lazy"></div>'
-        +'<h3>'+esc(p.title)+'</h3>'
-        +'<div class="pcard__meta"><span class="navy">'+esc(p.category)+'</span><span>'+esc(p.location)+'</span><span>'+esc(p.type)+'</span></div>'
-      +'</a>';
-    }).join('');
-    return ''
-      +'<div class="pall__bar">'
-        +'<a href="#" class="pd__logo" data-home><img src="assets/montana-logo.svg" alt="Montana Contracting"></a>'
-        +'<button type="button" class="back" data-back-home><i></i>Back to Home</button>'
-      +'</div>'
-      +'<div class="pall__head">'
-        +'<div class="pall__k"><i></i>Selected Works</div>'
-        +'<h2>All Projects</h2>'
-        +'<p>'+PROJECTS.length+' projects across New York and New Jersey. Since 1984.</p>'
-      +'</div>'
-      +'<div class="pall__grid">'+cards+'</div>';
-  }
-
-  // ---- open / close ----
-  var allBuilt=false;
-  var allScrollTop=0;
-
-  function stopDetailMedia(){
-    pdetail.querySelectorAll('video').forEach(function(video){
-      video.pause();
-      video.removeAttribute('src');
-      video.load();
-    });
-  }
-
-  function openDetail(p){
-    if(pall.classList.contains('open'))allScrollTop=pall.scrollTop;
-    pall.classList.remove('open');pall.setAttribute('aria-hidden','true');
-    stopDetailMedia();
-    pdetail.innerHTML=detailHTML(p);
-    pdetail.scrollTop=0;
-    // reflow so the transition plays from hidden state
-    void pdetail.offsetWidth;
-    pdetail.classList.add('open');
-    pdetail.setAttribute('aria-hidden','false');
-    lockScroll();
-    currentImages=p.images;
-    requestAnimationFrame(function(){var back=pdetail.querySelector('[data-back]');if(back)back.focus();});
-  }
-
-  function openAll(restoreScroll){
-    stopDetailMedia();
-    pdetail.classList.remove('open');pdetail.setAttribute('aria-hidden','true');
-    if(!allBuilt){pall.innerHTML=allHTML();allBuilt=true;}
-    if(!restoreScroll)allScrollTop=0;
-    pall.scrollTop=allScrollTop;
-    void pall.offsetWidth;
-    pall.classList.add('open');
-    pall.setAttribute('aria-hidden','false');
-    lockScroll();
-    requestAnimationFrame(function(){var back=pall.querySelector('[data-back-home]');if(back)back.focus();});
-  }
-
-  function closeOverlays(){
-    stopDetailMedia();
-    pdetail.classList.remove('open');pdetail.setAttribute('aria-hidden','true');
-    pall.classList.remove('open');pall.setAttribute('aria-hidden','true');
-    unlockScroll();
-  }
-
-  // ---- router (hash-driven, back-button friendly) ----
-  function currentSlug(){return (location.hash||'').replace(/^#/,'');}
-
-  /* remembers the last "gateway" page (home or the all-projects grid) so "Back to Projects"
-     returns to wherever the user actually entered from, even after clicking through
-     several "Next Project" links in a row. */
-  var lastGateway='';
-  function route(){
-    if(lb&&lb.classList.contains('open'))closeLightbox(false);
-    var h=currentSlug();
-    if(h==='all'){
-      var restoreScroll=lastGateway==='all';
-      lastGateway='all';
-      openAll(restoreScroll);
-    }
-    else if(h && bySlug[h]){openDetail(bySlug[h]);}
-    else{lastGateway='';closeOverlays();}
-  }
-
-  window.addEventListener('hashchange',route);
-
-  // ---- delegated clicks inside overlays ----
-  function go(slug){
-    var nextUrl=location.pathname+location.search+'#'+slug;
-    if(bySlug[currentSlug()])history.replaceState(history.state,document.title,nextUrl);
-    else history.pushState({montanaProjectGateway:lastGateway==='all'?'all':'featured'},document.title,nextUrl);
-    route();
-  }
-  function goHome(){
-    unlockScroll();
-    if(history.state&&history.state.montanaProjectGateway){
-      window.addEventListener('popstate',function finishHome(){
-        history.replaceState('',document.title,location.pathname+location.search);
-        closeOverlays();
-        route();
-        window.scrollTo(0,0);
-      },{once:true});
-      history.back();
-      return;
-    }
-    if(location.hash){history.replaceState('',document.title,location.pathname+location.search);}
-    // hashchange doesn't fire on replaceState, so close + route explicitly
-    closeOverlays();
-    route();
-    window.scrollTo(0,0);
-  }
-  // "Back to Projects" returns to wherever the user actually came from:
-  // the all-projects grid if that's the gateway they entered through, otherwise the homepage.
-  function backToProjects(){
-    unlockScroll();
-    if(history.state&&history.state.montanaProjectGateway){
-      history.back();
-      return;
-    }
-    var target=(lastGateway==='all')?'#all':'#featured';
-    history.replaceState('',document.title,location.pathname+location.search+target);
-    closeOverlays();
-    route();
-    if(target==='#featured'){
-      var featured=document.getElementById('featured');
-      if(featured)featured.scrollIntoView();
-    }
-  }
-
-  document.addEventListener('click',function(e){
-    if(!e.target.closest)return;
-    var goto=e.target.closest('[data-goto]');
-    if(goto){e.preventDefault();go(goto.getAttribute('data-goto'));return;}
-    var back=e.target.closest('[data-back]');
-    if(back){e.preventDefault();backToProjects();return;}
-    var backHome=e.target.closest('[data-back-home]');
-    if(backHome){e.preventDefault();goHome();return;}
-    var home=e.target.closest('[data-home]');
-    if(home){e.preventDefault();goHome();return;}
-    var shot=e.target.closest('.pd__shot');
-    if(shot){openLightbox(parseInt(shot.getAttribute('data-idx'),10));return;}
-  });
-
-  // ---- lightbox / carousel ----
-  var lb=document.getElementById('pdLightbox');
-  var lbImg=document.getElementById('lbImg');
-  var lbCount=document.getElementById('lbCount');
-  var currentImages=[], lbIndex=0;
-  var lightboxFocus=null;
-
-  function showLb(){
-    if(!currentImages.length)return;
-    lbImg.src=currentImages[lbIndex];
-    lbImg.alt='Project image '+(lbIndex+1);
-    lbCount.textContent=('0'+(lbIndex+1)).slice(-2)+' / '+('0'+currentImages.length).slice(-2);
-  }
-  function openLightbox(i){
-    if(!currentImages.length)return;
-    lightboxFocus=document.activeElement;
-    lbIndex=i||0;showLb();
-    pdetail.inert=true;
-    lb.classList.add('open');lb.setAttribute('aria-hidden','false');
-    document.getElementById('lbClose').focus();
-  }
-  function closeLightbox(restoreFocus){
-    lb.classList.remove('open');lb.setAttribute('aria-hidden','true');pdetail.inert=false;
-    if(restoreFocus!==false&&lightboxFocus&&lightboxFocus.focus)lightboxFocus.focus();
-    lightboxFocus=null;
-  }
-  function step(d){lbIndex=(lbIndex+d+currentImages.length)%currentImages.length;showLb();}
-
-  document.getElementById('lbClose').addEventListener('click',closeLightbox);
-  document.getElementById('lbPrev').addEventListener('click',function(){step(-1);});
-  document.getElementById('lbNext').addEventListener('click',function(){step(1);});
-  lb.addEventListener('mousedown',function(e){if(e.target===lb)closeLightbox();});
-
-  document.addEventListener('keydown',function(e){
-    if(lb.classList.contains('open')){
-      if(e.key==='Escape')closeLightbox();
-      else if(e.key==='ArrowLeft')step(-1);
-      else if(e.key==='ArrowRight')step(1);
-      return;
-    }
-    // Escape from a project overlay returns to the projects context
-    if(e.key==='Escape'){
-      if(pdetail.classList.contains('open'))backToProjects();
-      else if(pall.classList.contains('open'))goHome();
-    }
-  });
-
-  // ---- initial route (deep link on load) ----
-  route();
-
   /* ---------- FEATURED PROJECT SPLIT PREVIEW ---------- */
   const previewStack=document.getElementById('projectsPreview');
   const previewImgs=previewStack?previewStack.querySelectorAll('img'):[];
@@ -2107,11 +1457,6 @@ a{color:inherit;text-decoration:none}
 
 })();
 </script>
-
-<!-- MOBILE CTA BAR (≤860px) -->
-<div class="mbar" id="mobileBar" role="navigation" aria-label="Quick actions">
-  <button type="button" class="mbar__start" data-open-form>Start a Project</button>
-  <a class="mbar__call" href="tel:+18453981778">Call</a>
-</div>
+<script src="assets/inquiry-form.js" defer></script>
 </body>
 </html>

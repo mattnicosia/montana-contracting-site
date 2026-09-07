@@ -2,7 +2,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, resolve } from "node:path";
 
 const root = process.cwd();
-const pages = ["index.html", "pre-construction.html"];
+const pages = ["index.html", "pre-construction/index.html", "core-values/index.html", "financing/index.html"];
 const errors = [];
 const referencedAssets = new Set();
 
@@ -40,7 +40,11 @@ for (const page of pages) {
 }
 
 const index = readFileSync(resolve(root, "index.html"), "utf8");
-const slugs = [...index.matchAll(/slug:'([^']+)'/g)].map((match) => match[1]);
+const projects = JSON.parse(readFileSync(resolve(root, 'data/projects.json'), 'utf8'));
+const slugs = projects.map(project => project.slug);
+for (const project of projects) {
+  for (const asset of [...project.images, ...(project.video ? [project.video] : [])]) referencedAssets.add(asset);
+}
 const duplicateSlugs = slugs.filter((slug, index) => slugs.indexOf(slug) !== index);
 if (!slugs.length) fail("index.html: no projects found");
 if (duplicateSlugs.length) fail(`index.html: duplicate project slugs: ${[...new Set(duplicateSlugs)].join(", ")}`);
@@ -81,67 +85,25 @@ if (!index.includes("var isVisible=domIndex>=idx&&domIndex<idx+visible")) {
   fail("index.html: carousel must expose only rendered DOM slots to keyboard users");
 }
 
-if (!index.includes("closeLightbox(false)")) {
-  fail("index.html: hash routing must close the image viewer");
-}
-
 if (!index.includes("minmax(min(320px,100%),1fr)")) {
   fail("index.html: project cards must fit narrow phone viewports");
 }
 
-if (!index.includes("title:'Dunkin Fort Montgomery'") || index.includes("title:'Dunkin Eastchester'")) {
+if (!projects.some(project => project.title === 'Dunkin Fort Montgomery') || projects.some(project => project.title === 'Dunkin Eastchester')) {
   fail("index.html: Dunkin project name must match the Fort Montgomery image");
 }
 
-if (index.includes("PR+'catch-air-nanuet-05.jpg'")) {
+if (projects.find(project => project.slug === 'catch-air-nanuet')?.images.some(image => image.endsWith('catch-air-nanuet-05.jpg'))) {
   fail("index.html: Catch Air gallery must not include the duplicate fifth image");
-}
-
-if (!index.includes("if(pall.classList.contains('open'))allScrollTop=pall.scrollTop")) {
-  fail("index.html: All Projects must preserve its scroll position when opening a project");
-}
-
-if (!index.includes("history.replaceState('',document.title,location.pathname+location.search)")) {
-  fail("index.html: closing All Projects must replace its history entry");
-}
-
-if (!index.includes("location.pathname+location.search+target")) {
-  fail("index.html: leaving a project detail must replace its history entry");
-}
-
-if (!index.includes("if(featured)featured.scrollIntoView()")) {
-  fail("index.html: leaving a deep-linked project must reveal Featured Projects");
 }
 
 if (!index.includes("if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)")) {
   fail("index.html: film autoplay must respect reduced-motion settings");
 }
 
-if (!index.includes("var allowVideo=p.video&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches")) {
-  fail("index.html: project videos must respect reduced-motion settings");
-}
-
-if (!index.includes("function stopDetailMedia()")) {
-  fail("index.html: hidden project videos must stop loading and playing");
-}
-
-if (!index.includes("montanaProjectGateway:lastGateway==='all'?'all':'featured'")) {
-  fail("index.html: project history entries must record their gateway");
-}
-
-if (!index.includes("if(history.state&&history.state.montanaProjectGateway)")) {
-  fail("index.html: project exit must return to an existing gateway entry");
-}
-
-if (!index.includes("window.addEventListener('popstate',function finishHome()")) {
-  fail("index.html: project-to-home navigation must consume its gateway entry");
-}
-
-if (!index.includes("else{lastGateway='';closeOverlays();}")) {
-  fail("index.html: homepage routes must clear the project gateway");
-}
-
-const preConstruction = readFileSync(resolve(root, "pre-construction.html"), "utf8");
+// The old hash-overlay checks now live in tests/projects.test.cjs as static-route,
+// legacy redirect, keyboard gallery, and non-autoplay video checks.
+const preConstruction = readFileSync(resolve(root, "pre-construction/index.html"), "utf8");
 if (!preConstruction.includes('class="nav__burger" aria-expanded="false" aria-controls="precon-nav-links"')) {
   fail("pre-construction.html: mobile menu control must expose its navigation target and state");
 }
