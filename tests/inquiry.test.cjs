@@ -26,6 +26,17 @@ test('accepted inquiry uses fixed recipient and visitor Reply-To', async () => {
   assert.equal(mail.from,env.INQUIRY_FROM); assert.match(mail.text,/A local test/);
   assert.equal(r.headers['Cache-Control'],'no-store'); assert.equal(calls[0][0],'https://api.resend.com/emails');
 });
+test('every project type offered by the form is accepted by the server', async () => {
+  const html = require('node:fs').readFileSync(require('node:path').join(__dirname, '../index.html'), 'utf8');
+  const select = html.match(/<select\b[^>]*name="projectType"[^>]*>([\s\S]*?)<\/select>/)?.[1];
+  assert.ok(select);
+  const options = [...select.matchAll(/<option\b[^>]*value="([^"]+)"/g)].map(match => match[1]);
+  assert.ok(options.length);
+  for (const projectType of options) {
+    const { handler } = setup();
+    assert.equal((await run(handler, request({ ...valid, projectType }))).status, 200, projectType);
+  }
+});
 test('retries keep provider idempotency key stable; changed payload changes key',async()=>{
   const {handler,calls}=setup(); await run(handler); await run(handler); await run(handler,request({...valid,message:'Changed'}));
   assert.equal(calls[0][1].headers['Idempotency-Key'],calls[1][1].headers['Idempotency-Key']);

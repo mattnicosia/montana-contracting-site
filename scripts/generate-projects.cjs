@@ -8,7 +8,7 @@ const origin = 'https://montanacontracting.com';
 const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const asset = value => '/' + value.replace(/^\/+/, '');
 const projectPath = p => '/projects/' + p.slug + '/';
-const description = p => p.description?.[0] || `${p.title}. ${p.type} in ${p.location}. A Montana Contracting project.`;
+const description = p => p.description?.[0] || `${p.title} is a Montana Contracting project in ${p.location}.`;
 
 function documentHTML(title, summary, route, image, body, gallery = false) {
   return `<!doctype html>
