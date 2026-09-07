@@ -89,24 +89,6 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--navy);color:#fff}
 
-/* ============================== PRELOADER ============================== */
-#preloader{
-  position:fixed;inset:0;z-index:9999;background:var(--dark);
-  display:flex;align-items:center;justify-content:center;flex-direction:column;
-  transition:opacity .8s var(--ease),visibility .8s var(--ease);
-}
-#preloader.done{opacity:0;visibility:hidden}
-.pre__logo{
-  color:#fff;font-weight:600;letter-spacing:.12em;font-size:clamp(1rem,2.4vw,1.5rem);
-  display:flex;gap:.5em;overflow:hidden;
-}
-.pre__logo span{display:inline-block;transform:translateY(110%);animation:preRise .9s var(--ease) forwards}
-.pre__logo span:nth-child(2){animation-delay:.12s}
-@keyframes preRise{to{transform:translateY(0)}}
-.pre__bar{margin-top:1.6rem;width:min(320px,60vw);height:1px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
-.pre__bar i{position:absolute;inset:0;width:0;background:#fff;transition:width .1s linear}
-.pre__count{margin-top:.9rem;color:rgba(255,255,255,.5);font-size:.78rem;letter-spacing:.28em;font-variant-numeric:tabular-nums}
-
 /* ============================== BACKGROUND FX ============================== */
 #grain{
   position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
@@ -700,14 +682,23 @@ a{color:inherit;text-decoration:none}
 </style>
 <script src="/assets/legacy-project-routes.js" defer></script>
 <noscript><style>#preloader{display:none}.reveal{opacity:1;transform:none}</style></noscript>
+<link rel="stylesheet" href="assets/logo-intro.css">
+<link rel="preload" href="assets/montana-m-original.png" as="image">
 </head>
 <body>
 
 <!-- PRELOADER -->
-<div id="preloader">
-  <div class="pre__logo"><img src="assets/montana-logo-white.svg" alt="Montana Contracting" style="height:22px;width:auto"></div>
-  <div class="pre__bar"><i></i></div>
-  <div class="pre__count">000</div>
+<div id="preloader" hidden role="dialog" aria-modal="true" aria-label="Montana Contracting introduction">
+  <div class="intro__mark" aria-hidden="true">
+    <div class="intro__piece intro__piece--left"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
+    <div class="intro__piece intro__piece--top"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
+    <div class="intro__piece intro__piece--right"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
+  </div>
+  <button class="intro__skip" type="button">Skip introduction</button>
+</div>
+<div class="intro-review" id="introReview" hidden aria-label="Local logo preview controls">
+  <button type="button" data-replay>Replay opening</button>
+  <button type="button" data-slow>Slow replay</button>
 </div>
 
 <!-- BACKGROUND FX -->
@@ -1047,28 +1038,8 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<script src="assets/logo-intro.js" onerror="document.getElementById('hero').classList.add('in')"></script>
 <script>
-/* ============================== PRELOADER ============================== */
-(function(){
-  var pre=document.getElementById('preloader');
-  var bar=pre.querySelector('.pre__bar i');
-  var count=pre.querySelector('.pre__count');
-  var n=0;
-  var t=setInterval(function(){
-    n+=Math.floor(Math.random()*8)+3;
-    if(n>=100){n=100;clearInterval(t);finish();}
-    bar.style.width=n+'%';
-    count.textContent=('00'+n).slice(-3);
-  },70);
-  function finish(){
-    setTimeout(function(){
-      pre.classList.add('done');
-      document.getElementById('hero').classList.add('in');
-    },350);
-  }
-  // safety fallback
-  setTimeout(function(){if(!pre.classList.contains('done')){pre.classList.add('done');document.getElementById('hero').classList.add('in');}},3500);
-})();
 
 /* ============================== NAV SCROLL AND MOBILE MENU ============================== */
 (function(){

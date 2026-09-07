@@ -1,0 +1,46 @@
+/* The PNG stays intact. Three clipped views separate its existing blue shapes. */
+#preloader[hidden]{display:none}
+#preloader{
+  position:fixed;inset:0;z-index:9999;background:#fff;
+  display:grid;place-items:center;overflow:hidden;
+  --intro-rate:1;
+}
+.intro__flood{position:absolute;inset:0;background:#002bd4;pointer-events:none}
+.intro__flood[hidden]{display:none}
+#preloader.intro--blue-ready{background:transparent}
+.intro--blue-ready>.intro__mark{visibility:hidden}
+.intro--blue-ready .intro__skip{color:#fff;z-index:1}
+.hero.intro-blue::after{content:'';position:absolute;inset:0;z-index:1;background:#002bd4;pointer-events:none}
+.hero.intro-blue-title h1 .ln>span{animation:introHeadline calc(550ms * var(--intro-rate)) cubic-bezier(.4,0,.2,1) both}
+.hero.intro-blue-title h1 .ln:nth-child(2)>span{animation-delay:calc(80ms * var(--intro-rate))}
+.hero.intro-blue-title h1 .ln:nth-child(3)>span{animation-delay:calc(160ms * var(--intro-rate))}
+@keyframes introHeadline{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero.intro-blue-fade::after{animation:introBlueFade calc(1200ms * var(--intro-rate)) cubic-bezier(.4,0,.2,1) both}
+@keyframes introBlueFade{from{opacity:1}to{opacity:0}}
+.intro-brand .nav,.intro-brand .hero__eyebrow,.intro-brand .hero__scroll{opacity:0}
+.intro-brand-fade .nav,.intro-brand-fade .hero__eyebrow,.intro-brand-fade .hero__scroll{animation:introChrome calc(650ms * var(--intro-rate)) ease-out both}
+@keyframes introChrome{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero.intro-blue-settled h1 .ln>span{animation:none;transform:none;opacity:1}
+.intro__mark{position:relative;width:156px;aspect-ratio:774/654;isolation:isolate;--assembly-scale:2.2}
+.intro__piece{position:absolute;inset:0;opacity:0;mix-blend-mode:multiply}
+.intro__piece img{position:absolute;width:175.84%;max-width:none;height:auto;left:-37.98%;top:-38.07%}
+.intro__piece--left{clip-path:polygon(0 0,26% 0,68% 54%,49.4% 76%,23% 43%,24% 100%,0 100%);--ix:-36px;--iy:24px}
+.intro__piece--top{clip-path:polygon(50.5% 26.7%,73% 0,100% 0,100% 13.5%,68.8% 50.5%);--ix:32px;--iy:-32px;--delay:55ms}
+.intro__piece--right{clip-path:polygon(75% 47%,100% 18%,100% 100%,75% 100%);--ix:18px;--iy:36px;--delay:100ms}
+.intro--playing .intro__mark{animation:introCompact calc(450ms * var(--intro-rate)) cubic-bezier(.65,0,.35,1) both;animation-delay:calc(1100ms * var(--intro-rate))}
+.intro--playing .intro__piece{animation:introAssemble calc(1000ms * var(--intro-rate)) cubic-bezier(.25,.65,.3,1) both;animation-delay:calc(var(--delay,0ms) * var(--intro-rate))}
+@keyframes introCompact{from{transform:scale(var(--assembly-scale))}to{transform:scale(1)}}
+@keyframes introAssemble{0%{opacity:0;transform:translate(var(--ix),var(--iy))}18%{opacity:1}100%{opacity:1;transform:translate(0,0)}}
+.hero.intro-await h1 .ln>span{animation:none;transform:translateY(105%);opacity:0}
+.intro--filling .intro__skip{color:#fff;transition:color calc(500ms * var(--intro-rate));z-index:1}
+.intro__skip{position:absolute;right:clamp(20px,4vw,56px);bottom:32px;padding:12px 0;border:0;background:none;color:#525660;font:inherit;font-size:13px;cursor:pointer}
+.intro__skip:focus-visible,.intro-review button:focus-visible{outline:2px solid #0028cc;outline-offset:5px}
+.intro-review{position:fixed;right:20px;bottom:20px;z-index:10000;display:flex;gap:8px;padding:8px;background:#fff;color:#0a0d18;border:1px solid #d8dce5;box-shadow:0 4px 18px #07091212;font:13px/1.4 sans-serif}
+.intro-review{left:20px;right:auto}
+.intro-review[hidden]{display:none}
+.intro-review button{border:0;background:#f4f5f8;color:#0a0d18;padding:10px 12px;font:inherit;cursor:pointer}
+.intro-review button:first-child{background:#0028cc;color:white}
+.intro-review button:disabled{opacity:.5;cursor:default}
+.intro-review button:active{transform:scale(.97)}
+@media(max-width:600px){.intro__mark{width:132px;--assembly-scale:1.65}.intro-review{left:12px;bottom:12px}.intro__skip{bottom:76px}}
+@media(prefers-reduced-motion:reduce){.intro--playing .intro__piece,.intro--playing .intro__mark{animation:none;opacity:1}#preloader{transition:none}}
