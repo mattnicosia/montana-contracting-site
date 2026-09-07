@@ -31,7 +31,7 @@ function documentHTML(title, summary, route, image, body, gallery = false) {
 <meta name="twitter:image" content="${origin}${asset(image)}">
 <meta name="twitter:image:alt" content="${esc(title)}">
 <meta name="theme-color" content="#0028cc">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg?v=montana-m-1" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/project-pages.css">
 ${gallery ? '<script src="/assets/project-gallery.js" defer></script>' : ''}
 </head><body>

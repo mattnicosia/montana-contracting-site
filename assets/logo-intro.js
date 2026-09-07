@@ -2,7 +2,7 @@
   'use strict';
   var intro=document.getElementById('preloader'),hero=document.getElementById('hero');
   if(!intro||!hero)return;
-  var skip=intro.querySelector('button'),controls=document.getElementById('introReview');
+  var controls=document.getElementById('introReview');
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   var review=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&new URLSearchParams(location.search).get('intro')==='preview';
   var running=false,assembling=false,artworkTimer,timers=[],animations=[],flood,inertNodes=[],previousFocus,previousOverflow;
@@ -34,7 +34,7 @@
     if(restoreFocus){
       var target=previousFocus&&previousFocus!==document.body?previousFocus:null;
       if(target)target.focus({preventScroll:true});
-      else skip.blur();
+      else intro.blur();
     }
   }
   function fillBlue(rate){
@@ -74,7 +74,7 @@
     document.body.classList.add('intro-brand');
     [intro,hero,document.body].forEach(function(node){node.style.setProperty('--intro-rate',String(rate));});
     intro.classList.remove('intro--playing','intro--blue-ready','intro--filling');
-    skip.focus({preventScroll:true});
+    intro.focus({preventScroll:true});
     if(controls)controls.querySelectorAll('button').forEach(function(button){button.disabled=true;});
     try{sessionStorage.setItem(key,'seen');}catch(error){}
     function assemble(){
@@ -95,11 +95,10 @@
     },1200);
     assemble();
   }
-  skip.addEventListener('click',finish);
   document.addEventListener('keydown',function(event){
     if(!running)return;
     if(event.key==='Escape'){event.preventDefault();finish();}
-    if(event.key==='Tab'){event.preventDefault();skip.focus();}
+    if(event.key==='Tab'){event.preventDefault();intro.focus();}
   });
   function motionChanged(){if(reduced.matches)finish();}
   if(reduced.addEventListener)reduced.addEventListener('change',motionChanged);

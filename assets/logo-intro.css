@@ -1,5 +1,6 @@
 /* The PNG stays intact. Three clipped views separate its existing blue shapes. */
 #preloader[hidden]{display:none}
+#preloader:focus{outline:none}
 #preloader{
   position:fixed;inset:0;z-index:9999;background:#fff;
   display:grid;place-items:center;overflow:hidden;
@@ -9,7 +10,6 @@
 .intro__flood[hidden]{display:none}
 #preloader.intro--blue-ready{background:transparent}
 .intro--blue-ready>.intro__mark{visibility:hidden}
-.intro--blue-ready .intro__skip{color:#fff;z-index:1}
 .hero.intro-blue::after{content:'';position:absolute;inset:0;z-index:1;background:#002bd4;pointer-events:none}
 .hero.intro-blue-title h1 .ln>span{animation:introHeadline calc(550ms * var(--intro-rate)) cubic-bezier(.4,0,.2,1) both}
 .hero.intro-blue-title h1 .ln:nth-child(2)>span{animation-delay:calc(80ms * var(--intro-rate))}
@@ -32,9 +32,7 @@
 @keyframes introCompact{from{transform:scale(var(--assembly-scale))}to{transform:scale(1)}}
 @keyframes introAssemble{0%{opacity:0;transform:translate(var(--ix),var(--iy))}18%{opacity:1}100%{opacity:1;transform:translate(0,0)}}
 .hero.intro-await h1 .ln>span{animation:none;transform:translateY(105%);opacity:0}
-.intro--filling .intro__skip{color:#fff;transition:color calc(500ms * var(--intro-rate));z-index:1}
-.intro__skip{position:absolute;right:clamp(20px,4vw,56px);bottom:32px;padding:12px 0;border:0;background:none;color:#525660;font:inherit;font-size:13px;cursor:pointer}
-.intro__skip:focus-visible,.intro-review button:focus-visible{outline:2px solid #0028cc;outline-offset:5px}
+.intro-review button:focus-visible{outline:2px solid #0028cc;outline-offset:5px}
 .intro-review{position:fixed;right:20px;bottom:20px;z-index:10000;display:flex;gap:8px;padding:8px;background:#fff;color:#0a0d18;border:1px solid #d8dce5;box-shadow:0 4px 18px #07091212;font:13px/1.4 sans-serif}
 .intro-review{left:20px;right:auto}
 .intro-review[hidden]{display:none}
@@ -42,5 +40,5 @@
 .intro-review button:first-child{background:#0028cc;color:white}
 .intro-review button:disabled{opacity:.5;cursor:default}
 .intro-review button:active{transform:scale(.97)}
-@media(max-width:600px){.intro__mark{width:132px;--assembly-scale:1.65}.intro-review{left:12px;bottom:12px}.intro__skip{bottom:76px}}
+@media(max-width:600px){.intro__mark{width:132px;--assembly-scale:1.65}.intro-review{left:12px;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.intro--playing .intro__piece,.intro--playing .intro__mark{animation:none;opacity:1}#preloader{transition:none}}
