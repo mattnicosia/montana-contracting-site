@@ -32,8 +32,9 @@
     inertNodes.forEach(function(item){item.node.inert=item.value;});inertNodes=[];
     if(controls)controls.querySelectorAll('button').forEach(function(button){button.disabled=false;});
     if(restoreFocus){
-      var target=previousFocus&&previousFocus!==document.body?previousFocus:document.querySelector('.nav__logo');
+      var target=previousFocus&&previousFocus!==document.body?previousFocus:null;
       if(target)target.focus({preventScroll:true});
+      else skip.blur();
     }
   }
   function fillBlue(rate){
