@@ -9,7 +9,9 @@ const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
 
 test('each featured link has its own existing photograph and accessible name', () => {
   const rows = [...html.matchAll(/<a\b[^>]*class="pitem\b[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
-  assert.equal(rows.length, 5);
+  assert.equal(rows.length, 6);
+  assert.match(rows[4], /href="\/projects\/monte-nido-west-nyack\/"/);
+  assert.match(rows[5], /href="\/projects\/twisted-ridge\/"/);
   const photos = rows.map(row => {
     const image = row.match(/<img\b[^>]*class="pitem__img"[^>]*>/)?.[0];
     assert.ok(image, 'The photograph belongs inside the project link.');
@@ -22,7 +24,7 @@ test('each featured link has its own existing photograph and accessible name', (
     assert.match(row, /href="(?:#|\/projects\/)[^"]+"/);
     return src;
   });
-  assert.equal(new Set(photos).size, 5);
+  assert.equal(new Set(photos).size, 6);
 });
 
 test('thumbnail layout stays inside the existing responsive breakpoint', () => {
