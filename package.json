@@ -1,13 +1,11 @@
 {
   "name": "montana-contracting-site",
-  "version": "1.0.0",
   "private": true,
-  "description": "Montana Contracting portfolio and pre-construction website",
+  "version": "1.0.0",
+  "engines": { "node": "22.x" },
   "scripts": {
-    "start": "node scripts/serve.mjs",
-    "test": "node scripts/verify-site.mjs"
-  },
-  "engines": {
-    "node": ">=20"
+    "start": "npm run build && node scripts/serve.mjs",
+    "build": "node scripts/build.cjs",
+    "test": "node --test tests/*.test.cjs && node scripts/verify-site.mjs"
   }
 }

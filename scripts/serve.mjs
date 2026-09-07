@@ -3,10 +3,13 @@ import { createServer } from "node:http";
 import { extname, isAbsolute, normalize, relative, resolve, sep } from "node:path";
 
 const port = Number(process.env.PORT || 4173);
-const root = process.cwd();
+const root = resolve(process.cwd(), 'public');
 
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".webp": "image/webp",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".mp4": "video/mp4",
@@ -21,7 +24,7 @@ createServer((request, response) => {
   let decodedRoute;
   try {
     const pathname = new URL(request.url, `http://${request.headers.host}`).pathname;
-    const route = pathname === "/" ? "/index.html" : pathname === "/pre-construction" ? "/pre-construction.html" : pathname;
+    const route = pathname === "/" ? "/index.html" : pathname;
     decodedRoute = decodeURIComponent(route);
   } catch {
     response.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });
@@ -29,7 +32,8 @@ createServer((request, response) => {
     return;
   }
   const relativePath = normalize(decodedRoute).replace(/^[/\\]+/, "");
-  const filePath = resolve(root, relativePath);
+  let filePath = resolve(root, relativePath);
+  if (existsSync(filePath) && statSync(filePath).isDirectory()) filePath = resolve(filePath, 'index.html');
   const pathFromRoot = relative(root, filePath);
   const outsideRoot = pathFromRoot === ".." || pathFromRoot.startsWith(`..${sep}`) || isAbsolute(pathFromRoot);
 
@@ -83,6 +87,6 @@ createServer((request, response) => {
     return;
   }
   createReadStream(filePath).pipe(response);
-}).listen(port, () => {
+}).listen(port, '127.0.0.1', () => {
   console.log(`Montana Contracting is running at http://localhost:${port}`);
 });
