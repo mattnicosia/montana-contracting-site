@@ -11,7 +11,7 @@ function setup({seen=false,reduce=false,hash='',review=false,storageError=false,
     return {tagName,hidden:true,inert:false,disabled:false,events:{},style:{overflow:'',setProperty(){}},children:[],
       appendChild(child){this.children.push(child);},setAttribute(){},remove(){this.removed=true;},
       classList:{add(...x){x.forEach(v=>classes.add(v));},remove(...x){x.forEach(v=>classes.delete(v));},contains(x){return classes.has(x);}},
-      addEventListener(k,fn){this.events[k]=fn;},removeEventListener(k,fn){if(this.events[k]===fn)delete this.events[k];},dispatch(k){this.events[k]?.();},focus(){if(!this.disabled)document.activeElement=this;}};
+      addEventListener(k,fn){this.events[k]=fn;},removeEventListener(k,fn){if(this.events[k]===fn)delete this.events[k];},dispatch(k){this.events[k]?.();},focus(){if(!this.disabled)document.activeElement=this;},blur(){if(document.activeElement===this)document.activeElement=document.body;}};
   }
   const intro=node(),hero=node(),skip=node('BUTTON'),replay=node('BUTTON'),slow=node('BUTTON'),previous=node('BUTTON'),controls=node(),nav=node();
   const imgs=Array.from({length:3},()=>Object.assign(node('IMG'),{complete:imagesReady,naturalWidth:imagesReady?1361:0})),img=imgs[0];
@@ -140,7 +140,7 @@ test('pagehide and resize release the page during assembly and the blue field',(
 test('animation failures release focus, scroll, and the added blue panel',()=>{
   const s=setup({animated:true,animationError:true});s.tick(1800);
   assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);
-  assert.equal(s.document.activeElement,s.nav);assert.equal(s.document.body.style.overflow,'');
+  assert.equal(s.document.activeElement,s.document.body);assert.equal(s.document.body.style.overflow,'');
   assert.ok(s.intro.children.every(n=>n.removed));assert.equal(s.hero.classList.contains('in'),true);
 });
 
@@ -222,4 +222,23 @@ test('artwork failures and the load deadline release the page and late loads sta
     for(const img of s.imgs){img.complete=true;img.naturalWidth=1361;img.dispatch('load');}
     s.tick(6000);assert.equal(s.intro.hidden,true);assert.equal(s.panelAnimations.length,0);
   }
+});
+
+test('first-visit completion and skip do not move focus to the header wordmark',()=>{
+  for(const action of ['finish','skip','escape','failure']){
+    const s=setup({animated:true});
+    if(action==='finish')s.tick(4950);
+    if(action==='skip')s.skip.events.click();
+    if(action==='escape')s.document.events.keydown({key:'Escape',preventDefault(){}});
+    if(action==='failure')s.img.events.error();
+    assert.equal(s.intro.hidden,true);
+    assert.equal(s.document.activeElement,s.document.body);
+    assert.equal(s.nav.inert,false);
+  }
+});
+
+test('headline uses the smaller desktop size and keeps the mobile size',()=>{
+  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
+  assert.match(html,/font-size:clamp\(2\.8rem,5\.92vw,5\.28rem\);max-width:16ch/);
+  assert.match(html,/@media\(max-width:600px\)\{\.hero h1\{font-size:clamp\(2\.6rem,7\.4vw,6\.6rem\)\}\}/);
 });
