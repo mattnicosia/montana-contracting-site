@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="12" fill="#0028cc"/>
-  <text x="50" y="68" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="52" fill="#fff">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880">
+  <title>Montana Contracting M</title>
+  <rect width="880" height="880" rx="88" fill="#fff"/>
+  <g fill="#002bd4" transform="translate(-241 -136)">
+    <path d="M294 249H490L810 600L675 739L477 524V903H294Z"/>
+    <path d="M692 424L866 249H1068V331L827 573Z"/>
+    <path d="M880 559L1068 373V903H880Z"/>
+  </g>
 </svg>
