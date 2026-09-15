@@ -6,4 +6,8 @@ The mapped changes include the approved Haviland gallery and new-construction ta
 
 The Resend browser workspace bldgestimating, signed in as matt@bldgestimating.com, owns the verified montanacontracting.com domain. The connected Resend tool points to a different workspace and must not manage this sender. A sending-only Montana Website Inquiries key restricted to montanacontracting.com is saved as a production-only Secret in Vercel. INQUIRY_FROM is website@montanacontracting.com. The recipient is matt@montanacontracting.com.
 
-Matt approved deployment and one labeled test inquiry. The firewall rule is live in logging mode, counting POST /api/inquiry at 10 requests per minute per IP. It does not block yet. The Vercel firewall skill requires user review and publication of preview enforcement, then production enforcement, before the public form release. No new production deployment or real test email has occurred. Inbox receipt remains a release check.
+Matt approved deployment and one labeled test inquiry, and both are done. Deployment dpl_NdGDSVW5guuXb9yoY2LmaroqTwHg has served montanacontracting.com since September 6, 2026, and it builds api/inquiry as a server function. It was created after the production settings were saved, so it carries them.
+
+The firewall rule Montana inquiry rate limit is published and enforcing. It counts POST /api/inquiry at 3 requests per 60 seconds per IP on a fixed window and throttles callers above that. A separate preview enforcement rule no longer exists, because the main rule carries no environment condition and already covers preview.
+
+A test inquiry on September 15, 2026 returned accepted, and the message reached the inbox seven seconds later from website@montanacontracting.com. Inbox receipt is confirmed, so the release checks for the inquiry form are complete.
