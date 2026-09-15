@@ -4,6 +4,9 @@ node_modules/
 .env*
 !.env.example
 
+# gstack tool logs, written into the working copy at runtime
+.gstack/
+
 # macOS
 .DS_Store
 
