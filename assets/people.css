@@ -6,7 +6,7 @@
 .pp{
   --pp-gut:clamp(1.2rem,4vw,3.5rem);
   --pp-max:1680px;
-  --pp-plate:#0b0c0d;
+  --pp-plate:var(--plate);
   --pp-lab-size:.76rem;
   --pp-lab-track:.14em;
   /* The word runs the width of the crew's footprint in the frame: their shoes
@@ -18,6 +18,8 @@
 }
 @supports(width:1cqw){.pp{--pp-title:24.3cqw;--pp-crew-left:11.5cqw}}
 .pp__wrap{padding-inline:var(--pp-gut);max-width:var(--pp-max);margin:0 auto}
+/* The page runs to 1680, so the shared header and footer run with it here. */
+.page-header__inner,.page-footer__inner{max-width:var(--pp-max)}
 .pp__lab{
   font-size:var(--pp-lab-size);
   letter-spacing:var(--pp-lab-track);
@@ -33,8 +35,8 @@
 .pp__open-frame{position:relative;line-height:0}
 .pp__open-frame img{width:100%;height:auto}
 .pp__open-frame::after{
-  content:'';position:absolute;left:0;right:0;bottom:0;height:16%;pointer-events:none;
-  background:linear-gradient(180deg,rgba(11,12,13,0) 0%,rgba(11,12,13,.22) 34%,rgba(11,12,13,.7) 66%,rgba(11,12,13,.96) 88%,var(--pp-plate) 100%);
+  content:'';position:absolute;left:0;right:0;bottom:0;height:24%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,12,13,0) 0%,rgba(11,12,13,.14) 30%,rgba(11,12,13,.5) 60%,rgba(11,12,13,.88) 85%,var(--pp-plate) 100%);
 }
 .pp__masthead{
   position:relative;z-index:1;
@@ -54,16 +56,17 @@
 .pp__meta{
   color:rgba(255,255,255,.55);
   display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;
-  margin-top:calc(var(--pp-title) * .3);
+  margin-top:calc(var(--pp-title) * .22);
   padding-top:.9rem;
   border-top:1px solid rgba(255,255,255,.14);
 }
-.pp__meta span{white-space:nowrap}
+.pp__meta span{white-space:nowrap;position:relative}
+.pp__meta span:not(:last-child)::after{content:'·';position:absolute;right:-1.05rem}
 
 /* Portrait series */
 .pp__series{background:var(--pp-plate);color:#fff}
 .pp__lead{
-  padding-block:clamp(2.4rem,4.5vw,4.2rem) clamp(2.2rem,4vw,3.6rem);
+  padding-block:clamp(2.2rem,4vw,3.6rem) clamp(2.2rem,4vw,3.6rem);
   display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem clamp(2rem,5vw,4rem);
   align-items:end;
 }
@@ -98,15 +101,16 @@
 .pp__shot{position:relative;aspect-ratio:4/5;background:var(--pp-plate);overflow:hidden}
 .pp__shot img{
   width:100%;height:100%;object-fit:cover;
-  transform:scale(1.001);
-  transition:filter .75s var(--ease),transform 1s var(--ease);
+  transition:filter .75s var(--ease);
 }
-.pp__shot::after{
-  content:'';position:absolute;left:0;bottom:0;height:2px;width:0;
+.pp__caption{padding-top:.9rem}
+/* The navy rule sits on the ground under the frame, so it reads under a white
+   shirt and a black one alike. */
+.pp__caption::before{
+  content:'';display:block;height:2px;width:0;margin-bottom:.8rem;
   background:var(--navy);
   transition:width .55s var(--ease);
 }
-.pp__caption{padding-top:.9rem;transition:opacity .6s var(--ease)}
 .pp__name{font-weight:600;font-size:clamp(1.05rem,1.3vw,1.32rem);letter-spacing:-.012em;line-height:1.2}
 .pp__role{color:rgba(255,255,255,.55);margin-top:.35rem;transition:color .5s var(--ease)}
 
@@ -116,16 +120,13 @@
 @media(hover:hover){
   .pp__person:hover .pp__shot img{
     filter:brightness(1.07) contrast(1.02);
-    transform:scale(1.012);
-    transition-duration:.35s,1s;
+    transition-duration:.35s;
   }
-  .pp__person:hover .pp__shot::after{width:100%}
+  .pp__person:hover .pp__caption::before{width:100%}
   .pp__person:hover .pp__role{color:#fff}
 }
-/* Keyboard: a focused person reads the same as a hovered one. */
-.pp__person:focus-within .pp__shot img{filter:brightness(1.07) contrast(1.02);transform:scale(1.012)}
-.pp__person:focus-within .pp__shot::after{width:100%}
-.pp__person:focus-within .pp__role{color:#fff}
+/* Nothing inside a card is focusable, and the name and role are always
+   visible, so keyboard and touch already have what hover has. */
 
 /* Close */
 .pp__close{border-top:1px solid rgba(255,255,255,.14);padding-block:clamp(3rem,6vw,5.5rem)}
@@ -139,11 +140,10 @@
 /* Credits */
 .pp__credits{
   padding-block:0 clamp(2.4rem,4vw,3.6rem);
-  color:rgba(255,255,255,.4);
+  color:rgba(255,255,255,.55);
   display:flex;flex-wrap:wrap;gap:.4rem 1.8rem;
 }
 
 @media(prefers-reduced-motion:reduce){
   .pp *{transition-duration:.01ms!important;animation-duration:.01ms!important}
-  .pp__person:hover .pp__shot img,.pp__person:focus-within .pp__shot img{transform:none}
 }
