@@ -86,19 +86,21 @@
 
 .pp__grid{
   --pp-col:clamp(1rem,3.3vw,3rem);
+  --pp-row:clamp(2.6rem,6.6vw,6rem);
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(2.6rem,6.6vw,6rem) var(--pp-col);
+  gap:var(--pp-row) var(--pp-col);
   list-style:none;
   padding-bottom:clamp(3.4rem,7vw,6rem);
 }
 @media(min-width:900px){
   .pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  /* The three principals hold the first row. A hairline runs under them, the
-     way the homepage rules off its project list, and the nine follow. */
-  .pp__person--principal{position:relative;padding-bottom:clamp(2rem,3vw,3rem)}
+  /* The three principals hold the first row. A hairline marks the break to
+     the nine, centred in the row gap so it reads as a row break and not an
+     underline. Same rule the homepage uses between projects. */
+  .pp__person--principal{position:relative}
   .pp__person--principal::after{
-    content:'';position:absolute;left:0;right:calc(-1 * var(--pp-col));bottom:0;height:1px;
+    content:'';position:absolute;left:0;right:calc(-1 * var(--pp-col));bottom:calc(-.5 * var(--pp-row));height:1px;
     background:rgba(255,255,255,.14);
   }
   .pp__person--principal:nth-child(3)::after{right:0}
