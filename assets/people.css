@@ -73,13 +73,6 @@
   filter:brightness(1.05) contrast(1.03);
   transform:scale(1.022);
 }
-.pp__no{
-  position:absolute;top:10px;left:11px;
-  font-family:var(--pp-mono);font-size:.66rem;letter-spacing:.14em;
-  color:#fff;mix-blend-mode:difference;opacity:.72;
-  transition:opacity .35s ease;
-}
-.pp__person:hover .pp__no{opacity:1}
 .pp__caption{padding-top:13px}
 .pp__name{
   font-weight:600;
