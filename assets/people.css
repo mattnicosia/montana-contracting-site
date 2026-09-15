@@ -85,13 +85,24 @@
 .pp__more:focus-visible{outline:2px solid #fff;outline-offset:4px}
 
 .pp__grid{
+  --pp-col:clamp(1rem,3.3vw,3rem);
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(1.4rem,2.2vw,2.6rem) clamp(.9rem,1.6vw,1.6rem);
+  gap:clamp(2.6rem,6.6vw,6rem) var(--pp-col);
   list-style:none;
   padding-bottom:clamp(3.4rem,7vw,6rem);
 }
-@media(min-width:900px){.pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:900px){
+  .pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  /* The three principals hold the first row. A hairline runs under them, the
+     way the homepage rules off its project list, and the nine follow. */
+  .pp__person--principal{position:relative;padding-bottom:clamp(2rem,3vw,3rem)}
+  .pp__person--principal::after{
+    content:'';position:absolute;left:0;right:calc(-1 * var(--pp-col));bottom:0;height:1px;
+    background:rgba(255,255,255,.14);
+  }
+  .pp__person--principal:nth-child(3)::after{right:0}
+}
 
 .pp__shot{position:relative;aspect-ratio:4/5;background:var(--pp-plate);overflow:hidden}
 .pp__shot img{
