@@ -11,15 +11,15 @@
   --pp-lab-track:.14em;
   /* The word runs the width of the crew's footprint in the frame: their shoes
      span about 11.5% to 88% of the photograph, and the word is 3.15em wide. */
-  --pp-title:24.3vw;
-  --pp-crew-left:11.5vw;
+  --pp-title:min(24.3vw,408.24px);
+  --pp-crew-left:min(11.5vw,193.2px);
   background:var(--pp-plate);
   color:#fff;
 }
 @supports(width:1cqw){.pp{--pp-title:24.3cqw;--pp-crew-left:11.5cqw}}
 .pp__wrap{padding-inline:var(--pp-gut);max-width:var(--pp-max);margin:0 auto}
 /* The page runs to 1680, so the shared header and footer run with it here. */
-.page-header__inner,.page-footer__inner{max-width:var(--pp-max)}
+.page-header__inner,.page-footer__inner{max-width:1680px}
 .pp__lab{
   font-size:var(--pp-lab-size);
   letter-spacing:var(--pp-lab-track);
@@ -61,7 +61,7 @@
   border-top:1px solid rgba(255,255,255,.14);
 }
 .pp__meta span{white-space:nowrap}
-.pp__meta span + span::before{content:'·';padding:0 .8rem}
+.pp__meta span + span::before{content:'·';content:'·' / '';padding:0 .8rem}
 
 /* Portrait series */
 .pp__series{background:var(--pp-plate);color:#fff}
@@ -77,7 +77,7 @@
 .pp__more{
   display:inline-flex;align-items:center;gap:.8rem;
   font-weight:600;color:rgba(255,255,255,.8);text-decoration:none;
-  min-height:44px;margin-top:1rem;
+  min-height:44px;margin-top:.6rem;
 }
 .pp__more i{width:36px;height:1px;background:rgba(255,255,255,.6);transition:width .35s var(--ease)}
 .pp__more:hover i,.pp__more:focus-visible i{width:60px}
