@@ -75,22 +75,22 @@
     },
     {
       "source": "/our-team",
-      "destination": "/#story",
+      "destination": "/people/",
       "permanent": true
     },
     {
       "source": "/our-team/",
-      "destination": "/#story",
+      "destination": "/people/",
       "permanent": true
     },
     {
       "source": "/team",
-      "destination": "/#story",
+      "destination": "/people/",
       "permanent": true
     },
     {
       "source": "/team/",
-      "destination": "/#story",
+      "destination": "/people/",
       "permanent": true
     },
     {

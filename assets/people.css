@@ -1,0 +1,156 @@
+/* Portrait series for the People page. Scoped under .pp so the tokens in
+   information-pages.css are never overwritten. */
+
+.pp{
+  --pp-ground:#eaeae7;
+  --pp-surface:#fff;
+  --pp-plate:#0b0c0d;
+  --pp-ink:#16181a;
+  --pp-ink-2:#6a6f75;
+  --pp-ink-3:#9aa0a5;
+  --pp-rule:#d2d3cf;
+  --pp-accent:#0028cc;
+  --pp-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --pp-gut:clamp(20px,4vw,64px);
+
+  background:var(--pp-ground);
+  color:var(--pp-ink);
+}
+
+.pp__wrap{padding-inline:var(--pp-gut);max-width:1680px;margin:0 auto}
+
+/* masthead */
+.pp__masthead{
+  padding-block:clamp(40px,7vw,96px) clamp(28px,4vw,52px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:clamp(24px,3vw,44px);
+}
+@media(min-width:900px){
+  .pp__masthead{grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);align-items:end}
+}
+.pp__wordmark{
+  font-weight:600;
+  font-size:clamp(3.4rem,13vw,10.5rem);
+  line-height:.84;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
+.pp__wordmark span{font-weight:400;color:var(--pp-ink-2)}
+.pp__standfirst{
+  font-size:clamp(1rem,1.35vw,1.2rem);
+  line-height:1.5;
+  max-width:46ch;
+  margin-bottom:1.15em;
+}
+.pp__standfirst + .pp__standfirst{color:var(--pp-ink-2);margin-bottom:0}
+
+.pp__meta{
+  font-family:var(--pp-mono);
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--pp-ink-2);
+  border-top:1px solid var(--pp-rule);
+  padding-top:14px;
+  margin-top:clamp(28px,4vw,48px);
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 26px;
+}
+.pp__meta span{white-space:nowrap}
+
+/* grid */
+.pp__series{padding-block:clamp(28px,4vw,56px) clamp(48px,7vw,104px)}
+.pp__grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(22px,2.6vw,48px) clamp(16px,2vw,34px);
+  list-style:none;
+}
+@media(min-width:760px){.pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1180px){.pp__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+.pp__shot{
+  position:relative;
+  aspect-ratio:4/5;
+  background:var(--pp-plate);
+  overflow:hidden;
+}
+.pp__shot img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.94) contrast(1.01);
+  transform:scale(1.001);
+  transition:filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.pp__person:hover .pp__shot img,.pp__person:focus-within .pp__shot img{
+  filter:brightness(1.05) contrast(1.03);
+  transform:scale(1.022);
+}
+.pp__no{
+  position:absolute;top:10px;left:11px;
+  font-family:var(--pp-mono);font-size:.66rem;letter-spacing:.14em;
+  color:#fff;mix-blend-mode:difference;opacity:.72;
+  transition:opacity .35s ease;
+}
+.pp__person:hover .pp__no{opacity:1}
+.pp__caption{padding-top:13px}
+.pp__name{
+  font-weight:600;
+  font-size:clamp(1.02rem,1.15vw,1.22rem);
+  letter-spacing:-.012em;
+  line-height:1.2;
+}
+.pp__role{
+  font-family:var(--pp-mono);
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--pp-ink-2);
+  margin-top:6px;
+  line-height:1.35;
+}
+.pp__role--tk{color:var(--pp-accent)}
+
+/* Franky */
+.pp__coda{
+  background:var(--pp-surface);
+  border-top:1px solid var(--pp-rule);
+  border-bottom:1px solid var(--pp-rule);
+}
+.pp__coda-inner{
+  padding-block:clamp(36px,5vw,76px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:clamp(22px,3vw,54px);
+  align-items:center;
+}
+@media(min-width:820px){
+  .pp__coda-inner{grid-template-columns:minmax(220px,.9fr) minmax(0,1.6fr)}
+}
+.pp__coda .pp__shot{background:#f7f7f5;max-width:420px}
+.pp__coda-copy{max-width:44ch}
+.pp__coda h2{
+  font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.6rem);
+  letter-spacing:-.035em;
+  line-height:.95;
+  margin-bottom:4px;
+}
+.pp__coda .pp__role{margin-bottom:18px}
+.pp__coda p{color:var(--pp-ink-2);font-size:clamp(1rem,1.2vw,1.1rem);max-width:40ch}
+
+/* series credits */
+.pp__credits{
+  padding-block:clamp(30px,4vw,60px) clamp(40px,5vw,72px);
+  font-family:var(--pp-mono);
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--pp-ink-3);
+  display:flex;flex-wrap:wrap;gap:8px 30px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pp *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}

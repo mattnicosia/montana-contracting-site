@@ -2,7 +2,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, resolve } from "node:path";
 
 const root = process.cwd();
-const pages = ["index.html", "pre-construction/index.html", "core-values/index.html", "financing/index.html"];
+const pages = ["index.html", "pre-construction/index.html", "core-values/index.html", "people/index.html", "financing/index.html"];
 const errors = [];
 const referencedAssets = new Set();
 
