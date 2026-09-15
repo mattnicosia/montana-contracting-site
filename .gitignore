@@ -3,3 +3,9 @@ public/
 node_modules/
 .env*
 !.env.example
+
+# macOS
+.DS_Store
+
+# Brand logo source files, kept locally and not in the repo
+/MCC 2.0 Logo*.png
