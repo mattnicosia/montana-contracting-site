@@ -55,21 +55,17 @@
 /* The dateline clears the descender of the p, then reads as one line. */
 .pp__meta{
   color:rgba(255,255,255,.55);
-  display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;
+  display:flex;flex-wrap:wrap;gap:.4rem 0;
   margin-top:calc(var(--pp-title) * .22);
   padding-top:.9rem;
   border-top:1px solid rgba(255,255,255,.14);
 }
-.pp__meta span{white-space:nowrap;position:relative}
-.pp__meta span:not(:last-child)::after{content:'·';position:absolute;right:-1.05rem}
+.pp__meta span{white-space:nowrap}
+.pp__meta span + span::before{content:'·';padding:0 .8rem}
 
 /* Portrait series */
 .pp__series{background:var(--pp-plate);color:#fff}
-.pp__lead{
-  padding-block:clamp(2.2rem,4vw,3.6rem) clamp(2.2rem,4vw,3.6rem);
-  display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem clamp(2rem,5vw,4rem);
-  align-items:end;
-}
+.pp__lead{padding-block:clamp(2.2rem,4vw,3.6rem) clamp(2.2rem,4vw,3.6rem)}
 .pp__lead p{
   font-size:clamp(1.15rem,1.9vw,1.6rem);
   line-height:1.32;
@@ -81,18 +77,17 @@
 .pp__more{
   display:inline-flex;align-items:center;gap:.8rem;
   font-weight:600;color:rgba(255,255,255,.8);text-decoration:none;
-  min-height:44px;
+  min-height:44px;margin-top:1rem;
 }
 .pp__more i{width:36px;height:1px;background:rgba(255,255,255,.6);transition:width .35s var(--ease)}
 .pp__more:hover i,.pp__more:focus-visible i{width:60px}
 .pp__more:hover{color:#fff}
 .pp__more:focus-visible{outline:2px solid #fff;outline-offset:4px}
-@media(min-width:900px){.pp__lead{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}.pp__more{justify-self:end}}
 
 .pp__grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(1.8rem,3vw,3.6rem) clamp(.9rem,1.6vw,1.6rem);
+  gap:clamp(1.4rem,2.2vw,2.6rem) clamp(.9rem,1.6vw,1.6rem);
   list-style:none;
   padding-bottom:clamp(3.4rem,7vw,6rem);
 }
