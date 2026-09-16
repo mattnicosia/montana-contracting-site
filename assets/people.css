@@ -95,15 +95,6 @@
 }
 @media(min-width:900px){
   .pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  /* The three principals hold the first row. A hairline marks the break to
-     the nine, centred in the row gap so it reads as a row break and not an
-     underline. Same rule the homepage uses between projects. */
-  .pp__person--principal{position:relative}
-  .pp__person--principal::after{
-    content:'';position:absolute;left:0;right:calc(-1 * var(--pp-col));bottom:calc(-.5 * var(--pp-row));height:1px;
-    background:rgba(255,255,255,.14);
-  }
-  .pp__person--principal:nth-child(3)::after{right:0}
 }
 
 .pp__shot{position:relative;aspect-ratio:4/5;background:var(--pp-plate);overflow:hidden}
