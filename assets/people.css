@@ -1,133 +1,155 @@
-/* Portrait series for the People page. Scoped under .pp so the tokens in
-   information-pages.css are never overwritten. */
+/* People. Scoped under .pp. Every colour, ease and type size comes from the
+   tokens in information-pages.css. The masthead and the group photograph sit
+   under the photograph, in the dark the road fades into. Everything sits on the site's dark, so
+   the black seamless plates dissolve into the page and the people carry it. */
 
 .pp{
-  --pp-ground:#eaeae7;
-  --pp-surface:#fff;
-  --pp-plate:#0b0c0d;
-  --pp-ink:#16181a;
-  --pp-ink-2:#6a6f75;
-  --pp-ink-3:#9aa0a5;
-  --pp-rule:#d2d3cf;
-  --pp-accent:#0028cc;
-  --pp-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --pp-gut:clamp(20px,4vw,64px);
-
-  background:var(--pp-ground);
-  color:var(--pp-ink);
+  --pp-gut:clamp(1.2rem,4vw,3.5rem);
+  --pp-max:1680px;
+  --pp-plate:var(--plate);
+  --pp-lab-size:.76rem;
+  --pp-lab-track:.14em;
+  /* The word runs the width of the crew's footprint in the frame: their shoes
+     span about 11.5% to 88% of the photograph, and the word is 3.15em wide. */
+  --pp-title:min(24.3vw,408.24px);
+  --pp-crew-left:min(11.5vw,193.2px);
+  background:var(--pp-plate);
+  color:#fff;
 }
-
-.pp__wrap{padding-inline:var(--pp-gut);max-width:1680px;margin:0 auto}
-
-/* masthead */
-.pp__masthead{
-  padding-block:clamp(40px,7vw,96px) clamp(28px,4vw,52px);
-}
-.pp__wordmark{
-  font-weight:600;
-  font-size:clamp(3.4rem,13vw,10.5rem);
-  line-height:.84;
-  letter-spacing:-.045em;
-  text-wrap:balance;
-}
-.pp__wordmark span{font-weight:400;color:var(--pp-ink-2)}
-.pp__meta{
-  font-family:var(--pp-mono);
-  font-size:.7rem;
-  letter-spacing:.1em;
+@supports(width:1cqw){.pp{--pp-title:24.3cqw;--pp-crew-left:11.5cqw}}
+.pp__wrap{padding-inline:var(--pp-gut);max-width:var(--pp-max);margin:0 auto}
+/* The page runs to 1680, so the shared header and footer run with it here. */
+.page-header__inner,.page-footer__inner{max-width:1680px}
+.pp__lab{
+  font-size:var(--pp-lab-size);
+  letter-spacing:var(--pp-lab-track);
   text-transform:uppercase;
-  color:var(--pp-ink-2);
-  border-top:1px solid var(--pp-rule);
-  padding-top:14px;
-  margin-top:clamp(28px,4vw,48px);
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px 26px;
+  line-height:1.4;
+}
+
+/* The opening. One frame, full width to 1680, the whole photograph, no crop.
+   The asphalt at the bottom of the frame runs into the site dark, and the
+   title stands in that dark directly under the crew's feet. The road becomes
+   the ground the studio portraits stand on, and the word is set in it. */
+.pp__open{position:relative;max-width:var(--pp-max);margin:0 auto;container-type:inline-size}
+.pp__open-frame{position:relative;line-height:0}
+.pp__open-frame img{width:100%;height:auto}
+.pp__open-frame::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:24%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,12,13,0) 0%,rgba(11,12,13,.14) 30%,rgba(11,12,13,.5) 60%,rgba(11,12,13,.88) 85%,var(--pp-plate) 100%);
+}
+.pp__masthead{
+  position:relative;z-index:1;
+  margin-top:calc(var(--pp-title) * -.16);
+}
+/* The title aligns to the first boot, not the page gutter. It belongs to the
+   photograph. Everything under it returns to the gutter. */
+.pp__wordmark{margin-left:calc(var(--pp-crew-left) - var(--pp-gut))}
+.pp__wordmark{
+  color:#fff;
+  font-weight:600;
+  font-size:var(--pp-title);
+  line-height:.84;
+  letter-spacing:-.035em;
+}
+/* The dateline clears the descender of the p, then reads as one line. */
+.pp__meta{
+  color:rgba(255,255,255,.55);
+  display:flex;flex-wrap:wrap;gap:.4rem 0;
+  margin-top:calc(var(--pp-title) * .22);
+  padding-top:.9rem;
+  border-top:1px solid rgba(255,255,255,.14);
 }
 .pp__meta span{white-space:nowrap}
+.pp__meta span + span::before{content:'·';content:'·' / '';padding:0 .8rem}
 
-/* grid */
-.pp__series{padding-block:clamp(28px,4vw,56px) clamp(48px,7vw,104px)}
+/* Portrait series */
+.pp__series{background:var(--pp-plate);color:#fff}
+.pp__lead{padding-block:clamp(2.2rem,4vw,3.6rem) clamp(2.2rem,4vw,3.6rem)}
+.pp__lead p{
+  font-size:clamp(1.15rem,1.9vw,1.6rem);
+  line-height:1.32;
+  letter-spacing:-.015em;
+  max-width:36ch;
+}
+.pp__lead p strong{font-weight:600}
+.pp__lead p span{color:rgba(255,255,255,.62)}
+.pp__more{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-weight:600;color:rgba(255,255,255,.8);text-decoration:none;
+  min-height:44px;margin-top:.6rem;
+}
+.pp__more i{width:36px;height:1px;background:rgba(255,255,255,.6);transition:width .35s var(--ease)}
+.pp__more:hover i,.pp__more:focus-visible i{width:60px}
+.pp__more:hover{color:#fff}
+.pp__more:focus-visible{outline:2px solid #fff;outline-offset:4px}
+
 .pp__grid{
+  --pp-col:clamp(1rem,3.3vw,3rem);
+  --pp-row:clamp(2.6rem,6.6vw,6rem);
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(22px,2.6vw,48px) clamp(16px,2vw,34px);
+  gap:var(--pp-row) var(--pp-col);
   list-style:none;
+  padding-bottom:clamp(3.4rem,7vw,6rem);
 }
-@media(min-width:760px){.pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(min-width:1180px){.pp__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:900px){
+  .pp__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  /* The three principals hold the first row. A hairline marks the break to
+     the nine, centred in the row gap so it reads as a row break and not an
+     underline. Same rule the homepage uses between projects. */
+  .pp__person--principal{position:relative}
+  .pp__person--principal::after{
+    content:'';position:absolute;left:0;right:calc(-1 * var(--pp-col));bottom:calc(-.5 * var(--pp-row));height:1px;
+    background:rgba(255,255,255,.14);
+  }
+  .pp__person--principal:nth-child(3)::after{right:0}
+}
 
-.pp__shot{
-  position:relative;
-  aspect-ratio:4/5;
-  background:var(--pp-plate);
-  overflow:hidden;
-}
+.pp__shot{position:relative;aspect-ratio:4/5;background:var(--pp-plate);overflow:hidden}
 .pp__shot img{
   width:100%;height:100%;object-fit:cover;
-  filter:brightness(.94) contrast(1.01);
-  transform:scale(1.001);
-  transition:filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);
+  transition:filter .75s var(--ease);
 }
-.pp__person:hover .pp__shot img,.pp__person:focus-within .pp__shot img{
-  filter:brightness(1.05) contrast(1.03);
-  transform:scale(1.022);
+.pp__caption{padding-top:.9rem}
+/* The navy rule sits on the ground under the frame, so it reads under a white
+   shirt and a black one alike. */
+.pp__caption::before{
+  content:'';display:block;height:2px;width:0;margin-bottom:.8rem;
+  background:var(--navy);
+  transition:width .55s var(--ease);
 }
-.pp__caption{padding-top:13px}
-.pp__name{
-  font-weight:600;
-  font-size:clamp(1.02rem,1.15vw,1.22rem);
-  letter-spacing:-.012em;
-  line-height:1.2;
-}
-.pp__role{
-  font-family:var(--pp-mono);
-  font-size:.66rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--pp-ink-2);
-  margin-top:6px;
-  line-height:1.35;
-}
-.pp__role--tk{color:var(--pp-accent)}
+.pp__name{font-weight:600;font-size:clamp(1.05rem,1.3vw,1.32rem);letter-spacing:-.012em;line-height:1.2}
+.pp__role{color:rgba(255,255,255,.55);margin-top:.35rem;transition:color .5s var(--ease)}
 
-/* Franky */
-.pp__coda{
-  background:var(--pp-surface);
-  border-top:1px solid var(--pp-rule);
-  border-bottom:1px solid var(--pp-rule);
+/* Hover is light. Nothing is dimmed at rest. The person you are on comes up
+   a step and moves forward a hair, the role reads at full white, and the
+   site's navy rule draws under the frame. Fast in, slow out, like a lamp. */
+@media(hover:hover){
+  .pp__person:hover .pp__shot img{
+    filter:brightness(1.07) contrast(1.02);
+    transition-duration:.35s;
+  }
+  .pp__person:hover .pp__caption::before{width:100%}
+  .pp__person:hover .pp__role{color:#fff}
 }
-.pp__coda-inner{
-  padding-block:clamp(36px,5vw,76px);
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
-  gap:clamp(22px,3vw,54px);
-  align-items:center;
-}
-@media(min-width:820px){
-  .pp__coda-inner{grid-template-columns:minmax(220px,.9fr) minmax(0,1.6fr)}
-}
-.pp__coda .pp__shot{background:#f7f7f5;max-width:420px}
-.pp__coda-copy{max-width:44ch}
-.pp__coda h2{
-  font-weight:600;
-  font-size:clamp(2rem,4.6vw,3.6rem);
-  letter-spacing:-.035em;
-  line-height:.95;
-  margin-bottom:4px;
-}
-.pp__coda .pp__role{margin-bottom:18px}
-.pp__coda p{color:var(--pp-ink-2);font-size:clamp(1rem,1.2vw,1.1rem);max-width:40ch}
+/* Nothing inside a card is focusable, and the name and role are always
+   visible, so keyboard and touch already have what hover has. */
 
-/* series credits */
+/* Close */
+.pp__close{border-top:1px solid rgba(255,255,255,.14);padding-block:clamp(3rem,6vw,5.5rem)}
+.pp__close-inner{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:1.6rem clamp(2rem,5vw,4rem);align-items:center;
+}
+.pp__close h2{font-weight:600;font-size:clamp(2rem,4.6vw,3.8rem);letter-spacing:-.02em;line-height:1.02}
+.pp__close p{color:rgba(255,255,255,.7);margin-top:.9rem;max-width:40ch;font-size:clamp(1rem,1.4vw,1.18rem)}
+@media(min-width:900px){.pp__close-inner{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}.pp__close .btn{justify-self:end}}
+
+/* Credits */
 .pp__credits{
-  padding-block:clamp(30px,4vw,60px) clamp(40px,5vw,72px);
-  font-family:var(--pp-mono);
-  font-size:.68rem;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--pp-ink-3);
-  display:flex;flex-wrap:wrap;gap:8px 30px;
+  padding-block:0 clamp(2.4rem,4vw,3.6rem);
+  color:rgba(255,255,255,.55);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.8rem;
 }
 
 @media(prefers-reduced-motion:reduce){

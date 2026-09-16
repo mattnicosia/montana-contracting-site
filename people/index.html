@@ -2,15 +2,17 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>People | Montana Contracting</title>
-<meta name="description" content="The people who build Montana Contracting's work, photographed as a portrait series at the Congers office.">
+<meta name="description" content="The twelve people who build Montana Contracting's work. Three principals stay on every project. Photographed by April Vidal Photography, September 2026.">
 <link rel="canonical" href="https://montanacontracting.com/people/">
 <meta property="og:title" content="People | Montana Contracting">
-<meta property="og:description" content="The people who build Montana Contracting's work, photographed as a portrait series at the Congers office.">
+<meta property="og:description" content="The twelve people who build Montana Contracting's work. Three principals stay on every project.">
 <meta property="og:url" content="https://montanacontracting.com/people/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://montanacontracting.com/assets/people/joe-montana-sr-800.jpg">
+<meta property="og:image" content="https://montanacontracting.com/assets/people/crew-1024.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#0028cc">
 <link rel="icon" href="/favicon.svg?v=montana-m-1" type="image/svg+xml">
+<link rel="preload" href="../assets/TT_Commons_Pro_Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/TT_Commons_Pro_Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/information-pages.css">
 <link rel="stylesheet" href="../assets/people.css">
 </head><body>
@@ -26,59 +28,71 @@
 
 <main id="main" class="pp">
 
-  <div class="pp__wrap">
-    <header class="pp__masthead">
-      <h1 class="pp__wordmark">People<span>.</span></h1>
-    </header>
-    <div class="pp__meta">
-      <span>Montana Contracting Corp.</span>
-      <span>Congers, New York</span>
-      <span>Est. 1984</span>
-      <span>Photographed September 2026</span>
+  <!-- The opening. The crew stands on the road, the road fades into the site
+       dark, and the title stands in that dark directly under their feet. -->
+  <section class="pp__open" aria-labelledby="pp-title">
+    <div class="pp__open-frame">
+      <picture>
+        <source type="image/webp" srcset="../assets/people/crew-1024.webp">
+        <img src="../assets/people/crew-1024.jpg" width="1024" height="598" alt="The twelve people of Montana Contracting, and Franky, standing together in front of a hedge and a concrete wall" loading="eager" fetchpriority="high" decoding="async">
+      </picture>
     </div>
-  </div>
+    <div class="pp__wrap pp__masthead">
+      <h1 class="pp__wordmark" id="pp-title">People.</h1>
+      <div class="pp__meta pp__lab">
+        <span>Congers, New York</span>
+        <span>Est. 1984</span>
+      </div>
+    </div>
+  </section>
 
-  <div class="pp__wrap pp__series">
-    <ul class="pp__grid">
-      <li class="pp__person">
+  <section class="pp__series" aria-label="The people">
+    <div class="pp__wrap pp__lead">
+      <p id="pp-lead"><strong>Joe Montana, Matt Nicosia and Chris Lange are the three principals.</strong> <span>All three stay involved in every project. One of them is your contact from the first walkthrough to the final punch list. These are the twelve people who build Montana's projects.</span></p>
+      <a class="pp__more pp__lab" href="../core-values/index.html">Our values <i></i></a>
+    </div>
+
+    <div class="pp__wrap">
+      <ul class="pp__grid">
+      <li class="pp__person pp__person--principal">
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/joe-montana-sr-400.webp 400w, ../assets/people/joe-montana-sr-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/joe-montana-sr-800.jpg" width="800" height="1000" alt="Joe Montana, Montana Contracting Corp." loading="eager" decoding="async">
+              <source type="image/webp" srcset="../assets/people/joe-montana-sr-400.webp 400w, ../assets/people/joe-montana-sr-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/joe-montana-sr-800.jpg" width="800" height="1000" alt="" loading="eager">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Joe Montana</p>
-            <p class="pp__role">CEO</p>
+            <p class="pp__role pp__lab">CEO</p>
           </figcaption>
         </figure>
       </li>
-      <li class="pp__person">
+      <li class="pp__person pp__person--principal">
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/matt-nicosia-400.webp 400w, ../assets/people/matt-nicosia-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/matt-nicosia-800.jpg" width="800" height="1000" alt="Matt Nicosia, Montana Contracting Corp." loading="eager" decoding="async">
+              <source type="image/webp" srcset="../assets/people/matt-nicosia-400.webp 400w, ../assets/people/matt-nicosia-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/matt-nicosia-800.jpg" width="800" height="1000" alt="" loading="eager">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Matt Nicosia</p>
-            <p class="pp__role">COO</p>
+            <p class="pp__role pp__lab">COO</p>
           </figcaption>
         </figure>
       </li>
-      <li class="pp__person">
+      <li class="pp__person pp__person--principal">
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/chris-lange-400.webp 400w, ../assets/people/chris-lange-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/chris-lange-800.jpg" width="800" height="1000" alt="Chris Lange, Montana Contracting Corp." loading="eager" decoding="async">
+              <source type="image/webp" srcset="../assets/people/chris-lange-400.webp 400w, ../assets/people/chris-lange-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/chris-lange-800.jpg" width="800" height="1000" alt="" loading="eager">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Chris Lange</p>
-            <p class="pp__role">General Superintendent</p>
+            <p class="pp__role pp__lab">General Superintendent</p>
           </figcaption>
         </figure>
       </li>
@@ -86,13 +100,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/joe-montana-jr-400.webp 400w, ../assets/people/joe-montana-jr-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/joe-montana-jr-800.jpg" width="800" height="1000" alt="Joe Montana Jr., Montana Contracting Corp." loading="eager" decoding="async">
+              <source type="image/webp" srcset="../assets/people/joe-montana-jr-400.webp 400w, ../assets/people/joe-montana-jr-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/joe-montana-jr-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Joe Montana Jr.</p>
-            <p class="pp__role">Superintendent</p>
+            <p class="pp__role pp__lab">Superintendent</p>
           </figcaption>
         </figure>
       </li>
@@ -100,13 +114,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/scott-martens-400.webp 400w, ../assets/people/scott-martens-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/scott-martens-800.jpg" width="800" height="1000" alt="Scott Martens, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/scott-martens-400.webp 400w, ../assets/people/scott-martens-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/scott-martens-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Scott Martens</p>
-            <p class="pp__role">Superintendent</p>
+            <p class="pp__role pp__lab">Superintendent</p>
           </figcaption>
         </figure>
       </li>
@@ -114,27 +128,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/alex-divernieri-400.webp 400w, ../assets/people/alex-divernieri-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/alex-divernieri-800.jpg" width="800" height="1000" alt="Alex DiVernieri, Montana Contracting Corp." loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <figcaption class="pp__caption">
-            <p class="pp__name">Alex DiVernieri</p>
-            <p class="pp__role">Project Manager</p>
-          </figcaption>
-        </figure>
-      </li>
-      <li class="pp__person">
-        <figure>
-          <div class="pp__shot">
-            <picture>
-              <source type="image/webp" srcset="../assets/people/ines-macadam-400.webp 400w, ../assets/people/ines-macadam-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/ines-macadam-800.jpg" width="800" height="1000" alt="Ines MacAdam, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/ines-macadam-400.webp 400w, ../assets/people/ines-macadam-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/ines-macadam-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Ines MacAdam</p>
-            <p class="pp__role">Project Manager</p>
+            <p class="pp__role pp__lab">Project Manager</p>
           </figcaption>
         </figure>
       </li>
@@ -142,13 +142,27 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/steve-catalanotto-400.webp 400w, ../assets/people/steve-catalanotto-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/steve-catalanotto-800.jpg" width="800" height="1000" alt="Steve Catalanotto, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/alex-divernieri-400.webp 400w, ../assets/people/alex-divernieri-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/alex-divernieri-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
+            </picture>
+          </div>
+          <figcaption class="pp__caption">
+            <p class="pp__name">Alex DiVernieri</p>
+            <p class="pp__role pp__lab">Project Manager</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="pp__person">
+        <figure>
+          <div class="pp__shot">
+            <picture>
+              <source type="image/webp" srcset="../assets/people/steve-catalanotto-400.webp 400w, ../assets/people/steve-catalanotto-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/steve-catalanotto-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Steve Catalanotto</p>
-            <p class="pp__role">Estimator</p>
+            <p class="pp__role pp__lab">Estimator</p>
           </figcaption>
         </figure>
       </li>
@@ -156,13 +170,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/mike-planamento-400.webp 400w, ../assets/people/mike-planamento-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/mike-planamento-800.jpg" width="800" height="1000" alt="Mike Planamento, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/mike-planamento-400.webp 400w, ../assets/people/mike-planamento-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/mike-planamento-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Mike Planamento</p>
-            <p class="pp__role">Billing Manager</p>
+            <p class="pp__role pp__lab">Billing Manager</p>
           </figcaption>
         </figure>
       </li>
@@ -170,13 +184,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/lynn-montana-400.webp 400w, ../assets/people/lynn-montana-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/lynn-montana-800.jpg" width="800" height="1000" alt="Lynn Montana, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/lynn-montana-400.webp 400w, ../assets/people/lynn-montana-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/lynn-montana-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Lynn Montana</p>
-            <p class="pp__role">Operations Manager</p>
+            <p class="pp__role pp__lab">Operations Manager</p>
           </figcaption>
         </figure>
       </li>
@@ -184,13 +198,13 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/sheila-linguanti-400.webp 400w, ../assets/people/sheila-linguanti-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/sheila-linguanti-800.jpg" width="800" height="1000" alt="Sheila Linguanti, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/sheila-linguanti-400.webp 400w, ../assets/people/sheila-linguanti-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/sheila-linguanti-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Sheila Linguanti</p>
-            <p class="pp__role">Compliance Manager</p>
+            <p class="pp__role pp__lab">Compliance Manager</p>
           </figcaption>
         </figure>
       </li>
@@ -198,26 +212,35 @@
         <figure>
           <div class="pp__shot">
             <picture>
-              <source type="image/webp" srcset="../assets/people/anthony-falsetti-400.webp 400w, ../assets/people/anthony-falsetti-800.webp 800w" sizes="(max-width:760px) 45vw, (max-width:1180px) 30vw, 22vw">
-              <img src="../assets/people/anthony-falsetti-800.jpg" width="800" height="1000" alt="Anthony Falsetti, Montana Contracting Corp." loading="lazy" decoding="async">
+              <source type="image/webp" srcset="../assets/people/anthony-falsetti-400.webp 400w, ../assets/people/anthony-falsetti-800.webp 800w" sizes="(max-width:899px) 50vw, min(33vw, 540px)">
+              <img src="../assets/people/anthony-falsetti-800.jpg" width="800" height="1000" alt="" loading="eager" fetchpriority="low">
             </picture>
           </div>
           <figcaption class="pp__caption">
             <p class="pp__name">Anthony Falsetti</p>
-            <p class="pp__role">Shop Manager</p>
+            <p class="pp__role pp__lab">Shop Manager</p>
           </figcaption>
         </figure>
       </li>
-    </ul>
-  </div>
+      </ul>
+    </div>
 
-  <div class="pp__wrap">
-    <p class="pp__credits">
-      <span>Montana Contracting Corp.</span>
-      <span>68 Route 303, Congers, NY</span>
-      <span>Portrait series, black seamless</span>
-    </p>
-  </div>
+    <div class="pp__close">
+      <div class="pp__wrap pp__close-inner">
+        <div>
+          <h2>Start a project.</h2>
+          <p>Tell us about the work. One of the three principals will be in touch personally.</p>
+        </div>
+        <a class="btn" href="../index.html#contact">Let's Talk</a>
+      </div>
+    </div>
+
+    <div class="pp__wrap">
+      <p class="pp__credits pp__lab">
+        <span>Portraits and group photograph by April Vidal, September 2026</span>
+      </p>
+    </div>
+  </section>
 
 </main>
 <footer class="page-footer"><div class="page-footer__inner"><p>Montana Contracting &middot; Since 1984</p>
