@@ -14,6 +14,8 @@ Open `http://localhost:4173/?intro=preview` to check the M opening with Replay o
 
 Edit `data/projects.json` for project content, then run `npm run build` to regenerate project pages and the public directory. Do not edit generated project HTML directly.
 
+After adding photographs, run `node scripts/optimize-images.mjs` (macOS, needs `cwebp`). It writes resized WebP copies to `assets/web/` and updates `data/image-variants.json`. Pages show the copies; originals stay for sharing tags. Commit both. `npm test` fails if a copy is missing.
+
 ## Deployment
 
 Vercel runs `npm run build`, publishes `public`, and builds `api/inquiry.js` as a server function. The site uses `/pre-construction/` and `/projects/<slug>/` routes. The old root `pre-construction.html` remains in Git but is not published.

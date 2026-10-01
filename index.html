@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Montana Contracting · The Hudson Valley's Most Ambitious Work</title>
-<meta name="description" content="The Hudson Valley's Most Ambitious Work. Since 1984. NY + NJ.">
+<meta name="description" content="General contractor for custom homes and commercial work in Westchester, Rockland, Orange, Putnam, Dutchess, Ulster, Greene, Columbia and Bergen since 1984.">
 
 <!-- OG tags for social sharing -->
 <meta property="og:title" content="Montana Contracting · The Hudson Valley's Most Ambitious Work">
 <meta property="og:description" content="The Hudson Valley's Most Ambitious Work. Since 1984. NY + NJ.">
 <meta property="og:image" content="https://montanacontracting.com/assets/photos/piaule-catskill.jpg">
-<meta property="og:url" content="https://montanacontracting.com">
+<meta property="og:url" content="https://montanacontracting.com/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://montanacontracting.com">
+<link rel="canonical" href="https://montanacontracting.com/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=montana-m-1">
 <meta name="theme-color" content="#0028cc">
 
@@ -22,9 +22,10 @@
 {
   "@context": "https://schema.org",
   "@type": "GeneralContractor",
+  "@id": "https://montanacontracting.com/#business",
   "name": "Montana Contracting",
-  "description": "The Hudson Valley's Most Ambitious Work. Since 1984. NY + NJ.",
-  "url": "https://montanacontracting.com",
+  "description": "General contractor for custom homes and commercial work in Westchester, Rockland, Orange, Putnam, Dutchess, Ulster, Greene, Columbia and Bergen since 1984.",
+  "url": "https://montanacontracting.com/",
   "telephone": "(845) 398-1778",
   "email": "info@montanacontracting.com",
   "foundingDate": "1984",
@@ -38,7 +39,16 @@
   },
   "areaServed": [
     { "@type": "State", "name": "New York" },
-    { "@type": "State", "name": "New Jersey" }
+    { "@type": "State", "name": "New Jersey" },
+    { "@type": "AdministrativeArea", "name": "Westchester County" },
+    { "@type": "AdministrativeArea", "name": "Rockland County" },
+    { "@type": "AdministrativeArea", "name": "Orange County" },
+    { "@type": "AdministrativeArea", "name": "Putnam County" },
+    { "@type": "AdministrativeArea", "name": "Dutchess County" },
+    { "@type": "AdministrativeArea", "name": "Ulster County" },
+    { "@type": "AdministrativeArea", "name": "Greene County" },
+    { "@type": "AdministrativeArea", "name": "Columbia County" },
+    { "@type": "AdministrativeArea", "name": "Bergen County" }
   ],
   "knowsAbout": ["Pre-Construction", "General Contracting", "Construction Financing", "Design-Build", "Commercial Construction", "Residential Construction"],
   "image": "https://montanacontracting.com/assets/photos/piaule-catskill.jpg"
@@ -125,6 +135,7 @@ a{color:inherit;text-decoration:none}
 .nav--solid .nav__cta{color:var(--navy);border-color:var(--navy)}
 .nav__cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .nav__burger{display:none}
+.nav__call{display:none}
 .nav__links a:focus-visible,.nav__burger:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 /* The People link makes seven. Seven do not fit beside the logo and the
    button until about 1100px, so the burger now covers everything below it. */
@@ -136,6 +147,9 @@ a{color:inherit;text-decoration:none}
   .nav__cta{display:none}
   .nav__burger{display:block;flex-shrink:0;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}
   .nav--solid .nav__burger{color:var(--ink)}
+  .nav__call{display:inline-flex;align-items:center;margin-left:auto;flex-shrink:0;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.5rem .95rem;border-radius:30px;background:#fff;color:var(--navy)!important;border:1px solid #fff}
+  .nav--solid .nav__call{background:var(--navy);color:#fff!important;border-color:var(--navy)}
+  .nav__call:focus-visible{outline:2px solid currentColor;outline-offset:4px}
   .nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}
   .nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}
 }
@@ -150,6 +164,8 @@ a{color:inherit;text-decoration:none}
 .hero__eyebrow{display:flex;align-items:center;gap:.8rem;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;opacity:.9;margin-bottom:1.4rem}
 .hero__eyebrow--below{margin-bottom:0;margin-top:1.6rem}
 .hero__eyebrow i{width:34px;height:1px;background:#fff;display:inline-block}
+.hero__eyebrow .nw{white-space:nowrap}
+.hero__eyebrow i{flex-shrink:0}
 .hero h1{
   font-weight:600;line-height:1.02;letter-spacing:-.02em;
   font-size:clamp(2.8rem,5.92vw,5.28rem);max-width:16ch;
@@ -686,16 +702,16 @@ a{color:inherit;text-decoration:none}
 <script src="/assets/legacy-project-routes.js" defer></script>
 <noscript><style>#preloader{display:none}.reveal{opacity:1;transform:none}</style></noscript>
 <link rel="stylesheet" href="assets/logo-intro.css">
-<link rel="preload" href="assets/montana-m-original.png" as="image">
+<link rel="preload" href="assets/montana-m-original.webp" as="image" type="image/webp">
 </head>
 <body>
 
 <!-- PRELOADER -->
 <div id="preloader" hidden role="dialog" aria-modal="true" aria-label="Montana Contracting introduction" tabindex="-1">
   <div class="intro__mark" aria-hidden="true">
-    <div class="intro__piece intro__piece--left"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
-    <div class="intro__piece intro__piece--top"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
-    <div class="intro__piece intro__piece--right"><img src="assets/montana-m-original.png" alt="" width="1361" height="1156"></div>
+    <div class="intro__piece intro__piece--left"><img src="assets/montana-m-original.webp" alt="" width="1361" height="1156"></div>
+    <div class="intro__piece intro__piece--top"><img src="assets/montana-m-original.webp" alt="" width="1361" height="1156"></div>
+    <div class="intro__piece intro__piece--right"><img src="assets/montana-m-original.webp" alt="" width="1361" height="1156"></div>
   </div>
 </div>
 <div class="intro-review" id="introReview" hidden aria-label="Local logo preview controls">
@@ -711,20 +727,21 @@ a{color:inherit;text-decoration:none}
   <a href="#" class="nav__logo"><img class="logo-light" src="assets/montana-logo-white.svg" alt="Montana Contracting"><img class="logo-dark" src="assets/montana-logo.svg" alt="Montana Contracting"></a>
   <div class="nav__links" id="main-nav-links">
     <a href="#story">Approach</a>
-    <a href="core-values/index.html">Values</a>
-    <a href="people/index.html">People</a>
+    <a href="/core-values/">Values</a>
+    <a href="/people/">People</a>
     <a href="#featured">Work</a>
     <a href="#precon">Pre-Con</a>
-    <a href="financing/index.html">Financing</a>
+    <a href="/financing/">Financing</a>
     <a href="#contact">Contact</a>
   </div>
   <a href="#contact" class="nav__cta" data-open-form>Start a Project</a>
+  <a href="tel:+18453981778" class="nav__call" aria-label="Call Montana Contracting at (845) 398-1778">Call</a>
   <button type="button" class="nav__burger" aria-expanded="false" aria-controls="main-nav-links">Menu</button>
 </nav>
 
 <!-- HERO -->
 <header class="hero" id="hero">
-  <div class="hero__bg" id="heroBg"><img src="assets/photos/piaule-catskill.jpg" alt="Piaule Catskill Retreat landscape hotel" width="2000" height="1125" fetchpriority="high"></div>
+  <div class="hero__bg" id="heroBg"><img src="assets/web/photos/piaule-catskill-1600.webp" srcset="assets/web/photos/piaule-catskill-800.webp 800w, assets/web/photos/piaule-catskill-1600.webp 1600w, assets/web/photos/piaule-catskill-2000.webp 2000w" sizes="(max-aspect-ratio: 16/9) 240vh, 100vw" alt="Piaule Catskill Retreat landscape hotel" width="2000" height="1125" fetchpriority="high"></div>
   <div class="hero__scrim"></div>
   <div class="hero__inner">
     <h1>
@@ -732,7 +749,7 @@ a{color:inherit;text-decoration:none}
       <span class="ln"><span>Most Ambitious</span></span>
       <span class="ln"><span>Work</span></span>
     </h1>
-    <div class="hero__eyebrow hero__eyebrow--below"><i></i>Since 1984 · NY + NJ</div>
+    <div class="hero__eyebrow hero__eyebrow--below"><i></i><span><span class="nw">General Contractor ·</span> <span class="nw">Since 1984 · NY + NJ</span></span></div>
   </div>
   <div class="hero__scroll">Scroll<i></i></div>
 </header>
@@ -749,37 +766,37 @@ a{color:inherit;text-decoration:none}
   <div class="press__cards" id="pressTrack">
     <figure class="press__card reveal" data-d="1">
       <a href="https://www.vogue.com/article/piaule-catskill-hotel" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/vogue.png" alt="Featured in Vogue" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/vogue-800.webp" srcset="assets/web/press/vogue-800.webp 800w, assets/web/press/vogue-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="Featured in Vogue" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">Vogue</span><span>Feature</span></figcaption>
     </figure>
     <figure class="press__card reveal" data-d="2">
       <a href="https://www.nytimes.com/2026/04/27/realestate/germantown-ny-art-studio-home.html" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/nyt.png" alt="Featured in The New York Times" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/nyt-800.webp" srcset="assets/web/press/nyt-800.webp 800w, assets/web/press/nyt-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="Featured in The New York Times" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">The New York Times</span><span>Feature</span></figcaption>
     </figure>
     <figure class="press__card reveal" data-d="3">
       <a href="https://www.vogue.com.au/vogue-living/interiors/the-up-studio-hudson-home/image-gallery/2dfd4b7fefe975b528768f0ae1e49799" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/vogue-living.jpg" alt="Vogue Living feature" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/vogue-living-800.webp" srcset="assets/web/press/vogue-living-800.webp 800w, assets/web/press/vogue-living-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="Vogue Living feature" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">Vogue Living</span><span>Feature</span></figcaption>
     </figure>
     <figure class="press__card reveal" data-d="4">
       <a href="https://www.dwell.com/home/hudson-river-house-76036ff7" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/dwell.jpg" alt="Dwell feature" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/dwell-800.webp" srcset="assets/web/press/dwell-800.webp 800w, assets/web/press/dwell-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="Dwell feature" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">Dwell</span><span>Feature</span></figcaption>
     </figure>
     <figure class="press__card reveal" data-d="5">
       <a href="https://www.architecturaldigest.com/gallery/tour-an-artists-hudson-valley-homestead-brimming-with-good-feng-shui" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/architectural-digest.jpg" alt="Architectural Digest feature" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/architectural-digest-800.webp" srcset="assets/web/press/architectural-digest-800.webp 800w, assets/web/press/architectural-digest-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="Architectural Digest feature" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">Architectural Digest</span><span>Feature</span></figcaption>
     </figure>
     <figure class="press__card reveal" data-d="6">
       <a href="https://www.archdaily.com/944766/hudson-river-house-revolution-4-architecture" target="_blank" rel="noopener" class="press__link">
-        <div class="press__frame"><img src="assets/press/archdaily.jpg" alt="ArchDaily feature" width="1080" height="1350"></div>
+        <div class="press__frame"><img src="assets/web/press/archdaily-800.webp" srcset="assets/web/press/archdaily-800.webp 800w, assets/web/press/archdaily-1080.webp 1080w" sizes="(max-width: 700px) 80vw, 260px" loading="lazy" decoding="async" alt="ArchDaily feature" width="1080" height="1350"></div>
       </a>
       <figcaption class="press__cap"><span class="navy">ArchDaily</span><span>Feature</span></figcaption>
     </figure>
@@ -792,9 +809,9 @@ a{color:inherit;text-decoration:none}
 <!-- TWISTED RIDGE VIDEO -->
 <section class="video" id="film">
   <div class="video__label"><i></i>Twisted Ridge · Hudson Valley</div>
-  <img class="video__poster" src="assets/photos/projects/twisted-ridge-16.jpg" alt="Twisted Ridge aerial dusk">
+  <img class="video__poster" src="assets/web/photos/projects/twisted-ridge-16-1600.webp" alt="Twisted Ridge aerial dusk" loading="lazy" decoding="async">
   <div class="video__frame">
-    <video autoplay loop muted playsinline preload="auto" poster="assets/photos/projects/twisted-ridge-16.jpg">
+    <video loop muted playsinline preload="none" poster="assets/web/photos/projects/twisted-ridge-16-1600.webp">
       <source src="assets/video/twisted-ridge-film.mp4" type="video/mp4">
     </video>
   </div>
@@ -838,8 +855,8 @@ a{color:inherit;text-decoration:none}
   <div class="projects__split">
     <div class="plist">
 
-    <a class="pitem reveal is-active" href="/projects/piaule-catskill/" data-preview="assets/photos/projects/piaule-catskill-14.jpg">
-      <img class="pitem__img" src="assets/photos/projects/piaule-catskill-14.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal is-active" href="/projects/piaule-catskill/" data-preview="assets/web/photos/projects/piaule-catskill-14-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/piaule-catskill-14-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">01</span>
         <div><h3>Piaule Catskill Retreat</h3>
@@ -847,8 +864,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="/projects/hudson-river-house/" data-preview="assets/photos/projects/hudson-river-house-16.jpg">
-      <img class="pitem__img" src="assets/photos/projects/hudson-river-house-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal" href="/projects/hudson-river-house/" data-preview="assets/web/photos/projects/hudson-river-house-16-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/hudson-river-house-16-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">02</span>
         <div><h3>Hudson River House</h3>
@@ -856,8 +873,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="/projects/gym-englewood/" data-preview="assets/photos/projects/gym-englewood-06.jpg">
-      <img class="pitem__img" src="assets/photos/projects/gym-englewood-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal" href="/projects/gym-englewood/" data-preview="assets/web/photos/projects/gym-englewood-06-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/gym-englewood-06-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">03</span>
         <div><h3>The Gym Englewood</h3>
@@ -865,8 +882,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="/projects/multi-generational-house/" data-preview="assets/photos/projects/germantown-compound-06.jpg">
-      <img class="pitem__img" src="assets/photos/projects/germantown-compound-06.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal" href="/projects/multi-generational-house/" data-preview="assets/web/photos/projects/germantown-compound-06-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/germantown-compound-06-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">04</span>
         <div><h3>Germantown Compound</h3>
@@ -874,8 +891,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="/projects/monte-nido-west-nyack/" data-preview="assets/photos/projects/monte-nido-west-nyack-01.jpg">
-      <img class="pitem__img" src="assets/photos/projects/monte-nido-west-nyack-01.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal" href="/projects/monte-nido-west-nyack/" data-preview="assets/web/photos/projects/monte-nido-west-nyack-01-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/monte-nido-west-nyack-01-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">05</span>
         <div><h3>Monte Nido West Nyack</h3>
@@ -883,8 +900,8 @@ a{color:inherit;text-decoration:none}
       </div>
     </a>
 
-    <a class="pitem reveal" href="/projects/twisted-ridge/" data-preview="assets/photos/projects/twisted-ridge-16.jpg">
-      <img class="pitem__img" src="assets/photos/projects/twisted-ridge-16.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <a class="pitem reveal" href="/projects/twisted-ridge/" data-preview="assets/web/photos/projects/twisted-ridge-16-800.webp">
+      <img class="pitem__img" src="assets/web/photos/projects/twisted-ridge-16-800.webp" alt="" width="480" height="360" loading="lazy" decoding="async">
       <div class="pitem__left">
         <span class="pitem__no">06</span>
         <div><h3>Twisted Ridge</h3>
@@ -895,12 +912,12 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="projects__preview" aria-hidden="true">
       <div class="projects__preview-stack" id="projectsPreview">
-        <img class="is-active" src="assets/photos/projects/piaule-catskill-14.jpg" alt="Piaule Catskill Retreat" data-key="piaule">
-        <img src="assets/photos/projects/hudson-river-house-16.jpg" alt="Hudson River House pool terrace" data-key="hudson">
-        <img src="assets/photos/projects/gym-englewood-06.jpg" alt="The Gym Englewood entrance" data-key="gym">
-        <img src="assets/photos/projects/germantown-compound-06.jpg" alt="Germantown Compound" data-key="multi">
-        <img src="assets/photos/projects/monte-nido-west-nyack-01.jpg" alt="Monte Nido West Nyack" data-key="monte-nido">
-        <img src="assets/photos/projects/twisted-ridge-16.jpg" alt="Twisted Ridge aerial dusk" data-key="twisted">
+        <img class="is-active" src="assets/web/photos/projects/piaule-catskill-14-1600.webp" srcset="assets/web/photos/projects/piaule-catskill-14-800.webp 800w, assets/web/photos/projects/piaule-catskill-14-1600.webp 1600w, assets/web/photos/projects/piaule-catskill-14-2000.webp 2000w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Piaule Catskill Retreat" data-key="piaule">
+        <img src="assets/web/photos/projects/hudson-river-house-16-1080.webp" srcset="assets/web/photos/projects/hudson-river-house-16-800.webp 800w, assets/web/photos/projects/hudson-river-house-16-1080.webp 1080w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Hudson River House pool terrace" data-key="hudson">
+        <img src="assets/web/photos/projects/gym-englewood-06-1600.webp" srcset="assets/web/photos/projects/gym-englewood-06-800.webp 800w, assets/web/photos/projects/gym-englewood-06-1600.webp 1600w, assets/web/photos/projects/gym-englewood-06-2400.webp 2400w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="The Gym Englewood entrance" data-key="gym">
+        <img src="assets/web/photos/projects/germantown-compound-06-1600.webp" srcset="assets/web/photos/projects/germantown-compound-06-800.webp 800w, assets/web/photos/projects/germantown-compound-06-1600.webp 1600w, assets/web/photos/projects/germantown-compound-06-2400.webp 2400w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Germantown Compound" data-key="multi">
+        <img src="assets/web/photos/projects/monte-nido-west-nyack-01-1600.webp" srcset="assets/web/photos/projects/monte-nido-west-nyack-01-800.webp 800w, assets/web/photos/projects/monte-nido-west-nyack-01-1600.webp 1600w, assets/web/photos/projects/monte-nido-west-nyack-01-2400.webp 2400w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Monte Nido West Nyack" data-key="monte-nido">
+        <img src="assets/web/photos/projects/twisted-ridge-16-1600.webp" srcset="assets/web/photos/projects/twisted-ridge-16-800.webp 800w, assets/web/photos/projects/twisted-ridge-16-1600.webp 1600w, assets/web/photos/projects/twisted-ridge-16-2400.webp 2400w" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Twisted Ridge aerial dusk" data-key="twisted">
       </div>
     </div>
   </div>
@@ -979,8 +996,8 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="contact__foot reveal">
     <span>© 2026 <b>Montana Contracting</b> · The Hudson Valley's Most Ambitious Work</span>
-    <span>Since 1984 · NY + NJ</span>
-    <nav class="contact__page-links" aria-label="More about Montana"><a href="core-values/index.html">Our values</a><a href="financing/index.html">Financing</a></nav>
+    <span>General contractor since 1984 · Westchester, Rockland, Orange, Putnam, Dutchess, Ulster, Greene, Columbia and Bergen</span>
+    <nav class="contact__page-links" aria-label="More about Montana"><a href="/core-values/">Our values</a><a href="/financing/">Financing</a></nav>
   </div>
 </section>
 
@@ -1131,14 +1148,16 @@ a{color:inherit;text-decoration:none}
     entries.forEach(function(en){
       if(en.isIntersecting&&video.paused)attemptPlay();
     });
-  },{threshold:0.15});
+  },{threshold:0,rootMargin:'300px 0px'});
   io.observe(section);
+  // preload="none" keeps the 5 MB film off the first load; play() starts the download near view.
+  var near=false;
+  new IntersectionObserver(function(entries){near=entries[0].isIntersecting;},{rootMargin:'300px 0px'}).observe(section);
 
   ['touchstart','click'].forEach(function(evt){
     document.addEventListener(evt,function retry(){
-      if(video.paused)attemptPlay();
-      document.removeEventListener(evt,retry);
-    },{once:true,passive:true});
+      if(near&&video.paused)attemptPlay();
+    },{passive:true});
   });
 })();
 
@@ -1344,6 +1363,12 @@ a{color:inherit;text-decoration:none}
   document.querySelectorAll('[data-open-form]').forEach(function(el){
     el.addEventListener('click',function(e){e.preventDefault();open();});
   });
+  // Project pages link to /#start-project to open the form directly.
+  if(location.hash==='#start-project'){
+    var contactSection=document.getElementById('contact');
+    if(contactSection)contactSection.scrollIntoView();
+    open();
+  }
   // close triggers
   modal.querySelectorAll('[data-close-form]').forEach(function(el){
     el.addEventListener('click',close);
