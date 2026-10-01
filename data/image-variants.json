@@ -1,0 +1,1857 @@
+{
+  "assets/photos/piaule-catskill.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/236-west-10th-street-18-unit-reno-slate-.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/catch-air-nanuet-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catch-air-nanuet-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catch-air-nanuet-03.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/catch-air-nanuet-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catch-air-nanuet-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-07.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-08.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-09.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-10.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-11.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-12.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-13.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-14.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-15.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-16.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-17.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-18.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/catskills-cabin-19.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-01.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-02.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-03.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-04.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-05.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-06.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-07.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-08.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-09.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-10.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-11.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-12.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-13.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-14.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-15.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-16.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-17.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-18.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dairyland-chefs-warehouse-19.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/dorotockeys-run.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/dunkin-fort-montgomery.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-03.jpg": {
+    "width": 1996,
+    "widths": [
+      800,
+      1600,
+      1996
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-07.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-08.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-09.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-greenwood-lake-10.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-07.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-08.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/dunkin-new-city-09.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/dunkin-yonkers.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/eagles-barn.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/germantown-compound-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-07.jpg": {
+    "width": 1885,
+    "widths": [
+      800,
+      1600,
+      1885
+    ]
+  },
+  "assets/photos/projects/germantown-compound-08.jpg": {
+    "width": 1885,
+    "widths": [
+      800,
+      1600,
+      1885
+    ]
+  },
+  "assets/photos/projects/germantown-compound-09.jpg": {
+    "width": 1885,
+    "widths": [
+      800,
+      1600,
+      1885
+    ]
+  },
+  "assets/photos/projects/germantown-compound-10.jpg": {
+    "width": 1885,
+    "widths": [
+      800,
+      1600,
+      1885
+    ]
+  },
+  "assets/photos/projects/germantown-compound-12.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-13.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-14.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-15.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-16.jpg": {
+    "width": 1885,
+    "widths": [
+      800,
+      1600,
+      1885
+    ]
+  },
+  "assets/photos/projects/germantown-compound-17.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-18.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-19.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-20.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-21.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-22.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-23.jpg": {
+    "width": 1791,
+    "widths": [
+      800,
+      1600,
+      1791
+    ]
+  },
+  "assets/photos/projects/germantown-compound-24.jpg": {
+    "width": 1791,
+    "widths": [
+      800,
+      1600,
+      1791
+    ]
+  },
+  "assets/photos/projects/germantown-compound-25.jpg": {
+    "width": 1791,
+    "widths": [
+      800,
+      1600,
+      1791
+    ]
+  },
+  "assets/photos/projects/germantown-compound-26.jpg": {
+    "width": 1791,
+    "widths": [
+      800,
+      1600,
+      1791
+    ]
+  },
+  "assets/photos/projects/germantown-compound-27.jpg": {
+    "width": 1801,
+    "widths": [
+      800,
+      1600,
+      1801
+    ]
+  },
+  "assets/photos/projects/germantown-compound-28.jpg": {
+    "width": 1801,
+    "widths": [
+      800,
+      1600,
+      1801
+    ]
+  },
+  "assets/photos/projects/germantown-compound-29.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-30.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/germantown-compound-31.jpg": {
+    "width": 1799,
+    "widths": [
+      800,
+      1600,
+      1799
+    ]
+  },
+  "assets/photos/projects/germantown-compound-32.jpg": {
+    "width": 1790,
+    "widths": [
+      800,
+      1600,
+      1790
+    ]
+  },
+  "assets/photos/projects/gym-englewood-01.jpg": {
+    "width": 2500,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/gym-englewood-02.jpg": {
+    "width": 1707,
+    "widths": [
+      800,
+      1600,
+      1707
+    ]
+  },
+  "assets/photos/projects/gym-englewood-03.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/gym-englewood-04.jpg": {
+    "width": 1536,
+    "widths": [
+      800,
+      1536
+    ]
+  },
+  "assets/photos/projects/gym-englewood-05.jpg": {
+    "width": 1536,
+    "widths": [
+      800,
+      1536
+    ]
+  },
+  "assets/photos/projects/gym-englewood-06.jpg": {
+    "width": 2560,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-06.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-07.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-08.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-09.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-10.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-11.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-12.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-13.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-14.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-15.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-16.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-17.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-18.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-19.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-20.jpg": {
+    "width": 1350,
+    "widths": [
+      800,
+      1350
+    ]
+  },
+  "assets/photos/projects/haviland-22.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-23.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-25.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-27.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-30.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/haviland-32.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-01.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-02.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-03.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-04.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-05.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-06.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-07.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-08.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-09.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-11.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-12.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-13.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-14.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-15.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-16.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/hudson-river-house-17.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-07.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-08.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-09.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-10.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-11.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-12.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-13.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-new-city-14.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-07.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-08.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-09.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-10.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-11.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-12.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-13.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/monte-nido-west-nyack-14.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/nyack-fresh-market-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/nyack-fresh-market-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/nyack-fresh-market-03.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/nyack-fresh-market-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/orange-county-trust.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-01.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-02.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-03.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-04.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-05.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-06.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-07.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-08.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-09.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-10.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-11.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-12.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/palisades-mod-ranch-13.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-01.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-02.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-03.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-04.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-05.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-06.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-07.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-08.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-09.jpg": {
+    "width": 1597,
+    "widths": [
+      800,
+      1597
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-10.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-11.jpg": {
+    "width": 1597,
+    "widths": [
+      800,
+      1597
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-12.jpg": {
+    "width": 1597,
+    "widths": [
+      800,
+      1597
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-13.jpg": {
+    "width": 1597,
+    "widths": [
+      800,
+      1597
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-14.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-15.jpg": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-16.png": {
+    "width": 2000,
+    "widths": [
+      800,
+      1600,
+      2000
+    ]
+  },
+  "assets/photos/projects/piaule-catskill-17.jpg": {
+    "width": 1289,
+    "widths": [
+      800,
+      1289
+    ]
+  },
+  "assets/photos/projects/rockland-plastic-surgery.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/srt-domes.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/tappan-free-library.jpg": {
+    "width": 1500,
+    "widths": [
+      800,
+      1500
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-01.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-02.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-03.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-04.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-05.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-06.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-07.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-08.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-09.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-10.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-11.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-12.jpg": {
+    "width": 2400,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-13.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-14.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/tuxedo-residence-15.jpg": {
+    "width": 1772,
+    "widths": [
+      800,
+      1600,
+      1772
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-01.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-02.jpg": {
+    "width": 1400,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-03.jpg": {
+    "width": 1200,
+    "widths": [
+      800,
+      1200
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-04.jpg": {
+    "width": 1800,
+    "widths": [
+      800,
+      1600,
+      1800
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-05.jpg": {
+    "width": 1800,
+    "widths": [
+      800,
+      1600,
+      1800
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-06.jpg": {
+    "width": 1393,
+    "widths": [
+      800,
+      1393
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-07.jpg": {
+    "width": 1000,
+    "widths": [
+      800,
+      1000
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-08.jpg": {
+    "width": 1200,
+    "widths": [
+      800,
+      1200
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-09.jpg": {
+    "width": 1400,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-10.jpg": {
+    "width": 1400,
+    "widths": [
+      800,
+      1400
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-11.jpg": {
+    "width": 963,
+    "widths": [
+      800,
+      963
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-12.jpg": {
+    "width": 1000,
+    "widths": [
+      800,
+      1000
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-13.jpg": {
+    "width": 1600,
+    "widths": [
+      800,
+      1600
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-14.jpg": {
+    "width": 1000,
+    "widths": [
+      800,
+      1000
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-15.jpg": {
+    "width": 1920,
+    "widths": [
+      800,
+      1600,
+      1920
+    ]
+  },
+  "assets/photos/projects/twisted-ridge-16.jpg": {
+    "width": 4622,
+    "widths": [
+      800,
+      1600,
+      2400
+    ]
+  },
+  "assets/press/archdaily.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/press/architectural-digest.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/press/dwell.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/press/nyt.png": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/press/vogue-living.jpg": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  },
+  "assets/press/vogue.png": {
+    "width": 1080,
+    "widths": [
+      800,
+      1080
+    ]
+  }
+}

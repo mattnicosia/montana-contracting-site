@@ -4,7 +4,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const {outputs, projects} = require('../scripts/generate-projects.cjs');
+const {outputs, projects, published} = require('../scripts/generate-projects.cjs');
+const variants = require('../data/image-variants.json');
+const largestCopy = src => '/assets/web/' + src.replace(/^assets\//,'').replace(/\.[a-z]+$/i,'') + '-' + Math.max(...variants[src].widths) + '.webp';
 const root = path.resolve(__dirname, '..');
 const generated = outputs();
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -25,7 +27,19 @@ test('each project has initial content, sharing tags, ordinary links, and every 
     assert.ok(html.includes(`content="https://montanacontracting.com/${p.images[0]}"`));
     for (const paragraph of p.description || []) assert.ok(html.includes(`<p>${esc(paragraph)}</p>`));
     const images = [...html.matchAll(/href="([^"#]+)" data-gallery-image/g)].map(m => m[1]);
-    assert.deepEqual(images, p.images.map(s => '/' + s));
+    // The viewer opens the largest resized copy of every photograph, in order.
+    assert.deepEqual(images, p.images.map(largestCopy));
+    for (const s of p.images) assert.ok(variants[s], 'resized copies exist for ' + s);
+    assert.ok(html.length && !/<img[^>]+src="\/assets\/photos\//.test(html), p.slug + ' shows no full-size originals');
+    assert.ok(html.includes('href="tel:+18453981778"'), p.slug + ' call link');
+    assert.ok(html.includes('href="/#start-project"'), p.slug + ' form link');
+    assert.ok(html.includes("Let's Connect"));
+    const description = html.match(/<meta name="description" content="([^"]*)"/)[1];
+    assert.ok(description.length <= 155, p.slug + ' description is ' + description.length);
+    const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    assert.ok(ld, p.slug + ' structured data');
+    assert.equal(JSON.parse(ld[1])['@graph'][0]['@type'], 'BreadcrumbList');
+    assert.equal(html.includes('name="robots" content="noindex'), Boolean(p.placeholder), p.slug + ' noindex only on unfinished pages');
     assert.ok(html.includes('href="/projects/"'));
     assert.ok(!html.includes('href="#' + p.slug));
     if (p.video) {
@@ -74,12 +88,34 @@ test('legacy hashes replace the current entry and preserve query parameters', ()
   }
 });
 
-test('project routes are not redirected to hashes and sitemap contains every static project', () => {
+test('project routes are not redirected to hashes and sitemap lists only finished projects', () => {
   const config = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
   assert.ok(!config.redirects.some(r => /^\/projects\/?$/.test(r.source)));
   const sitemap = generated.get('sitemap.xml');
   assert.ok(!sitemap.includes('#'));
-  for (const p of projects) assert.ok(sitemap.includes(`/projects/${p.slug}/</loc>`));
+  const index = generated.get('projects/index.html');
+  assert.ok(published.length > 0 && published.length < projects.length);
+  for (const p of projects) {
+    assert.equal(sitemap.includes(`/projects/${p.slug}/</loc>`), !p.placeholder, p.slug);
+    assert.equal(index.includes(`href="/projects/${p.slug}/"`), !p.placeholder, p.slug);
+  }
+  // Unfinished pages stay reachable but never appear as the next project.
+  for (const p of projects) {
+    const next = generated.get(`projects/${p.slug}/index.html`).match(/<div class="k">Next Project<\/div><a href="\/projects\/([^/]+)\/"/)[1];
+    assert.ok(!projects.find(x => x.slug === next).placeholder, p.slug + ' -> ' + next);
+  }
+});
+
+test('one host and one URL per page', () => {
+  const {redirects} = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
+  const www = redirects[0];
+  assert.deepEqual(www.has, [{type:'host', value:'www.montanacontracting.com'}]);
+  assert.equal(www.destination, 'https://montanacontracting.com/:path*');
+  assert.equal(www.permanent, true);
+  for (const source of ['/index.html', '/:dir(pre-construction|core-values|people|financing|projects)', '/projects/:slug([a-z0-9-]+)']) assert.ok(redirects.some(r => r.source === source), source);
+  const home = fs.readFileSync(path.join(root,'index.html'),'utf8');
+  assert.ok(home.includes('<link rel="canonical" href="https://montanacontracting.com/">'));
+  assert.ok(!/href="[^"#]*index\.html"/.test(home));
 });
 
 function galleryFixture() {

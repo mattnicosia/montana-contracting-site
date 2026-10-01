@@ -1,8 +1,48 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "public",
-  "functions": { "api/inquiry.js": { "maxDuration": 15 } },
+  "functions": {
+    "api/inquiry.js": {
+      "maxDuration": 15
+    }
+  },
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.montanacontracting.com"
+        }
+      ],
+      "destination": "https://montanacontracting.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:dir(pre-construction|core-values|people|financing|projects)/index.html",
+      "destination": "/:dir/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/:slug([a-z0-9-]+)/index.html",
+      "destination": "/projects/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/:dir(pre-construction|core-values|people|financing|projects)",
+      "destination": "/:dir/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/:slug([a-z0-9-]+)",
+      "destination": "/projects/:slug/",
+      "permanent": true
+    },
     {
       "source": "/commercial-projects",
       "destination": "/projects/",

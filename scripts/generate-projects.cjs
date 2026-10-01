@@ -8,9 +8,42 @@ const origin = 'https://montanacontracting.com';
 const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const asset = value => '/' + value.replace(/^\/+/, '');
 const projectPath = p => '/projects/' + p.slug + '/';
-const description = p => p.description?.[0] || `${p.title} is a Montana Contracting project in ${p.location}.`;
+const variants = require('../data/image-variants.json');
+const published = projects.filter(p => !p.placeholder);
+const phone = '(845) 398-1778';
+const phoneHref = 'tel:+18453981778';
+const address = '173 N. Route 9W, Congers, NY 10920';
 
-function documentHTML(title, summary, route, image, body, gallery = false) {
+// Search results cut descriptions near 155 characters, so trim at a sentence break.
+function trimDescription(text, max = 155) {
+  if (text.length <= max) return text;
+  const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g) || [text];
+  let out = '';
+  for (const s of sentences) { if ((out + s).trim().length > max) break; out += s; }
+  if (out.trim()) return out.trim();
+  return text.slice(0, max - 3).replace(/\s+\S*$/, '') + '...';
+}
+const description = p => trimDescription(p.description?.[0] || `${p.title} is a Montana Contracting project in ${p.location}.`);
+
+// Resized WebP copies made by scripts/optimize-images.mjs. Originals stay for sharing tags.
+const variantPath = (src, w) => '/assets/web/' + src.replace(/^assets\//, '').replace(/\.[a-z]+$/i, '') + `-${w}.webp`;
+function sized(src, target) {
+  const v = variants[src];
+  if (!v) return asset(src);
+  const w = [...v.widths].sort((a,b) => a-b).find(x => x >= target) || Math.max(...v.widths);
+  return variantPath(src, w);
+}
+function srcset(src) {
+  const v = variants[src];
+  return v ? [...v.widths].sort((a,b) => a-b).map(w => `${variantPath(src, w)} ${w}w`).join(', ') : '';
+}
+function img(src, target, sizes, attrs) {
+  const set = srcset(src);
+  return `<img src="${sized(src, target)}"${set ? ` srcset="${set}" sizes="${sizes}"` : ''} ${attrs}>`;
+}
+const largest = src => sized(src, 99999);
+
+function documentHTML(title, summary, route, image, body, gallery = false, extra = '') {
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -18,7 +51,7 @@ function documentHTML(title, summary, route, image, body, gallery = false) {
 <title>${esc(title)} | Montana Contracting</title>
 <meta name="description" content="${esc(summary)}">
 <link rel="canonical" href="${origin}${route}">
-<meta property="og:type" content="website">
+${extra}<meta property="og:type" content="website">
 <meta property="og:site_name" content="Montana Contracting">
 <meta property="og:title" content="${esc(title)} | Montana Contracting">
 <meta property="og:description" content="${esc(summary)}">
@@ -57,11 +90,20 @@ function detail(p, next) {
   const paragraphs = p.placeholder
     ? ['This project is part of our portfolio across the Hudson Valley and northern New Jersey. A full case study with photography and detail is being prepared.', 'Reach out and one of the three principals will walk you through the work.']
     : p.description;
-  const gallery = p.images.slice(1).map((src,i) => `<a class="pd__shot${i % 3 === 0 ? ' pd__shot--full' : ''}" href="${asset(src)}" data-gallery-image aria-label="Open ${esc(p.title)} image ${i+2}"><img src="${asset(src)}" alt="${esc(p.title)} image ${i+2}" loading="lazy" decoding="async"></a>`).join('\n');
+  const gallery = p.images.slice(1).map((src,i) => { const full = i % 3 === 0; return `<a class="pd__shot${full ? ' pd__shot--full' : ''}" href="${largest(src)}" data-gallery-image aria-label="Open ${esc(p.title)} image ${i+2}">${img(src, full ? 1600 : 800, full ? '(max-width: 1280px) 100vw, 1280px' : '(max-width: 600px) 100vw, 640px', `alt="${esc(p.title)} image ${i+2}" loading="lazy" decoding="async"`)}</a>`; }).join('\n');
   const press = p.press?.length ? `<section class="pd__press" aria-label="Press"><h2 class="pd__gallery-head"><i aria-hidden="true"></i>As featured in</h2><div class="pd__press-links">${p.press.map(pr => `<a href="${esc(pr.url)}" target="_blank" rel="noopener">${esc(pr.outlet)}</a>`).join('<span aria-hidden="true">·</span>')}</div></section>` : '';
   const hero = p.video
-    ? `<video controls muted loop playsinline preload="none" poster="${asset(p.images[0])}" aria-label="${esc(p.title)} project film" data-hero-film><source src="${asset(p.video)}" type="video/mp4"><a href="${asset(p.video)}">Watch the project film</a></video><a class="pd__hero-open" href="${asset(p.images[0])}" data-gallery-image aria-label="Open ${esc(p.title)} image 1">View photograph</a>`
-    : `<a class="pd__hero-photo" href="${asset(p.images[0])}" data-gallery-image aria-label="Open ${esc(p.title)} image 1"><img src="${asset(p.images[0])}" alt="${esc(p.title)}" fetchpriority="high"></a>`;
+    ? `<video controls muted loop playsinline preload="none" poster="${sized(p.images[0], 1600)}" aria-label="${esc(p.title)} project film" data-hero-film><source src="${asset(p.video)}" type="video/mp4"><a href="${asset(p.video)}">Watch the project film</a></video><a class="pd__hero-open" href="${largest(p.images[0])}" data-gallery-image aria-label="Open ${esc(p.title)} image 1">View photograph</a>`
+    : `<a class="pd__hero-photo" href="${largest(p.images[0])}" data-gallery-image aria-label="Open ${esc(p.title)} image 1">${img(p.images[0], 1600, '(max-aspect-ratio: 4/3) 130vh, 100vw', `alt="${esc(p.title)}" fetchpriority="high"`)}</a>`;
+  const ld = {'@context':'https://schema.org','@graph':[
+    {'@type':'BreadcrumbList','itemListElement':[
+      {'@type':'ListItem',position:1,name:'Home',item:origin + '/'},
+      {'@type':'ListItem',position:2,name:'Projects',item:origin + '/projects/'},
+      {'@type':'ListItem',position:3,name:p.title,item:origin + projectPath(p)}]},
+    {'@type':'CreativeWork','name':p.title,'description':description(p),'url':origin + projectPath(p),
+      'image':origin + asset(p.images[0]),'locationCreated':{'@type':'Place','name':p.location},
+      'creator':{'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'}}]};
+  const extra = (p.placeholder ? '<meta name="robots" content="noindex, follow">\n' : '') + `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g,'\\u003c')}</script>\n`;
   return documentHTML(p.title, description(p), projectPath(p), p.images[0], `${bar()}
 <main id="main">
 <div class="pd__hero${p.video ? ' pd__hero--film' : ''}">
@@ -72,14 +114,16 @@ ${hero}
 ${press}
 <div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
 ${gallery ? `<section class="pd__gallery" aria-labelledby="gallery-title"><h2 class="pd__gallery-head" id="gallery-title"><i aria-hidden="true"></i>Gallery</h2><div class="pd__grid">${gallery}</div></section>` : ''}
-</div></main>
-<footer class="pd__foot"><a class="back" href="/projects/"><i aria-hidden="true"></i>Back to Projects</a><div class="pd__next"><div class="k">Next Project</div><a href="${projectPath(next)}">${esc(next.title)}</a></div></footer>`, true);
+</div>
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984</p></div></section>
+</main>
+<footer class="pd__foot"><a class="back" href="/projects/"><i aria-hidden="true"></i>Back to Projects</a><div class="pd__next"><div class="k">Next Project</div><a href="${projectPath(next)}">${esc(next.title)}</a></div></footer>`, true, extra);
 }
 
 function index() {
-  const cards = projects.map(p => `<a class="pcard" href="${projectPath(p)}"><div class="pcard__img">${p.placeholder ? '<span class="pcard__soon">Coming soon</span>' : ''}<img src="${asset(p.images[0])}" alt="${esc(p.title)}" loading="lazy" decoding="async"></div><h2>${esc(p.title)}</h2><div class="pcard__meta"><span class="navy">${esc(p.category)}</span><span>${esc(p.location)}</span><span>${esc(p.type)}</span></div></a>`).join('\n');
-  const summary = `Explore ${projects.length} Montana Contracting projects across New York and New Jersey.`;
-  return documentHTML('All Projects', summary, '/projects/', projects[0].images[0], `${bar(true)}<main id="main"><div class="pall__head"><div class="pall__k"><i aria-hidden="true"></i>Selected Works</div><h1>All Projects</h1><p>${summary}</p></div><div class="pall__grid">${cards}</div></main>`);
+  const cards = published.map(p => `<a class="pcard" href="${projectPath(p)}"><div class="pcard__img">${img(p.images[0], 800, '(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 420px', `alt="${esc(p.title)}" loading="lazy" decoding="async"`)}</div><h2>${esc(p.title)}</h2><div class="pcard__meta"><span class="navy">${esc(p.category)}</span><span>${esc(p.location)}</span><span>${esc(p.type)}</span></div></a>`).join('\n');
+  const summary = `Explore ${published.length} Montana Contracting projects across New York and New Jersey.`;
+  return documentHTML('All Projects', summary, '/projects/', published[0].images[0], `${bar(true)}<main id="main"><div class="pall__head"><div class="pall__k"><i aria-hidden="true"></i>Selected Works</div><h1>All Projects</h1><p>${summary}</p></div><div class="pall__grid">${cards}</div></main>`);
 }
 
 function outputs() {
@@ -91,10 +135,12 @@ function outputs() {
     for (const value of [...p.images, ...(p.video ? [p.video] : [])]) {
       if (!value.startsWith('assets/') || value.includes('..') || !fs.existsSync(path.join(root,value))) throw new Error('Missing or invalid project asset: ' + value);
     }
-    files.set(`projects/${p.slug}/index.html`, detail(p, projects[(i+1)%projects.length]));
+    const pos = published.indexOf(p);
+    const next = pos >= 0 ? published[(pos+1)%published.length] : published[0];
+    files.set(`projects/${p.slug}/index.html`, detail(p, next));
   });
   files.set('assets/legacy-project-routes.js', `/* Generated from data/projects.json. */\n(function(){\n  var routes=${JSON.stringify(Object.fromEntries([['all','/projects/'],['values','/core-values/'],['people','/people/'],['financing','/financing/'], ...projects.map(p => [p.slug,projectPath(p)])]))};\n  function route(){var slug=location.hash.slice(1);if(Object.prototype.hasOwnProperty.call(routes,slug))location.replace(routes[slug]+location.search);}\n  route();window.addEventListener('hashchange',route);\n})();\n`);
-  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/projects/', ...projects.map(projectPath)];
+  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/projects/', ...published.map(projectPath)];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.map(route => `  <url><loc>${origin}${route}</loc></url>`).join('\n')}\n</urlset>\n`);
   return files;
 }
@@ -107,4 +153,4 @@ if (require.main === module) {
   }
   console.log(`Generated ${projects.length} project pages and their index.`);
 }
-module.exports = {outputs, projects};
+module.exports = {outputs, projects, published, trimDescription};
