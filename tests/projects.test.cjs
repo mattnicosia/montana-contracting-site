@@ -16,7 +16,7 @@ test('committed documents match the shared data and generator', () => {
 });
 
 test('each project has initial content, sharing tags, ordinary links, and every photograph', () => {
-  assert.equal(projects.length, 25);
+  assert.equal(projects.length, 26);
   for (const p of projects) {
     const html = generated.get(`projects/${p.slug}/index.html`);
     const url = `https://montanacontracting.com/projects/${p.slug}/`;

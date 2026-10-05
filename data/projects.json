@@ -58,6 +58,32 @@
     ]
   },
   {
+    "slug": "rivers-bend-farm",
+    "title": "Rivers Bend Farm",
+    "category": "Hospitality",
+    "location": "Jefferson, NY",
+    "type": "Event Barn",
+    "architect": null,
+    "description": [
+      "A 50 by 60 foot, two-story barn built as an event space on a private 100-acre compound in the Catskills. The barn shares the land with a main house, a cottage, a single-family cabin and a regenerative organic farm.",
+      "The ground floor holds the events. Upstairs is fully finished as a bridal suite and living space, so a wedding party can get ready, stay the night and step down into the celebration without leaving the building.",
+      "The compound is private and remote. The West Kill runs through the property, past a pond and an open lawn, and the farm works the land around the barn."
+    ],
+    "images": [
+      "assets/photos/projects/rivers-bend-farm-01.jpg",
+      "assets/photos/projects/rivers-bend-farm-02.jpg",
+      "assets/photos/projects/rivers-bend-farm-03.jpg",
+      "assets/photos/projects/rivers-bend-farm-04.jpg",
+      "assets/photos/projects/rivers-bend-farm-05.jpg",
+      "assets/photos/projects/rivers-bend-farm-06.jpg",
+      "assets/photos/projects/rivers-bend-farm-07.jpg",
+      "assets/photos/projects/rivers-bend-farm-08.jpg",
+      "assets/photos/projects/rivers-bend-farm-09.jpg",
+      "assets/photos/projects/rivers-bend-farm-10.jpg",
+      "assets/photos/projects/rivers-bend-farm-11.jpg"
+    ]
+  },
+  {
     "slug": "hudson-river-house",
     "title": "Hudson River House",
     "category": "Residential",
