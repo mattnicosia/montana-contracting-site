@@ -64,3 +64,9 @@ test('phone and email taps are recorded as lead events', () => {
   r.docListeners.click({ target: { closest: () => null } });
   assert.equal(r.window.dataLayer.filter(a => a[0] === 'event').length, 2, 'other clicks ignored');
 });
+
+test('Search Console ownership file is published unchanged', () => {
+  const file = 'google0e41be8e9e5fa301.html';
+  assert.equal(fs.readFileSync(path.join(root, file), 'utf8').trim(), 'google-site-verification: ' + file);
+  assert.ok(fs.readFileSync(path.join(root, 'scripts/build.cjs'), 'utf8').includes("'" + file + "'"));
+});
