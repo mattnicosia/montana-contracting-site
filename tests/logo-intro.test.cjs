@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync(require('node:path').join(__dirname, '../assets/logo-intro.js'), 'utf8');
-function setup({seen=false,reduce=false,hash='',review=false,storageError=false,animated=false,animationError=false,hostname='127.0.0.1',missing='',overflow='',navInert=false,navMissing=false,imagesReady=true,brokenImage=false,legacyMedia=false}={}) {
+function setup({seen=false,reduce=false,hash='',review=false,storageError=false,animated=false,animationError=false,hostname='127.0.0.1',missing='',overflow='',navInert=false,navMissing=false,imagesReady=true,brokenImage=false,legacyMedia=false,phone=false}={}) {
   const timers = new Map();let next=0,now=0;
   const windowEvents={},stored=[];
   function node(tagName='DIV'){
@@ -28,7 +28,7 @@ function setup({seen=false,reduce=false,hash='',review=false,storageError=false,
   document.body.children=[intro,controls,nav,hero,script,style,link];document.activeElement=document.body;
   document.body.style.overflow=overflow;nav.inert=navInert;
   let hidden=true;Object.defineProperty(intro,'hidden',{get:()=>hidden,set(value){hidden=value;if(value&&document.activeElement===intro)document.activeElement=document.body;}});
-  vm.runInNewContext(source,{document,window:{innerWidth:1280,innerHeight:720,scrollTo(){document.scrolledToTop=true;},matchMedia:()=>media,addEventListener(k,fn){windowEvents[k]=fn;}},location:{hostname,hash,search:review?'?intro=preview':''},URLSearchParams,
+  vm.runInNewContext(source,{document,window:{innerWidth:1280,innerHeight:720,scrollTo(){document.scrolledToTop=true;},matchMedia:q=>q.includes('max-width')?{matches:phone}:media,addEventListener(k,fn){windowEvents[k]=fn;}},location:{hostname,hash,search:review?'?intro=preview':''},URLSearchParams,
     sessionStorage:{getItem(){if(storageError)throw Error();return seen?'seen':null;},setItem(key,value){if(storageError)throw Error();stored.push([key,value]);}},
     setTimeout(fn,ms){timers.set(++next,{fn,ms,at:now+ms});return next;},clearTimeout:id=>timers.delete(id)});
   // Advance elapsed time, including timers scheduled by another timer before the target.
@@ -252,4 +252,11 @@ test('opening has no visible skip control and focuses its borderless dialog',()=
   const s=setup({animated:true});
   assert.equal(s.document.activeElement,s.intro);
   s.dismiss();assert.equal(s.document.activeElement,s.document.body);
+});
+test('phones skip the opening and show the headline at once; desktop still plays it',()=>{
+  const p=setup({phone:true});
+  assert.equal(p.intro.hidden,true);assert.equal(p.hero.classList.contains('in'),true);
+  assert.equal(p.document.body.style.overflow,'');assert.equal(p.nav.inert,false);assert.deepEqual(p.stored,[]);
+  const d=setup();assert.equal(d.intro.hidden,false);
+  const r=setup({phone:true,review:true});r.replay.events.click();assert.equal(r.intro.hidden,false,'local review still replays on a phone');
 });

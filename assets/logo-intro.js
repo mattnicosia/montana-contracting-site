@@ -4,6 +4,8 @@
   if(!intro||!hero)return;
   var controls=document.getElementById('introReview');
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Phones skip the opening so the headline paints at once. It was the whole mobile load delay.
+  var phone=window.matchMedia('(max-width: 860px)');
   var review=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&new URLSearchParams(location.search).get('intro')==='preview';
   var running=false,assembling=false,artworkTimer,timers=[],animations=[],flood,inertNodes=[],previousFocus,previousOverflow;
   var artwork=Array.from(intro.querySelectorAll('img'));
@@ -111,6 +113,6 @@
     controls.querySelector('[data-replay]').addEventListener('click',function(){start(1);});
     controls.querySelector('[data-slow]').addEventListener('click',function(){start(3);});
     hero.classList.add('in');
-  }else if(seen||location.hash){hero.classList.add('in');}
+  }else if(seen||location.hash||phone.matches){hero.classList.add('in');}
   else{start(1);}
 })();
