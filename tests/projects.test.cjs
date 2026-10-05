@@ -112,7 +112,7 @@ test('one host and one URL per page', () => {
   assert.deepEqual(www.has, [{type:'host', value:'www.montanacontracting.com'}]);
   assert.equal(www.destination, 'https://montanacontracting.com/:path*');
   assert.equal(www.permanent, true);
-  for (const source of ['/index.html', '/:dir(pre-construction|core-values|people|financing|projects)', '/projects/:slug([a-z0-9-]+)']) assert.ok(redirects.some(r => r.source === source), source);
+  for (const source of ['/index.html', '/:dir(pre-construction|core-values|people|financing|privacy|projects)', '/projects/:slug([a-z0-9-]+)']) assert.ok(redirects.some(r => r.source === source), source);
   const home = fs.readFileSync(path.join(root,'index.html'),'utf8');
   assert.ok(home.includes('<link rel="canonical" href="https://montanacontracting.com/">'));
   assert.ok(!/href="[^"#]*index\.html"/.test(home));

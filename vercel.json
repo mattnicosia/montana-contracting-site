@@ -24,7 +24,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|core-values|people|financing|projects)/index.html",
+      "source": "/:dir(pre-construction|core-values|people|financing|privacy|projects)/index.html",
       "destination": "/:dir/",
       "permanent": true
     },
@@ -34,7 +34,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|core-values|people|financing|projects)",
+      "source": "/:dir(pre-construction|core-values|people|financing|privacy|projects)",
       "destination": "/:dir/",
       "permanent": true
     },
