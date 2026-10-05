@@ -7,11 +7,12 @@ function setup(fetchImpl) {
   const status = { style:{}, classList:{toggle(){}}, textContent:'' };
   const button = {disabled:false};
   const fields = {name:'Visitor',email:'visitor@example.com',phone:'',message:'Test',website:'',projectType:'Custom Home'};
+  const events=[];
   let submit; let resets=0; let valid=true; let reports=0;
   const form = { querySelector:()=>button, addEventListener:(_event,fn)=>{submit=fn;}, checkValidity:()=>valid, reportValidity:()=>reports++, setAttribute(){},removeAttribute(){}, reset(){resets++;} };
-  const context = {document:{getElementById:id=>id==='projectForm'?form:status}, location:{protocol:'http:'}, crypto:{randomUUID:()=>require('node:crypto').randomUUID()}, FormData:class{constructor(){return Object.entries(fields);}}, fetch:fetchImpl, AbortController, setTimeout,clearTimeout};
+  const context = {document:{getElementById:id=>id==='projectForm'?form:status}, location:{protocol:'http:'}, crypto:{randomUUID:()=>require('node:crypto').randomUUID()}, FormData:class{constructor(){return Object.entries(fields);}}, fetch:fetchImpl, gtag:(...a)=>events.push(a), AbortController, setTimeout,clearTimeout};
   vm.runInNewContext(source,context);
-  return {status,button,fields, submit:()=>submit({preventDefault(){}}), resets:()=>resets,reports:()=>reports, invalid:()=>{valid=false;} };
+  return {status,button,fields,events, submit:()=>submit({preventDefault(){}}), resets:()=>resets,reports:()=>reports, invalid:()=>{valid=false;} };
 }
 test('success only follows provider acceptance and clears unchanged draft',async()=>{
   const ui=setup(async()=>({ok:true,json:async()=>({accepted:true})}));await ui.submit();
@@ -34,4 +35,10 @@ test('unconfirmed and broken responses do not clear input or claim success',asyn
 });
 test('native field validation runs before sending',async()=>{
   let calls=0;const ui=setup(async()=>{calls++;});ui.invalid();await ui.submit();assert.equal(calls,0);assert.equal(ui.reports(),1);
+});
+test('a lead event fires only after acceptance and carries no personal details',async()=>{
+  const ok=setup(async()=>({ok:true,json:async()=>({accepted:true})}));await ok.submit();
+  assert.deepEqual(JSON.parse(JSON.stringify(ok.events)),[['event','generate_lead',{form_name:'project_inquiry',project_type:'Custom Home'}]]);
+  const failed=setup(async()=>({ok:false,json:async()=>({error:'Service unavailable'})}));await failed.submit();
+  assert.equal(failed.events.length,0);
 });

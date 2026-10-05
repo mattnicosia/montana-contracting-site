@@ -185,3 +185,4 @@ a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(-
 .pd__cta-btn:focus-visible{outline:2px solid #fff;outline-offset:4px}
 .pd__cta .pd__cta-addr{margin-top:2rem;font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.6)}
 @media(max-width:520px){.pd__cta-btn{width:100%}}
+.pd__cta-addr a{color:inherit;text-underline-offset:3px}

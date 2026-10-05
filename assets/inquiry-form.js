@@ -45,6 +45,8 @@
         return;
       }
       announce('Our email service accepted your inquiry for delivery to Matt. Thank you for getting in touch.', false);
+      // Counted only after the mail provider accepts it, so failed sends never show as leads.
+      if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'project_inquiry', project_type: fields.projectType || '' });
       // Keep any new draft the visitor typed while the previous inquiry was pending.
       if (JSON.stringify(Object.fromEntries(new FormData(form))) === payload) form.reset();
       requestId = '';

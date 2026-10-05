@@ -67,6 +67,7 @@ ${extra}<meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg?v=montana-m-1" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/project-pages.css">
 ${gallery ? '<script src="/assets/project-gallery.js" defer></script>' : ''}
+<script src="/assets/analytics.js" defer></script>
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div id="project-page">${body}</div>
@@ -115,7 +116,7 @@ ${press}
 <div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
 ${gallery ? `<section class="pd__gallery" aria-labelledby="gallery-title"><h2 class="pd__gallery-head" id="gallery-title"><i aria-hidden="true"></i>Gallery</h2><div class="pd__grid">${gallery}</div></section>` : ''}
 </div>
-<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984</p></div></section>
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
 </main>
 <footer class="pd__foot"><a class="back" href="/projects/"><i aria-hidden="true"></i>Back to Projects</a><div class="pd__next"><div class="k">Next Project</div><a href="${projectPath(next)}">${esc(next.title)}</a></div></footer>`, true, extra);
 }
@@ -140,7 +141,7 @@ function outputs() {
     files.set(`projects/${p.slug}/index.html`, detail(p, next));
   });
   files.set('assets/legacy-project-routes.js', `/* Generated from data/projects.json. */\n(function(){\n  var routes=${JSON.stringify(Object.fromEntries([['all','/projects/'],['values','/core-values/'],['people','/people/'],['financing','/financing/'], ...projects.map(p => [p.slug,projectPath(p)])]))};\n  function route(){var slug=location.hash.slice(1);if(Object.prototype.hasOwnProperty.call(routes,slug))location.replace(routes[slug]+location.search);}\n  route();window.addEventListener('hashchange',route);\n})();\n`);
-  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/projects/', ...published.map(projectPath)];
+  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/privacy/', '/projects/', ...published.map(projectPath)];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.map(route => `  <url><loc>${origin}${route}</loc></url>`).join('\n')}\n</urlset>\n`);
   return files;
 }
