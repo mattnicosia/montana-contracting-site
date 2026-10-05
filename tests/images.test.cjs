@@ -58,4 +58,7 @@ test('press covers and film poster wait for the fonts, and every deferred image 
   assert.ok(!/<video[^>]*\sposter="/.test(home), 'no eager poster');
   assert.match(home, /document\.fonts\.load\('600 1em "TT Commons Pro"'\)/);
   assert.match(home, /setTimeout\(swap,6000\)/);
+  const block = home.slice(home.indexOf('DEFERRED IMAGES'), home.indexOf('PRESS CAROUSEL'));
+  assert.ok(!/IntersectionObserver/.test(block), 'no nearness trigger: on phones the covers start inside any margin');
+  assert.match(block, /'scroll','touchstart','keydown'/);
 });
