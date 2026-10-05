@@ -1182,7 +1182,7 @@ a{color:inherit;text-decoration:none}
 /* ============================== DEFERRED IMAGES ==============================
    The press covers and the film poster sit just below the hero. On a slow phone
    they used to download alongside the fonts and push the headline back. They now
-   load once both fonts arrive, when the visitor scrolls near them, or after 6 s,
+   load once both fonts arrive, on the visitor's first scroll or tap, or after 6 s,
    whichever comes first. Clones made by the carousel carry the same data
    attributes, so one pass covers them too. */
 (function(){
@@ -1201,12 +1201,12 @@ a{color:inherit;text-decoration:none}
   if(document.fonts&&document.fonts.load){
     Promise.all([document.fonts.load('600 1em "TT Commons Pro"'),document.fonts.load('400 1em "TT Commons Pro"')]).then(swap,swap);
   }else{swap();}
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){
-      if(es.some(function(e){return e.isIntersecting;})){io.disconnect();swap();}
-    },{rootMargin:'600px 0px'});
-    ['press','film'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
-  }
+  // The covers sit right under the first screen on a phone, so a nearness check
+  // would fire at once. Wait for a real scroll or tap instead.
+  ['scroll','touchstart','keydown'].forEach(function(evt){
+    window.addEventListener(evt,swap,{once:true,passive:true});
+  });
+  if(location.hash)swap();
 })();
 
 /* ============================== PRESS CAROUSEL (manual arrows, true circular scroll) ============================== */
