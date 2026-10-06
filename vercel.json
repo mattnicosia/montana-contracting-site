@@ -19,6 +19,21 @@
       "permanent": true
     },
     {
+      "source": "/projects/haviland-court",
+      "destination": "/projects/saugerties-residence/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/haviland-court/",
+      "destination": "/projects/saugerties-residence/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/haviland-court/index.html",
+      "destination": "/projects/saugerties-residence/",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
