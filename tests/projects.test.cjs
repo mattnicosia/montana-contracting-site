@@ -48,9 +48,11 @@ test('each project has initial content, sharing tags, ordinary links, and every 
       assert.ok(!html.includes(' autoplay'));
     }
   }
-  const haviland = projects.find(p => p.slug === 'haviland-court');
+  const haviland = projects.find(p => p.slug === 'saugerties-residence');
   assert.equal(haviland.images.length, 23);
   assert.equal(haviland.images[0], 'assets/photos/projects/haviland-22.jpg');
+  assert.equal(haviland.title, 'Saugerties Residence');
+  assert.ok(!JSON.stringify(haviland).includes('Haviland Court'), 'no street address in the page text');
 });
 
 test('all local document links, media, styles, and fonts resolve', () => {
@@ -104,6 +106,18 @@ test('project routes are not redirected to hashes and sitemap lists only finishe
     const next = generated.get(`projects/${p.slug}/index.html`).match(/<div class="k">Next Project<\/div><a href="\/projects\/([^/]+)\/"/)[1];
     assert.ok(!projects.find(x => x.slug === next).placeholder, p.slug + ' -> ' + next);
   }
+});
+
+test('the old Haviland Court address redirects to the renamed page in one hop', () => {
+  const {redirects} = JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
+  for (const source of ['/projects/haviland-court', '/projects/haviland-court/']) {
+    const i = redirects.findIndex(r => r.source === source);
+    assert.ok(i > 0, source);
+    assert.equal(redirects[i].destination, '/projects/saugerties-residence/');
+    assert.equal(redirects[i].permanent, true);
+    assert.ok(i < redirects.findIndex(r => r.source === '/projects/:slug([a-z0-9-]+)'), 'ahead of the generic slash rule');
+  }
+  assert.ok(!generated.has('projects/haviland-court/index.html'));
 });
 
 test('one host and one URL per page', () => {
