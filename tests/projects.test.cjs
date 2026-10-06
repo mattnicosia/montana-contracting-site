@@ -170,3 +170,13 @@ test('modified image clicks stay ordinary navigation and pagehide clears an open
   f.click(f.links[4]); f.events.get('pagehide')();
   assert.equal(f.dialog.open,false); assert.equal(f.document.body.style.overflow,'');
 });
+
+test('Twisted Ridge film grows from a framed print as you scroll, with a still fallback', () => {
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.match(index, /<section class="video video--static" id="film"/, 'static by default so no-JS and reduced motion get a plain film');
+  assert.match(index, /\.video__pin\{position:sticky;top:0;height:100vh/);
+  assert.match(index, /section\.classList\.remove\('video--static'\)/);
+  assert.match(index, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\)return;\n  var win=document\.getElementById\('filmWindow'\)/, 'reduced motion exits before pinning');
+  assert.doesNotMatch(index, /Built into the ridge/i);
+  assert.match(index, /<video loop muted playsinline preload="none"/, 'film still loads lazily');
+});
