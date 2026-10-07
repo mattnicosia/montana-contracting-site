@@ -186,3 +186,26 @@ a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(-
 .pd__cta .pd__cta-addr{margin-top:2rem;font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.6)}
 @media(max-width:520px){.pd__cta-btn{width:100%}}
 .pd__cta-addr a{color:inherit;text-underline-offset:3px}
+
+/* ============================== SERVICE + COUNTY PAGES ==============================
+   Built from project descriptions only: one block per project, photo beside its text. */
+.lp__title{max-width:18ch}
+.lp__projs{display:grid;gap:clamp(3rem,7vw,5.5rem)}
+.lp__proj{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(1.6rem,4vw,3.5rem);align-items:start}
+.lp__proj-img{display:block;border-radius:6px;overflow:hidden;background:var(--offwhite);aspect-ratio:4/3}
+.lp__proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.lp__proj-img:hover img{transform:scale(1.03)}
+.lp__proj h2{font-weight:600;font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.025em;line-height:1.05;margin:.7rem 0 1.1rem}
+.lp__proj h2 a{color:var(--ink);text-decoration:none}
+.lp__proj h2 a:hover{color:var(--navy)}
+.lp__proj p{color:var(--muted);font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.6;margin-bottom:1rem;max-width:60ch}
+.lp__proj-more{display:inline-block;margin-top:.4rem;color:var(--navy);font-weight:600;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.lp__proj-more:hover{text-decoration:underline}
+@media(max-width:860px){.lp__proj{grid-template-columns:1fr}}
+.lp__links{margin-top:clamp(3rem,7vw,5rem);padding-top:2rem;border-top:2px solid var(--navy);display:grid;grid-template-columns:1fr 2fr;gap:2rem}
+.lp__links>div{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-content:flex-start}
+.lp__links-k{width:100%;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.lp__links a{color:var(--navy);font-weight:600;text-decoration:none;font-size:.98rem}
+.lp__links a:hover{text-decoration:underline}
+.lp__links a[aria-current]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:860px){.lp__links{grid-template-columns:1fr}}

@@ -127,8 +127,66 @@ function index() {
   return documentHTML('All Projects', summary, '/projects/', published[0].images[0], `${bar(true)}<main id="main"><div class="pall__head"><div class="pall__k"><i aria-hidden="true"></i>Selected Works</div><h1>All Projects</h1><p>${summary}</p></div><div class="pall__grid">${cards}</div></main>`);
 }
 
+// Service and county pages. Copy lives in data/landing-pages.json.
+const landing = require('../data/landing-pages.json');
+const bySlug = Object.fromEntries(projects.map(p => [p.slug, p]));
+const servicePath = s => '/' + s.slug + '/';
+const areaPath = a => '/areas/' + a.slug + '/';
+function landingProject(p, full) {
+  const text = full ? p.description : p.description.slice(0, 1);
+  return `<article class="lp__proj"><a class="lp__proj-img" href="${projectPath(p)}" aria-label="${esc(p.title)}">${img(p.images[0], 800, '(max-width: 860px) 100vw, 560px', `alt="${esc(p.title)}" loading="lazy" decoding="async"`)}</a><div class="lp__proj-text"><div class="pcard__meta"><span class="navy">${esc(p.category)}</span><span>${esc(p.location)}</span><span>${esc(p.type)}</span></div><h2><a href="${projectPath(p)}">${esc(p.title)}</a></h2>${text.map(t => `<p>${esc(t)}</p>`).join('')}<a class="lp__proj-more" href="${projectPath(p)}">View project</a></div></article>`;
+}
+function landingNav(current) {
+  const s = landing.services.map(x => `<a href="${servicePath(x)}"${x.slug === current ? ' aria-current="page"' : ''}>${esc(x.nav)}</a>`).concat(`<a href="/pre-construction/">Pre-Construction</a>`).join('');
+  const a = landing.areas.map(x => `<a href="${areaPath(x)}"${x.slug === current ? ' aria-current="page"' : ''}>${esc(x.name)}${x.state === 'NJ' ? ', NJ' : ''}</a>`).join('');
+  return `<nav class="lp__links" aria-label="Services and areas"><div><div class="lp__links-k">Services</div>${s}</div><div><div class="lp__links-k">Where we build</div>${a}</div></nav>`;
+}
+function landingPage({route, title, tags, h1, heroSlug, projectSlugs, full, current, service}) {
+  const list = projectSlugs.map(s => { const p = bySlug[s]; if (!p || p.placeholder) throw new Error('Landing page references a missing or unfinished project: ' + s); return p; });
+  const hero = bySlug[heroSlug];
+  const heroImage = hero.images[1] || hero.images[0];
+  // Search snippet: the page title plus as many project names as fit in about 155 characters.
+  let summary = `${title}, since 1984. Projects include ${list[0].title}`;
+  for (const p of list.slice(1)) { if ((summary + ', ' + p.title + '.').length > 155) break; summary += ', ' + p.title; }
+  summary += '.';
+  const graph = [
+    {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem',position:1,name:'Home',item:origin + '/'},{'@type':'ListItem',position:2,name:title,item:origin + route}]},
+    {'@type':'Service','name':service.name,'serviceType':service.type,'url':origin + route,
+      'provider':{'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'},'areaServed':service.area}];
+  const extra = `<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c')}</script>\n`;
+  return documentHTML(title, summary, route, heroImage, `${bar(true)}
+<main id="main">
+<div class="pd__hero">
+<div class="pd__hero-photo">${img(heroImage, 1600, '(max-aspect-ratio: 4/3) 130vh, 100vw', `alt="${esc(hero.title)}" fetchpriority="high"`)}</div>
+<div class="pd__hero-scrim"></div><div class="pd__hero-inner"><div class="pd__tags">${tags.map((t, i) => `<span class="pd__tag${i ? ' pd__tag--ghost' : ''}">${esc(t)}</span>`).join('')}</div><h1 class="pd__title lp__title">${esc(h1)}</h1></div>
+</div>
+<div class="pd__body">
+<div class="lp__projs">${list.map(p => landingProject(p, full)).join('\n')}</div>
+<div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
+${landingNav(current)}
+</div>
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
+</main>
+<footer class="pd__foot"><a class="back" href="/"><i aria-hidden="true"></i>Back to Home</a><div class="pd__next"><div class="k">All Work</div><a href="/projects/">See every project</a></div></footer>`, false, extra);
+}
+const countyPlace = a => ({'@type':'AdministrativeArea','name':`${a.name}, ${a.state === 'NJ' ? 'New Jersey' : 'New York'}`});
+function landingOutputs(files) {
+  for (const s of landing.services) {
+    files.set(s.slug + '/index.html', landingPage({route:servicePath(s), title:s.title, tags:[s.nav, 'Since 1984'], h1:s.nav, heroSlug:s.hero, projectSlugs:s.projects, full:false, current:s.slug,
+      service:{name:s.nav, type:s.nav === 'Commercial' ? 'Commercial construction' : 'Custom home building', area:landing.areas.map(countyPlace)}}));
+  }
+  for (const a of landing.areas) {
+    const label = `${a.name}, ${a.state}`;
+    files.set('areas/' + a.slug + '/index.html', landingPage({route:areaPath(a), title:`General Contractor in ${label}`, tags:['General Contractor', label],
+      h1:`${a.name.replace(' ', '\u00a0')}'s Most\u00a0Ambitious\u00a0Work`, heroSlug:a.projects[0], projectSlugs:a.projects, full:true, current:a.slug,
+      service:{name:`General contracting in ${label}`, type:'General contracting', area:countyPlace(a)}}));
+  }
+  return [...landing.services.map(servicePath), ...landing.areas.map(areaPath)];
+}
+
 function outputs() {
   const files = new Map([['projects/index.html', index()]]);
+  const landingRoutes = landingOutputs(files);
   const slugs = new Set();
   projects.forEach((p,i) => {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) || slugs.has(p.slug)) throw new Error('Invalid or duplicate project slug: ' + p.slug);
@@ -141,7 +199,7 @@ function outputs() {
     files.set(`projects/${p.slug}/index.html`, detail(p, next));
   });
   files.set('assets/legacy-project-routes.js', `/* Generated from data/projects.json. */\n(function(){\n  var routes=${JSON.stringify(Object.fromEntries([['all','/projects/'],['values','/core-values/'],['people','/people/'],['financing','/financing/'], ...projects.map(p => [p.slug,projectPath(p)])]))};\n  function route(){var slug=location.hash.slice(1);if(Object.prototype.hasOwnProperty.call(routes,slug))location.replace(routes[slug]+location.search);}\n  route();window.addEventListener('hashchange',route);\n})();\n`);
-  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/privacy/', '/projects/', ...published.map(projectPath)];
+  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/privacy/', '/projects/', ...landingRoutes, ...published.map(projectPath)];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.map(route => `  <url><loc>${origin}${route}</loc></url>`).join('\n')}\n</urlset>\n`);
   return files;
 }
@@ -154,4 +212,4 @@ if (require.main === module) {
   }
   console.log(`Generated ${projects.length} project pages and their index.`);
 }
-module.exports = {outputs, projects, published, trimDescription};
+module.exports = {outputs, projects, published, trimDescription, landing};

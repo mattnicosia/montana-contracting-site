@@ -1,0 +1,102 @@
+{
+  "_note": "Service and county pages are built only from the approved project descriptions in data/projects.json. Do not add marketing copy here.",
+  "services": [
+    {
+      "slug": "custom-homes",
+      "nav": "Custom Homes",
+      "title": "Custom Home Builder in the Hudson Valley",
+      "hero": "hudson-river-house",
+      "projects": [
+        "hudson-river-house",
+        "multi-generational-house",
+        "twisted-ridge",
+        "palisades-mod-ranch",
+        "custom-home-tuxedo-ny",
+        "saugerties-residence",
+        "catskills-cabin"
+      ]
+    },
+    {
+      "slug": "commercial",
+      "nav": "Commercial",
+      "title": "Commercial General Contractor in NY and NJ",
+      "hero": "dairyland-chefs-warehouse",
+      "projects": [
+        "dairyland-chefs-warehouse",
+        "dunkin-greenwood-lake",
+        "dunkin-new-city",
+        "nyack-fresh-market",
+        "catch-air-nanuet",
+        "gym-englewood",
+        "monte-nido-new-city",
+        "monte-nido-west-nyack",
+        "piaule-catskill",
+        "rivers-bend-farm"
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "slug": "rockland-county",
+      "name": "Rockland County",
+      "state": "NY",
+      "projects": [
+        "monte-nido-new-city",
+        "monte-nido-west-nyack",
+        "dunkin-new-city",
+        "nyack-fresh-market",
+        "catch-air-nanuet",
+        "palisades-mod-ranch"
+      ]
+    },
+    {
+      "slug": "orange-county",
+      "name": "Orange County",
+      "state": "NY",
+      "projects": [
+        "dunkin-greenwood-lake",
+        "custom-home-tuxedo-ny"
+      ]
+    },
+    {
+      "slug": "bergen-county",
+      "name": "Bergen County",
+      "state": "NJ",
+      "projects": [
+        "gym-englewood"
+      ]
+    },
+    {
+      "slug": "westchester-county",
+      "name": "Westchester County",
+      "state": "NY",
+      "projects": [
+        "hudson-river-house"
+      ]
+    },
+    {
+      "slug": "ulster-county",
+      "name": "Ulster County",
+      "state": "NY",
+      "projects": [
+        "saugerties-residence"
+      ]
+    },
+    {
+      "slug": "greene-county",
+      "name": "Greene County",
+      "state": "NY",
+      "projects": [
+        "piaule-catskill"
+      ]
+    },
+    {
+      "slug": "columbia-county",
+      "name": "Columbia County",
+      "state": "NY",
+      "projects": [
+        "multi-generational-house"
+      ]
+    }
+  ]
+}
