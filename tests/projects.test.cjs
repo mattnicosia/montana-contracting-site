@@ -213,3 +213,15 @@ test('service and county pages: built only from approved project text, linked, i
     }
   }
 });
+
+test('the business data links to the company profiles and the footer shows them', () => {
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const ld = JSON.parse(index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.deepEqual(ld.sameAs, [
+    'https://www.linkedin.com/company/montana-contracting-corp/',
+    'https://www.instagram.com/montanacontracting/',
+    'https://www.houzz.com/professionals/general-contractors/montana-contracting-pfvwus-pf~1226683051',
+  ]);
+  assert.match(index, /href="https:\/\/www\.linkedin\.com\/company\/montana-contracting-corp\/" rel="me noopener"/);
+  assert.match(index, /href="https:\/\/www\.instagram\.com\/montanacontracting\/" rel="me noopener"/);
+});
