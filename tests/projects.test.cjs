@@ -126,7 +126,7 @@ test('one host and one URL per page', () => {
   assert.deepEqual(www.has, [{type:'host', value:'www.montanacontracting.com'}]);
   assert.equal(www.destination, 'https://montanacontracting.com/:path*');
   assert.equal(www.permanent, true);
-  for (const source of ['/index.html', '/:dir(pre-construction|core-values|people|financing|privacy|projects)', '/projects/:slug([a-z0-9-]+)']) assert.ok(redirects.some(r => r.source === source), source);
+  for (const source of ['/index.html', '/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects)', '/projects/:slug([a-z0-9-]+)', '/areas/:slug([a-z0-9-]+)']) assert.ok(redirects.some(r => r.source === source), source);
   const home = fs.readFileSync(path.join(root,'index.html'),'utf8');
   assert.ok(home.includes('<link rel="canonical" href="https://montanacontracting.com/">'));
   assert.ok(!/href="[^"#]*index\.html"/.test(home));
@@ -179,4 +179,36 @@ test('Twisted Ridge film grows from a framed print as you scroll, with a still f
   assert.match(index, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\)return;\n  var win=document\.getElementById\('filmWindow'\)/, 'reduced motion exits before pinning');
   assert.doesNotMatch(index, /Built into the ridge/i);
   assert.match(index, /<video loop muted playsinline preload="none"/, 'film still loads lazily');
+});
+
+test('service and county pages: real copy, real projects, linked, in the sitemap', () => {
+  const {landing} = require('../scripts/generate-projects.cjs');
+  const sitemap = generated.get('sitemap.xml');
+  assert.deepEqual(landing.services.map(s => s.slug), ['custom-homes', 'commercial']);
+  assert.deepEqual(landing.areas.map(a => a.slug), ['rockland-county','orange-county','bergen-county','westchester-county','ulster-county','greene-county','columbia-county']);
+  const pages = [...landing.services.map(s => [s.slug + '/index.html', '/' + s.slug + '/', s.projects]), ...landing.areas.map(a => ['areas/' + a.slug + '/index.html', '/areas/' + a.slug + '/', a.projects])];
+  const bodies = [];
+  for (const [file, route, slugs] of pages) {
+    const html = generated.get(file);
+    assert.ok(html, file);
+    assert.ok(sitemap.includes(`<loc>https://montanacontracting.com${route}</loc>`), route);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, file);
+    assert.ok(html.includes(`<link rel="canonical" href="https://montanacontracting.com${route}">`), file);
+    assert.ok(!/noindex/.test(html), file);
+    for (const s of slugs) assert.ok(html.includes(`href="/projects/${s}/"`), `${file} links ${s}`);
+    for (const p of pages) assert.ok(html.includes(`href="${p[1]}"`), `${file} links ${p[1]}`);
+    assert.ok(!/renovation/i.test(html.replace(/Interior Renovation|Phased Renovation/g, '')), `${file} does not sell renovations`);
+    assert.ok(!/[\u2013\u2014]/.test(html), `${file} has no dashes`);
+    const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.ok(ld['@graph'].some(n => n['@type'] === 'Service' && n.provider['@id'] === 'https://montanacontracting.com/#business'), file);
+    const words = html.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+    assert.ok(words >= 300, `${file} has ${words} words`);
+    bodies.push((landing.areas.find(a => file.includes(a.slug)) || landing.services.find(s => file.startsWith(s.slug))).body.join(' '));
+  }
+  // County pages must not be the same page with the city swapped.
+  for (let i = 0; i < bodies.length; i++) for (let j = i + 1; j < bodies.length; j++) {
+    const a = new Set(bodies[i].toLowerCase().match(/\b\w+ \w+ \w+\b/g)), b = bodies[j].toLowerCase().match(/\b\w+ \w+ \w+\b/g) || [];
+    const shared = b.filter(x => a.has(x)).length / Math.max(1, b.length);
+    assert.ok(shared < 0.25, `pages ${i} and ${j} share ${Math.round(shared * 100)}% of phrases`);
+  }
 });

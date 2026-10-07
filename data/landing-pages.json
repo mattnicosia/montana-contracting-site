@@ -1,0 +1,312 @@
+{
+  "services": [
+    {
+      "slug": "custom-homes",
+      "nav": "Custom Homes",
+      "title": "Custom Home Builder in the Hudson Valley",
+      "h1": "Custom homes in the Hudson Valley and Northern New Jersey.",
+      "summary": "Montana Contracting builds ground-up custom homes across the Hudson Valley and Bergen County, NJ. Architect-led work, priced from schematic design. Since 1984.",
+      "hero": "hudson-river-house",
+      "kicker": "Custom Homes",
+      "body": [
+        "Montana Contracting builds ground-up custom homes across Rockland, Orange, Westchester, Ulster, Greene and Columbia counties in New York, and Bergen County in New Jersey. We have done it since 1984, on riverfront slopes, wooded ridges, open meadows and lake lots.",
+        "Most of our homes start with an architect's drawings and a site that pushes back. A steep grade above the Hudson in Croton-on-Hudson. A roofline that twists to follow a wooded slope. A 4,900-square-foot ranch in Palisades with ceilings that rise from 12 to 18 feet and three wood-burning fireplaces. We work out the structure, the systems and the finishes against the site before work starts, so the house that gets built is the house that was drawn.",
+        "We join at schematic design and price the design while it can still change, so the budget and the drawings move together. By the time we sign a guaranteed maximum price, more than 80 priced line items sit behind it.",
+        "One of our three principals stays on your project from the first walkthrough to the final punch list. Our superintendents came up as carpenters, and our own crews carry much of the work."
+      ],
+      "list_title": "What we build",
+      "list": [
+        "Ground-up custom homes",
+        "Family compounds with more than one building",
+        "Modern cabins and country houses",
+        "Homes on riverfront, steep and wooded sites"
+      ],
+      "projects": [
+        "hudson-river-house",
+        "multi-generational-house",
+        "twisted-ridge",
+        "palisades-mod-ranch",
+        "custom-home-tuxedo-ny",
+        "saugerties-residence",
+        "catskills-cabin"
+      ],
+      "faq": [
+        [
+          "When should we bring a general contractor onto a custom home?",
+          "At schematic design. If you wait until the construction documents are done, the budget is whatever the drawings cost. Joining early lets us price the design while it can still change, which avoids a costly redesign later."
+        ],
+        [
+          "Do you work with our architect?",
+          "Yes. Most of our homes are built from an architect's plans. We update the budget as the design develops, so the architect works with real numbers instead of guesses."
+        ],
+        [
+          "Where do you build custom homes?",
+          "Rockland, Orange, Westchester, Ulster, Greene and Columbia counties in New York, and Bergen County in New Jersey."
+        ],
+        [
+          "Who will we deal with during the build?",
+          "One of our three principals, Joe Montana, Matt Nicosia or Chris Lange, stays your contact from the first walkthrough to the final punch list."
+        ]
+      ]
+    },
+    {
+      "slug": "commercial",
+      "nav": "Commercial",
+      "title": "Commercial General Contractor in NY and NJ",
+      "h1": "Commercial construction in New York and New Jersey.",
+      "summary": "Ground-up retail, buildouts, offices, healthcare and hospitality projects across the Hudson Valley and Bergen County, NJ. Montana Contracting, since 1984.",
+      "hero": "dairyland-chefs-warehouse",
+      "kicker": "Commercial",
+      "body": [
+        "Montana Contracting builds ground-up retail, interior buildouts, offices, treatment centers and hospitality projects for owners, operators and national brands. Our work runs from Rockland County, where we are based, up through the Hudson Valley and into Bergen County, New Jersey.",
+        "A lot of commercial work happens around a business that has to keep running. We rebuilt a fitness club in Englewood in stages so its doors never closed. We turned a Dunkin' interior in New City in three weeks. In the Bronx, we converted 26,000 square feet of raw industrial space into offices and a test kitchen, with all-new mechanical, electrical and plumbing systems and helical piles under the foundation.",
+        "Owners know the number and the schedule before we mobilize. We price the design as it develops, then take it to our trade partners for firm pricing at 90% plans, so the guaranteed maximum price comes from the people who will build it.",
+        "For multi-family, affordable housing and larger commercial projects, we also offer construction financing through our partner, Procida Funding."
+      ],
+      "list_title": "What we build",
+      "list": [
+        "Ground-up retail and drive-thrus",
+        "Interior buildouts for operating businesses",
+        "Offices and test kitchens",
+        "Healthcare and treatment centers",
+        "Hotels, event spaces and hospitality"
+      ],
+      "projects": [
+        "dairyland-chefs-warehouse",
+        "dunkin-greenwood-lake",
+        "dunkin-new-city",
+        "nyack-fresh-market",
+        "catch-air-nanuet",
+        "gym-englewood",
+        "monte-nido-new-city",
+        "monte-nido-west-nyack",
+        "piaule-catskill",
+        "rivers-bend-farm"
+      ],
+      "faq": [
+        [
+          "Can you build while our business stays open?",
+          "Yes. We rebuilt a fitness club in Englewood in stages so it never closed, and turned a Dunkin' interior in New City in three weeks. We plan the phases with you so finished areas hand back on a schedule you can count on."
+        ],
+        [
+          "Do you build for national brands?",
+          "Yes. We have built Dunkin' stores from the ground up and as interior jobs, working to the brand's standards and schedule."
+        ],
+        [
+          "Do you offer construction financing?",
+          "Yes, for multi-family, affordable housing, mixed-use and larger commercial projects, through our partner Procida Funding."
+        ],
+        [
+          "Where do you build commercial projects?",
+          "Rockland, Orange, Westchester, Ulster, Greene and Columbia counties in New York, and Bergen County in New Jersey."
+        ]
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "slug": "rockland-county",
+      "name": "Rockland County",
+      "state": "NY",
+      "summary": "Montana Contracting is a Congers-based general contractor building custom homes and commercial projects across Rockland County, NY, since 1984.",
+      "body": [
+        "Montana Contracting is based in Congers, and Rockland County is where we have built the longest. Since 1984 we have worked across the county, from Nyack and Palisades to New City, West Nyack and Nanuet.",
+        "Our Rockland work includes two Monte Nido treatment centers, each built inside an existing estate and finished to a residential standard. In New City we turned a Dunkin' interior in three weeks. In Nyack we built the storefront and interior for Nyack Fresh Market, and in Nanuet a full indoor family entertainment center for Catch Air. In Palisades we built a 4,900-square-foot modern ranch in cedar, ipe and stone.",
+        "Our office is in Congers, so our principals and superintendents are close to every Rockland job."
+      ],
+      "projects": [
+        "monte-nido-new-city",
+        "monte-nido-west-nyack",
+        "dunkin-new-city",
+        "nyack-fresh-market",
+        "catch-air-nanuet",
+        "palisades-mod-ranch"
+      ],
+      "faq": [
+        [
+          "Where is Montana Contracting based?",
+          "At 173 N. Route 9W in Congers, in Rockland County. We have built from this part of the county since 1984."
+        ],
+        [
+          "What have you built in Rockland County?",
+          "Two Monte Nido treatment centers in New City and West Nyack, a Dunkin' interior in New City, Nyack Fresh Market, the Catch Air entertainment center in Nanuet and a modern ranch in Palisades."
+        ],
+        [
+          "Do you build both homes and commercial projects in Rockland?",
+          "Yes. Our Rockland work covers custom homes, retail, healthcare and family entertainment."
+        ]
+      ]
+    },
+    {
+      "slug": "orange-county",
+      "name": "Orange County",
+      "state": "NY",
+      "summary": "Custom homes and commercial construction in Orange County, NY, from Montana Contracting. Ground-up retail in Greenwood Lake, a custom home in Tuxedo.",
+      "body": [
+        "Orange County sits next to Rockland, a short drive from our Congers office. Our work here covers both sides of what we do.",
+        "In Greenwood Lake we built a ground-up Dunkin' with a full drive-thru on a tight main-road lot. The building, the lane and the parking were planned together from the first site plan, because the parcel left almost no margin.",
+        "In Tuxedo we built a transitional custom home on a wooded lot above a lake. The challenge there was the finish: light stucco, charcoal accent walls, a curved staircase, a coffered foyer and marble carried through the kitchen, bar and baths."
+      ],
+      "projects": [
+        "dunkin-greenwood-lake",
+        "custom-home-tuxedo-ny"
+      ],
+      "faq": [
+        [
+          "What have you built in Orange County?",
+          "A ground-up Dunkin' with a drive-thru in Greenwood Lake and a custom home on a wooded lake lot in Tuxedo."
+        ],
+        [
+          "How far is Orange County from your office?",
+          "Our office is in Congers, in neighboring Rockland County, so Orange County jobs are a short drive for our principals and superintendents."
+        ],
+        [
+          "Can you build a drive-thru on a tight lot?",
+          "Yes. In Greenwood Lake we planned the building, the drive-thru lane and the parking together from the first site plan so all three fit a narrow main-road parcel."
+        ]
+      ]
+    },
+    {
+      "slug": "bergen-county",
+      "name": "Bergen County",
+      "state": "NJ",
+      "summary": "Montana Contracting builds commercial projects and custom homes in Bergen County, NJ, including a phased fitness club rebuild in Englewood.",
+      "body": [
+        "Bergen County is our New Jersey market, just across the state line from our Rockland office.",
+        "In Englewood we rebuilt a fitness club in phases so the doors never closed. New floors, systems and finishes went in around an operating business. We kept construction separated from members and handed finished areas back on a schedule the owner could plan around.",
+        "We take on commercial projects and custom homes in Bergen County: ground-up retail, buildouts for operating businesses, offices and architect-designed homes.",
+        "Bergen projects get the same process as our New York work: pricing from schematic design, firm trade pricing before the guaranteed maximum price, and one of our three principals as your contact throughout."
+      ],
+      "projects": [
+        "gym-englewood"
+      ],
+      "faq": [
+        [
+          "Do you work in New Jersey?",
+          "Yes. Bergen County is our New Jersey market, just across the state line from our Rockland County office."
+        ],
+        [
+          "Can you rebuild a space while the business stays open?",
+          "Yes. We rebuilt a fitness club in Englewood in stages so it never closed, handing finished areas back on a set schedule."
+        ],
+        [
+          "Who manages a Bergen County project?",
+          "One of our three principals stays your contact from the first walkthrough to the final punch list."
+        ]
+      ]
+    },
+    {
+      "slug": "westchester-county",
+      "name": "Westchester County",
+      "state": "NY",
+      "summary": "Custom homes and commercial construction in Westchester County, NY. Montana Contracting built the Hudson River House in Croton-on-Hudson.",
+      "body": [
+        "Westchester sits across the Hudson from our Congers office. Our best-known work in the county is the Hudson River House in Croton-on-Hudson, featured in Dwell and ArchDaily.",
+        "The house opens almost entirely to the river, with large panes of glass framed in blackened steel and stone from the region. Building on a steep riverfront grade meant careful work on the foundations and drainage, and we sequenced the job to keep the site stable through every season.",
+        "Inside, rift white oak, honed stone and clean plaster run through the living spaces without a visible seam. It is the standard we bring to every Westchester project."
+      ],
+      "projects": [
+        "hudson-river-house"
+      ],
+      "faq": [
+        [
+          "What have you built in Westchester?",
+          "The Hudson River House in Croton-on-Hudson, a riverfront home featured in Dwell and ArchDaily."
+        ],
+        [
+          "Can you build on a steep riverfront lot?",
+          "Yes. The Hudson River House sits on a steep grade above the river. We engineered the foundations and drainage for the slope and sequenced the job to keep the site stable year-round."
+        ],
+        [
+          "How do you price a Westchester custom home?",
+          "We price the design from schematic design and update it as the drawings develop, then take it to our trade partners for firm pricing before setting a guaranteed maximum price."
+        ]
+      ]
+    },
+    {
+      "slug": "ulster-county",
+      "name": "Ulster County",
+      "state": "NY",
+      "summary": "Montana Contracting builds custom homes in Ulster County, NY, including the Saugerties Residence: two structures in cedar, glass and stone.",
+      "body": [
+        "In Ulster County we build custom homes for clients who want the house to sit quietly in the land.",
+        "The Saugerties Residence is a new custom home in two structures, set into the woods with vertical cedar, large areas of glass and stone set to the natural grade. Inside, the bedrooms are quiet and the main bath is finished in terracotta subway tile, dark stone and light cabinetry.",
+        "The same team builds across the Hudson Valley, from the Piaule cabins in Greene County to the Germantown compound in Columbia County, so Ulster clients get crews used to remote, wooded and sloping sites.",
+        "We price Ulster projects from schematic design, so the budget is set while the design can still change."
+      ],
+      "projects": [
+        "saugerties-residence"
+      ],
+      "faq": [
+        [
+          "What have you built in Ulster County?",
+          "The Saugerties Residence, a new custom home in two structures finished in vertical cedar, glass and stone."
+        ],
+        [
+          "Do you build homes on wooded sites?",
+          "Yes. The Saugerties Residence is set into the woods, with stone laid to the natural grade so the house follows the land."
+        ],
+        [
+          "When should we call you about an Ulster County home?",
+          "At schematic design, while the design can still change. That is when our pricing does the most good."
+        ]
+      ]
+    },
+    {
+      "slug": "greene-county",
+      "name": "Greene County",
+      "state": "NY",
+      "summary": "Montana Contracting built Piaule, the 24-cabin landscape hotel above Catskill, NY. Hospitality and custom construction in Greene County.",
+      "body": [
+        "Our largest Greene County project is Piaule, a landscape hotel on ninety acres above the town of Catskill, designed by Garrison Architects and featured in Vogue, Architectural Digest, Travel + Leisure and Forbes.",
+        "We built twenty-four minimalist cabins, a spa and a central lodge. Floor-to-ceiling glass, warm timber and concrete meet at tight tolerances, so each cabin steps back and the view becomes the room.",
+        "The site called for close coordination between our field teams and the design team: protecting mature trees, managing a sensitive grade and finishing every surface to a gallery standard."
+      ],
+      "projects": [
+        "piaule-catskill"
+      ],
+      "faq": [
+        [
+          "What did Montana Contracting build at Piaule?",
+          "Twenty-four cabins, a spa and a central lodge on ninety acres above Catskill, designed by Garrison Architects."
+        ],
+        [
+          "Do you build hospitality projects?",
+          "Yes. Piaule in Catskill and Rivers Bend Farm, a private event barn in the Catskills, are both our work."
+        ],
+        [
+          "Can you protect trees and grade on a sensitive site?",
+          "Yes. At Piaule our field teams worked with the design team to protect mature trees and manage a sensitive grade throughout the build."
+        ]
+      ]
+    },
+    {
+      "slug": "columbia-county",
+      "name": "Columbia County",
+      "state": "NY",
+      "summary": "Montana Contracting built a two-home family compound in Germantown, NY, featured in The New York Times and Architectural Digest.",
+      "body": [
+        "In Germantown, Montana Contracting built a family compound of two homes on one site, featured in The New York Times and Architectural Digest.",
+        "The first is a home and workspace for an artist, where floor-to-ceiling glass brings the woods inside. The second is Meadow House, a 2,800-square-foot home in three volumes set into a sloping meadow. A curved brick wall shapes the arrival, a roof with built-in solar panels ties the volumes together, and a geothermal system heats and cools the house.",
+        "Columbia County work is a long way from our Congers office, so we plan it tightly: pricing from schematic design, a set schedule and one principal as your contact from start to finish."
+      ],
+      "projects": [
+        "multi-generational-house"
+      ],
+      "faq": [
+        [
+          "What did you build in Germantown?",
+          "A family compound of two homes: an artist's home and workspace, and Meadow House, a 2,800-square-foot home in three volumes."
+        ],
+        [
+          "Do you build energy-efficient homes?",
+          "Yes. Meadow House has a roof with built-in solar panels and a geothermal system that heats and cools the house."
+        ],
+        [
+          "Was the Germantown project featured in the press?",
+          "Yes, in The New York Times and Architectural Digest."
+        ]
+      ]
+    }
+  ]
+}

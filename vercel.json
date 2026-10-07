@@ -39,7 +39,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|core-values|people|financing|privacy|projects)/index.html",
+      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects)/index.html",
       "destination": "/:dir/",
       "permanent": true
     },
@@ -49,7 +49,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|core-values|people|financing|privacy|projects)",
+      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects)",
       "destination": "/:dir/",
       "permanent": true
     },
@@ -247,6 +247,26 @@
       "source": "/:path(.+\\.php)$",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/areas/:slug([a-z0-9-]+)/index.html",
+      "destination": "/areas/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/:slug([a-z0-9-]+)",
+      "destination": "/areas/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/areas",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/areas/",
+      "destination": "/",
+      "permanent": false
     }
   ]
 }
