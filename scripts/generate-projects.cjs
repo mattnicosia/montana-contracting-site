@@ -178,7 +178,7 @@ function landingOutputs(files) {
   for (const a of landing.areas) {
     const label = `${a.name}, ${a.state}`;
     files.set('areas/' + a.slug + '/index.html', landingPage({route:areaPath(a), title:`General Contractor in ${label}`, crumb:a.name, crumbs:[[label, areaPath(a)]],
-      kicker:label, tags:['General Contractor', label], h1:`${a.name.replace(' ', '\u00a0')}'s Most Ambitious Work`, summary:a.summary, heroSlug:a.projects[0], body:a.body, projectSlugs:a.projects, faq:a.faq, current:a.slug,
+      kicker:label, tags:['General Contractor', label], h1:`${a.name.replace(' ', '\u00a0')}'s Most Ambitious\u00a0Work`, summary:a.summary, heroSlug:a.projects[0], body:a.body, projectSlugs:a.projects, faq:a.faq, current:a.slug,
       service:{name:`General contracting in ${label}`, type:'General contracting', area:countyPlace(a)}}));
   }
   return [...landing.services.map(servicePath), ...landing.areas.map(areaPath)];
