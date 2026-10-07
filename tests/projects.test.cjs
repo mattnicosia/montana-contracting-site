@@ -203,7 +203,7 @@ test('service and county pages: real copy, real projects, linked, in the sitemap
     assert.ok(!/noindex/.test(html), file);
     for (const s of slugs) assert.ok(html.includes(`href="/projects/${s}/"`), `${file} links ${s}`);
     for (const p of pages) assert.ok(html.includes(`href="${p[1]}"`), `${file} links ${p[1]}`);
-    assert.ok(!/renovation/i.test(html.replace(/Interior Renovation|Phased Renovation/g, '')), `${file} does not sell renovations`);
+    assert.ok(!/renovation/i.test(html), `${file} does not sell renovations`);
     assert.ok(!/[\u2013\u2014]/.test(html), `${file} has no dashes`);
     const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     assert.ok(ld['@graph'].some(n => n['@type'] === 'Service' && n.provider['@id'] === 'https://montanacontracting.com/#business'), file);
