@@ -195,7 +195,7 @@ test('service and county pages: real copy, real projects, linked, in the sitemap
     assert.equal((html.match(/<h1\b/g) || []).length, 1, file);
     const area = landing.areas.find(a => file === 'areas/' + a.slug + '/index.html');
     if (area) {
-      assert.match(html, new RegExp(`<h1 class="pd__title lp__title">${area.name.replace(' ', '\u00a0')}&#39;s Most Ambitious\u00a0Work</h1>`), file);
+      assert.match(html, new RegExp(`<h1 class="pd__title lp__title">${area.name.replace(' ', '\u00a0')}&#39;s Most\u00a0Ambitious\u00a0Work</h1>`), file);
       assert.ok(html.includes(`<title>General Contractor in ${area.name}, ${area.state} | Montana Contracting</title>`), file);
       assert.ok(html.includes('<span class="pd__tag">General Contractor</span>'), file);
     }
