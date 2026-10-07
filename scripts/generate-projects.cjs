@@ -141,7 +141,7 @@ function landingNav(current) {
   const a = landing.areas.map(x => `<a href="${areaPath(x)}"${x.slug === current ? ' aria-current="page"' : ''}>${esc(x.name)}${x.state === 'NJ' ? ', NJ' : ''}</a>`).join('');
   return `<nav class="lp__links" aria-label="Services and areas"><div><div class="lp__links-k">Services</div>${s}</div><div><div class="lp__links-k">Where we build</div>${a}</div></nav>`;
 }
-function landingPage({route, title, crumb, crumbs, kicker, h1, summary, heroSlug, body, list, listTitle, projectSlugs, faq, current, service}) {
+function landingPage({route, title, crumb, crumbs, kicker, tags, h1, summary, heroSlug, body, list, listTitle, projectSlugs, faq, current, service}) {
   const hero = bySlug[heroSlug];
   const heroImage = hero.images[1] || hero.images[0];
   const faqHTML = faq?.length ? `<section class="lp__faq" aria-labelledby="faq-title"><h2 class="pd__gallery-head" id="faq-title"><i aria-hidden="true"></i>Questions</h2>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</section>` : '';
@@ -156,7 +156,7 @@ function landingPage({route, title, crumb, crumbs, kicker, h1, summary, heroSlug
 <main id="main">
 <div class="pd__hero">
 <div class="pd__hero-photo">${img(heroImage, 1600, '(max-aspect-ratio: 4/3) 130vh, 100vw', `alt="${esc(hero.title)}, built by Montana Contracting" fetchpriority="high"`)}</div>
-<div class="pd__hero-scrim"></div><div class="pd__hero-inner"><div class="pd__tags"><span class="pd__tag">${esc(kicker)}</span><span class="pd__tag pd__tag--ghost">Since 1984</span></div><h1 class="pd__title lp__title">${esc(h1)}</h1></div>
+<div class="pd__hero-scrim"></div><div class="pd__hero-inner"><div class="pd__tags">${(tags || [kicker, 'Since 1984']).map((t, i) => `<span class="pd__tag${i ? ' pd__tag--ghost' : ''}">${esc(t)}</span>`).join('')}</div><h1 class="pd__title lp__title">${esc(h1)}</h1></div>
 </div>
 <div class="pd__body"><div class="pd__lead"><dl class="pd__facts"><div><dt class="pd__fact-lab">Based in</dt><dd class="pd__fact-val">Congers, NY</dd></div><div><dt class="pd__fact-lab">Since</dt><dd class="pd__fact-val">1984</dd></div><div><dt class="pd__fact-lab">Call</dt><dd class="pd__fact-val"><a href="${phoneHref}">${phone}</a></dd></div></dl><div class="pd__desc">${body.map(t => `<p>${esc(t)}</p>`).join('')}${list ? `<h2 class="lp__h2">${esc(listTitle)}</h2><ul class="lp__list">${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>
 <div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">How we price a project before it starts.</a></div>
@@ -178,7 +178,7 @@ function landingOutputs(files) {
   for (const a of landing.areas) {
     const label = `${a.name}, ${a.state}`;
     files.set('areas/' + a.slug + '/index.html', landingPage({route:areaPath(a), title:`General Contractor in ${label}`, crumb:a.name, crumbs:[[label, areaPath(a)]],
-      kicker:label, h1:`General contractor in ${a.name.replace(' ', '\u00a0')}, ${a.state}.`, summary:a.summary, heroSlug:a.projects[0], body:a.body, projectSlugs:a.projects, faq:a.faq, current:a.slug,
+      kicker:label, tags:['General Contractor', label], h1:`${a.name.replace(' ', '\u00a0')}'s Most Ambitious Work`, summary:a.summary, heroSlug:a.projects[0], body:a.body, projectSlugs:a.projects, faq:a.faq, current:a.slug,
       service:{name:`General contracting in ${label}`, type:'General contracting', area:countyPlace(a)}}));
   }
   return [...landing.services.map(servicePath), ...landing.areas.map(areaPath)];
