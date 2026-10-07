@@ -187,23 +187,21 @@ a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(-
 @media(max-width:520px){.pd__cta-btn{width:100%}}
 .pd__cta-addr a{color:inherit;text-underline-offset:3px}
 
-/* ============================== SERVICE + COUNTY PAGES ============================== */
+/* ============================== SERVICE + COUNTY PAGES ==============================
+   Built from project descriptions only: one block per project, photo beside its text. */
 .lp__title{max-width:18ch}
-.lp__h2{font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);letter-spacing:-.02em;color:var(--ink);margin:2.2rem 0 1rem}
-.lp__list{list-style:none;padding:0;margin:0;display:grid;gap:.6rem}
-.lp__list li{position:relative;padding-left:1.6rem;color:var(--ink);font-size:1.05rem;line-height:1.45}
-.lp__list li::before{content:'';position:absolute;left:0;top:.7em;width:14px;height:2px;background:var(--navy)}
-.lp__work{margin-top:clamp(3rem,7vw,5rem)}
-.lp__grid{padding:0;max-width:none}
-.pcard h3{font-weight:600;font-size:1.35rem;letter-spacing:-.02em;margin-top:1.1rem;transition:color .35s var(--ease)}
-.lp__faq{margin-top:clamp(3rem,7vw,5rem);max-width:62rem}
-.lp__faq details{border-top:1px solid var(--line);padding:1.2rem 0}
-.lp__faq details:last-child{border-bottom:1px solid var(--line)}
-.lp__faq summary{cursor:pointer;list-style:none;font-weight:600;font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--ink);display:flex;justify-content:space-between;gap:1rem}
-.lp__faq summary::-webkit-details-marker{display:none}
-.lp__faq summary::after{content:'+';color:var(--navy);font-weight:400;font-size:1.4rem;line-height:1}
-.lp__faq details[open] summary::after{content:'\2212'}
-.lp__faq details p{margin-top:.8rem;color:var(--muted);font-size:1.05rem;line-height:1.6;max-width:62ch}
+.lp__projs{display:grid;gap:clamp(3rem,7vw,5.5rem)}
+.lp__proj{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(1.6rem,4vw,3.5rem);align-items:start}
+.lp__proj-img{display:block;border-radius:6px;overflow:hidden;background:var(--offwhite);aspect-ratio:4/3}
+.lp__proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.lp__proj-img:hover img{transform:scale(1.03)}
+.lp__proj h2{font-weight:600;font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.025em;line-height:1.05;margin:.7rem 0 1.1rem}
+.lp__proj h2 a{color:var(--ink);text-decoration:none}
+.lp__proj h2 a:hover{color:var(--navy)}
+.lp__proj p{color:var(--muted);font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.6;margin-bottom:1rem;max-width:60ch}
+.lp__proj-more{display:inline-block;margin-top:.4rem;color:var(--navy);font-weight:600;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.lp__proj-more:hover{text-decoration:underline}
+@media(max-width:860px){.lp__proj{grid-template-columns:1fr}}
 .lp__links{margin-top:clamp(3rem,7vw,5rem);padding-top:2rem;border-top:2px solid var(--navy);display:grid;grid-template-columns:1fr 2fr;gap:2rem}
 .lp__links>div{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-content:flex-start}
 .lp__links-k{width:100%;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
@@ -211,4 +209,3 @@ a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(-
 .lp__links a:hover{text-decoration:underline}
 .lp__links a[aria-current]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:860px){.lp__links{grid-template-columns:1fr}}
-.pd__fact-val a{color:inherit;text-decoration:none}

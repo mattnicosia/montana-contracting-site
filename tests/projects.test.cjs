@@ -181,40 +181,35 @@ test('Twisted Ridge film grows from a framed print as you scroll, with a still f
   assert.match(index, /<video loop muted playsinline preload="none"/, 'film still loads lazily');
 });
 
-test('service and county pages: real copy, real projects, linked, in the sitemap', () => {
+test('service and county pages: built only from approved project text, linked, in the sitemap', () => {
   const {landing} = require('../scripts/generate-projects.cjs');
   const sitemap = generated.get('sitemap.xml');
   assert.deepEqual(landing.services.map(s => s.slug), ['custom-homes', 'commercial']);
   assert.deepEqual(landing.areas.map(a => a.slug), ['rockland-county','orange-county','bergen-county','westchester-county','ulster-county','greene-county','columbia-county']);
-  const pages = [...landing.services.map(s => [s.slug + '/index.html', '/' + s.slug + '/', s.projects]), ...landing.areas.map(a => ['areas/' + a.slug + '/index.html', '/areas/' + a.slug + '/', a.projects])];
-  const bodies = [];
-  for (const [file, route, slugs] of pages) {
+  for (const entry of [...landing.services, ...landing.areas]) {
+    for (const key of ['body', 'faq', 'summary', 'list', 'h1']) assert.ok(!(key in entry), `${entry.slug} must not carry its own copy (${key})`);
+  }
+  const pages = [...landing.services.map(s => [s.slug + '/index.html', '/' + s.slug + '/', s.projects, false]), ...landing.areas.map(a => ['areas/' + a.slug + '/index.html', '/areas/' + a.slug + '/', a.projects, true])];
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  for (const [file, route, slugs, full] of pages) {
     const html = generated.get(file);
     assert.ok(html, file);
     assert.ok(sitemap.includes(`<loc>https://montanacontracting.com${route}</loc>`), route);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, file);
-    const area = landing.areas.find(a => file === 'areas/' + a.slug + '/index.html');
-    if (area) {
-      assert.match(html, new RegExp(`<h1 class="pd__title lp__title">${area.name.replace(' ', '\u00a0')}&#39;s Most\u00a0Ambitious\u00a0Work</h1>`), file);
-      assert.ok(html.includes(`<title>General Contractor in ${area.name}, ${area.state} | Montana Contracting</title>`), file);
-      assert.ok(html.includes('<span class="pd__tag">General Contractor</span>'), file);
-    }
     assert.ok(html.includes(`<link rel="canonical" href="https://montanacontracting.com${route}">`), file);
     assert.ok(!/noindex/.test(html), file);
-    for (const s of slugs) assert.ok(html.includes(`href="/projects/${s}/"`), `${file} links ${s}`);
+    for (const s of slugs) {
+      const p = projects.find(x => x.slug === s);
+      assert.ok(html.includes(`href="/projects/${s}/"`), `${file} links ${s}`);
+      for (const para of (full ? p.description : p.description.slice(0, 1))) assert.ok(html.includes(`<p>${esc(para)}</p>`), `${file} quotes ${s}`);
+    }
     for (const p of pages) assert.ok(html.includes(`href="${p[1]}"`), `${file} links ${p[1]}`);
     assert.ok(!/renovation/i.test(html), `${file} does not sell renovations`);
     assert.ok(!/[\u2013\u2014]/.test(html), `${file} has no dashes`);
-    const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
-    assert.ok(ld['@graph'].some(n => n['@type'] === 'Service' && n.provider['@id'] === 'https://montanacontracting.com/#business'), file);
-    const words = html.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
-    assert.ok(words >= 300, `${file} has ${words} words`);
-    bodies.push((landing.areas.find(a => file.includes(a.slug)) || landing.services.find(s => file.startsWith(s.slug))).body.join(' '));
-  }
-  // County pages must not be the same page with the city swapped.
-  for (let i = 0; i < bodies.length; i++) for (let j = i + 1; j < bodies.length; j++) {
-    const a = new Set(bodies[i].toLowerCase().match(/\b\w+ \w+ \w+\b/g)), b = bodies[j].toLowerCase().match(/\b\w+ \w+ \w+\b/g) || [];
-    const shared = b.filter(x => a.has(x)).length / Math.max(1, b.length);
-    assert.ok(shared < 0.25, `pages ${i} and ${j} share ${Math.round(shared * 100)}% of phrases`);
+    const area = landing.areas.find(a => file === 'areas/' + a.slug + '/index.html');
+    if (area) {
+      assert.ok(html.includes(`${area.name.replace(' ', '\u00a0')}&#39;s Most\u00a0Ambitious\u00a0Work</h1>`), file);
+      assert.ok(html.includes(`<title>General Contractor in ${area.name}, ${area.state} | Montana Contracting</title>`), file);
+    }
   }
 });

@@ -132,53 +132,53 @@ const landing = require('../data/landing-pages.json');
 const bySlug = Object.fromEntries(projects.map(p => [p.slug, p]));
 const servicePath = s => '/' + s.slug + '/';
 const areaPath = a => '/areas/' + a.slug + '/';
-function landingProjects(slugs) {
-  const list = slugs.map(s => { const p = bySlug[s]; if (!p || p.placeholder) throw new Error('Landing page references a missing or unfinished project: ' + s); return p; });
-  return `<section class="lp__work" aria-labelledby="work-title"><h2 class="pd__gallery-head" id="work-title"><i aria-hidden="true"></i>Our work</h2><div class="pall__grid lp__grid">${list.map(p => `<a class="pcard" href="${projectPath(p)}"><div class="pcard__img">${img(p.images[0], 800, '(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 420px', `alt="${esc(p.title)}" loading="lazy" decoding="async"`)}</div><h3>${esc(p.title)}</h3><div class="pcard__meta"><span class="navy">${esc(p.category)}</span><span>${esc(p.location)}</span><span>${esc(p.type)}</span></div></a>`).join('\n')}</div></section>`;
+function landingProject(p, full) {
+  const text = full ? p.description : p.description.slice(0, 1);
+  return `<article class="lp__proj"><a class="lp__proj-img" href="${projectPath(p)}" aria-label="${esc(p.title)}">${img(p.images[0], 800, '(max-width: 860px) 100vw, 560px', `alt="${esc(p.title)}" loading="lazy" decoding="async"`)}</a><div class="lp__proj-text"><div class="pcard__meta"><span class="navy">${esc(p.category)}</span><span>${esc(p.location)}</span><span>${esc(p.type)}</span></div><h2><a href="${projectPath(p)}">${esc(p.title)}</a></h2>${text.map(t => `<p>${esc(t)}</p>`).join('')}<a class="lp__proj-more" href="${projectPath(p)}">View project</a></div></article>`;
 }
 function landingNav(current) {
   const s = landing.services.map(x => `<a href="${servicePath(x)}"${x.slug === current ? ' aria-current="page"' : ''}>${esc(x.nav)}</a>`).concat(`<a href="/pre-construction/">Pre-Construction</a>`).join('');
   const a = landing.areas.map(x => `<a href="${areaPath(x)}"${x.slug === current ? ' aria-current="page"' : ''}>${esc(x.name)}${x.state === 'NJ' ? ', NJ' : ''}</a>`).join('');
   return `<nav class="lp__links" aria-label="Services and areas"><div><div class="lp__links-k">Services</div>${s}</div><div><div class="lp__links-k">Where we build</div>${a}</div></nav>`;
 }
-function landingPage({route, title, crumb, crumbs, kicker, tags, h1, summary, heroSlug, body, list, listTitle, projectSlugs, faq, current, service}) {
+function landingPage({route, title, tags, h1, heroSlug, projectSlugs, full, current, service}) {
+  const list = projectSlugs.map(s => { const p = bySlug[s]; if (!p || p.placeholder) throw new Error('Landing page references a missing or unfinished project: ' + s); return p; });
   const hero = bySlug[heroSlug];
   const heroImage = hero.images[1] || hero.images[0];
-  const faqHTML = faq?.length ? `<section class="lp__faq" aria-labelledby="faq-title"><h2 class="pd__gallery-head" id="faq-title"><i aria-hidden="true"></i>Questions</h2>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</section>` : '';
+  // Search snippet: the page title plus as many project names as fit in about 155 characters.
+  let summary = `${title}, since 1984. Projects include ${list[0].title}`;
+  for (const p of list.slice(1)) { if ((summary + ', ' + p.title + '.').length > 155) break; summary += ', ' + p.title; }
+  summary += '.';
   const graph = [
-    {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem',position:1,name:'Home',item:origin + '/'}, ...crumbs.map((c, i) => ({'@type':'ListItem',position:i + 2,name:c[0],item:origin + c[1]}))]},
-    {'@type':'Service','name':service.name,'serviceType':service.type,'url':origin + route,'description':summary,
-      'provider':{'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'},
-      'areaServed':service.area}];
-  if (faq?.length) graph.push({'@type':'FAQPage','mainEntity':faq.map(([q, a]) => ({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}}))});
+    {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem',position:1,name:'Home',item:origin + '/'},{'@type':'ListItem',position:2,name:title,item:origin + route}]},
+    {'@type':'Service','name':service.name,'serviceType':service.type,'url':origin + route,
+      'provider':{'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'},'areaServed':service.area}];
   const extra = `<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c')}</script>\n`;
   return documentHTML(title, summary, route, heroImage, `${bar(true)}
 <main id="main">
 <div class="pd__hero">
-<div class="pd__hero-photo">${img(heroImage, 1600, '(max-aspect-ratio: 4/3) 130vh, 100vw', `alt="${esc(hero.title)}, built by Montana Contracting" fetchpriority="high"`)}</div>
-<div class="pd__hero-scrim"></div><div class="pd__hero-inner"><div class="pd__tags">${(tags || [kicker, 'Since 1984']).map((t, i) => `<span class="pd__tag${i ? ' pd__tag--ghost' : ''}">${esc(t)}</span>`).join('')}</div><h1 class="pd__title lp__title">${esc(h1)}</h1></div>
+<div class="pd__hero-photo">${img(heroImage, 1600, '(max-aspect-ratio: 4/3) 130vh, 100vw', `alt="${esc(hero.title)}" fetchpriority="high"`)}</div>
+<div class="pd__hero-scrim"></div><div class="pd__hero-inner"><div class="pd__tags">${tags.map((t, i) => `<span class="pd__tag${i ? ' pd__tag--ghost' : ''}">${esc(t)}</span>`).join('')}</div><h1 class="pd__title lp__title">${esc(h1)}</h1></div>
 </div>
-<div class="pd__body"><div class="pd__lead"><dl class="pd__facts"><div><dt class="pd__fact-lab">Based in</dt><dd class="pd__fact-val">Congers, NY</dd></div><div><dt class="pd__fact-lab">Since</dt><dd class="pd__fact-val">1984</dd></div><div><dt class="pd__fact-lab">Call</dt><dd class="pd__fact-val"><a href="${phoneHref}">${phone}</a></dd></div></dl><div class="pd__desc">${body.map(t => `<p>${esc(t)}</p>`).join('')}${list ? `<h2 class="lp__h2">${esc(listTitle)}</h2><ul class="lp__list">${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>
-<div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">How we price a project before it starts.</a></div>
-${landingProjects(projectSlugs)}
-${faqHTML}
+<div class="pd__body">
+<div class="lp__projs">${list.map(p => landingProject(p, full)).join('\n')}</div>
+<div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
 ${landingNav(current)}
 </div>
-<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Planning a project${crumb ? ' in ' + esc(crumb) : ''}?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
 </main>
 <footer class="pd__foot"><a class="back" href="/"><i aria-hidden="true"></i>Back to Home</a><div class="pd__next"><div class="k">All Work</div><a href="/projects/">See every project</a></div></footer>`, false, extra);
 }
 const countyPlace = a => ({'@type':'AdministrativeArea','name':`${a.name}, ${a.state === 'NJ' ? 'New Jersey' : 'New York'}`});
 function landingOutputs(files) {
   for (const s of landing.services) {
-    files.set(s.slug + '/index.html', landingPage({route:servicePath(s), title:s.title, crumb:'', crumbs:[[s.nav, servicePath(s)]], kicker:s.kicker, h1:s.h1, summary:s.summary,
-      heroSlug:s.hero, body:s.body, list:s.list, listTitle:s.list_title, projectSlugs:s.projects, faq:s.faq, current:s.slug,
+    files.set(s.slug + '/index.html', landingPage({route:servicePath(s), title:s.title, tags:[s.nav, 'Since 1984'], h1:s.nav, heroSlug:s.hero, projectSlugs:s.projects, full:false, current:s.slug,
       service:{name:s.nav, type:s.nav === 'Commercial' ? 'Commercial construction' : 'Custom home building', area:landing.areas.map(countyPlace)}}));
   }
   for (const a of landing.areas) {
     const label = `${a.name}, ${a.state}`;
-    files.set('areas/' + a.slug + '/index.html', landingPage({route:areaPath(a), title:`General Contractor in ${label}`, crumb:a.name, crumbs:[[label, areaPath(a)]],
-      kicker:label, tags:['General Contractor', label], h1:`${a.name.replace(' ', '\u00a0')}'s Most\u00a0Ambitious\u00a0Work`, summary:a.summary, heroSlug:a.projects[0], body:a.body, projectSlugs:a.projects, faq:a.faq, current:a.slug,
+    files.set('areas/' + a.slug + '/index.html', landingPage({route:areaPath(a), title:`General Contractor in ${label}`, tags:['General Contractor', label],
+      h1:`${a.name.replace(' ', '\u00a0')}'s Most\u00a0Ambitious\u00a0Work`, heroSlug:a.projects[0], projectSlugs:a.projects, full:true, current:a.slug,
       service:{name:`General contracting in ${label}`, type:'General contracting', area:countyPlace(a)}}));
   }
   return [...landing.services.map(servicePath), ...landing.areas.map(areaPath)];
