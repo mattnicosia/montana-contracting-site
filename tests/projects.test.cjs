@@ -178,6 +178,7 @@ test('Twisted Ridge film grows from a framed print as you scroll, with a still f
   assert.match(index, /section\.classList\.remove\('video--static'\)/);
   assert.match(index, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\)return;\n  var win=document\.getElementById\('filmWindow'\)/, 'reduced motion exits before pinning');
   assert.doesNotMatch(index, /Built into the ridge/i);
+  assert.doesNotMatch(index, /video__pre/, 'no label between Recognition and the film');
   assert.match(index, /<video loop muted playsinline preload="none"/, 'film still loads lazily');
 });
 
