@@ -261,6 +261,20 @@ a{color:inherit;text-decoration:none}
 .manifesto__body p strong{color:var(--ink);font-weight:400}
 .manifesto h2 .accent{color:var(--navy)}
 .manifesto__body p:last-child{margin-bottom:0}
+/* Principals: the three people named in "Three principals stay personally involved". */
+.principals{max-width:1280px;margin:clamp(3.5rem,8vw,6rem) auto 0}
+.principals__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.4vw,2rem)}
+.principal img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--offwhite);display:block;outline:1px solid var(--line);outline-offset:-1px}
+.principal__name{margin-top:1rem;font-weight:600;font-size:clamp(1.15rem,1.6vw,1.4rem);letter-spacing:-.015em;color:var(--ink)}
+.principal__role{margin-top:.3rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.principals__more{display:inline-flex;align-items:center;gap:.8rem;margin-top:clamp(1.8rem,4vw,2.6rem);color:var(--navy);font-weight:600;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none}
+.principals__more i{width:28px;height:1px;background:var(--navy);transition:width .3s var(--ease)}
+.principals__more:hover i{width:44px}
+@media(max-width:860px){
+  .principals__grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 calc(-1 * clamp(1.2rem,4vw,3.5rem));padding:0 clamp(1.2rem,4vw,3.5rem)}
+  .principals__grid::-webkit-scrollbar{display:none}
+  .principal{scroll-snap-align:start}
+}
 @media(max-width:860px){.manifesto__grid{grid-template-columns:1fr;gap:2rem}}
 
 /* ============================== STATS ============================== */
@@ -840,6 +854,35 @@ a{color:inherit;text-decoration:none}
       <p class="reveal" data-d="3">We are <strong>technology-driven</strong>, with custom-built systems for scheduling, cost, and field reporting. That infrastructure gives clients a live, honest view of the work as it happens.</p>
       <p class="reveal" data-d="4">Above all, we operate with <strong>radical transparency</strong>. Clear numbers, clear timelines, clear conversations. No surprises, on the most exacting residential and commercial architecture in the region.</p>
     </div>
+  </div>
+  <div class="principals">
+    <ul class="principals__grid reveal" data-d="1" aria-label="The three principals">
+      <li class="principal">
+        <picture>
+          <source type="image/webp" srcset="/assets/people/joe-montana-sr-400.webp 400w, /assets/people/joe-montana-sr-800.webp 800w" sizes="(max-width:860px) 72vw, 360px">
+          <img src="/assets/people/joe-montana-sr-800.jpg" width="800" height="1000" alt="Joe Montana, Founder / CEO, Montana Contracting" loading="lazy" decoding="async">
+        </picture>
+        <p class="principal__name">Joe Montana</p>
+        <p class="principal__role">Founder / CEO</p>
+      </li>
+      <li class="principal">
+        <picture>
+          <source type="image/webp" srcset="/assets/people/matt-nicosia-400.webp 400w, /assets/people/matt-nicosia-800.webp 800w" sizes="(max-width:860px) 72vw, 360px">
+          <img src="/assets/people/matt-nicosia-800.jpg" width="800" height="1000" alt="Matt Nicosia, COO, Montana Contracting" loading="lazy" decoding="async">
+        </picture>
+        <p class="principal__name">Matt Nicosia</p>
+        <p class="principal__role">COO</p>
+      </li>
+      <li class="principal">
+        <picture>
+          <source type="image/webp" srcset="/assets/people/chris-lange-400.webp 400w, /assets/people/chris-lange-800.webp 800w" sizes="(max-width:860px) 72vw, 360px">
+          <img src="/assets/people/chris-lange-800.jpg" width="800" height="1000" alt="Chris Lange, General Superintendent, Montana Contracting" loading="lazy" decoding="async">
+        </picture>
+        <p class="principal__name">Chris Lange</p>
+        <p class="principal__role">General Superintendent</p>
+      </li>
+    </ul>
+    <a class="principals__more reveal" href="/people/">Meet the team <i aria-hidden="true"></i></a>
   </div>
 </section>
 

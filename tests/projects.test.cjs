@@ -226,3 +226,16 @@ test('the business data links to the company profiles and the footer shows them'
   assert.match(index, /href="https:\/\/www\.linkedin\.com\/company\/montana-contracting-corp\/" rel="me noopener"/);
   assert.match(index, /href="https:\/\/www\.instagram\.com\/montanacontracting\/" rel="me noopener"/);
 });
+
+test('homepage shows the three principals and links to the team page', () => {
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const block = index.match(/<div class="principals">([\s\S]*?)<\/div>\n<\/section>/)[1];
+  for (const [file, name, role] of [['joe-montana-sr','Joe Montana','Founder / CEO'],['matt-nicosia','Matt Nicosia','COO'],['chris-lange','Chris Lange','General Superintendent']]) {
+    assert.ok(block.includes(`/assets/people/${file}-800.jpg`) && fs.existsSync(path.join(root, `assets/people/${file}-800.jpg`)) && fs.existsSync(path.join(root, `assets/people/${file}-400.webp`)), file);
+    assert.ok(block.includes(`<p class="principal__name">${name}</p>`) && block.includes(`<p class="principal__role">${role}</p>`), name);
+  }
+  assert.equal((block.match(/<li class="principal">/g) || []).length, 3);
+  assert.match(block, /href="\/people\/">Meet the team/);
+  const people = fs.readFileSync(path.join(root, 'people/index.html'), 'utf8');
+  assert.match(people, /Matt Nicosia<\/p>\s*<p class="pp__role pp__lab">COO</, 'titles match the People page');
+});
