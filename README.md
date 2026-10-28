@@ -16,6 +16,12 @@ Edit `data/projects.json` for project content, then run `npm run build` to regen
 
 After adding photographs, run `node scripts/optimize-images.mjs` (macOS, needs `cwebp`). It writes resized WebP copies to `assets/web/` and updates `data/image-variants.json`. Pages show the copies; originals stay for sharing tags. Commit both. `npm test` fails if a copy is missing.
 
+## Design
+
+`DESIGN.md` records the brand system: palette, type scale, spacing, shape, motion,
+component recipes, photography treatment, accessibility floors and voice. Build anything
+new against that file, and change it in the same commit as any token change.
+
 ## Deployment
 
 Vercel runs `npm run build`, publishes `public`, and builds `api/inquiry.js` as a server function. The site uses `/pre-construction/` and `/projects/<slug>/` routes. The old root `pre-construction.html` remains in Git but is not published.
