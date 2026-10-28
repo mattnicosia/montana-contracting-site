@@ -1,0 +1,3 @@
+# Matt reviews every path. The ruleset on main requires a code owner's
+# approval, and this file is what tells GitHub who that owner is.
+* @mattnicosia
