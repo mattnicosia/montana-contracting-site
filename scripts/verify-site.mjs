@@ -30,7 +30,7 @@ for (const page of pages) {
   }
 
   for (const match of source.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
-    if (/application\/ld\+json/.test(match[1])) continue;
+    if (/application\/ld\+json|speculationrules/.test(match[1])) continue;
     try {
       new Function(match[2]);
     } catch (error) {

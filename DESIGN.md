@@ -111,7 +111,7 @@ the button stop fitting. Phone adjustments land at **600px**.
 
 ## Shape, line and surface
 
-Corners are `4px`. That covers buttons, cards, framed images and panels. Circles at `50%`
+Corners are `6px`. That covers buttons, cards, framed images and panels. Circles at `50%`
 are for numbered step markers and map dots. Pills from `30px` to `44px` belong to the
 navigation button and the menu button alone, and appear nowhere else.
 
@@ -136,6 +136,17 @@ Content arrives by rising. An element starts at `opacity:0` and
 viewport. Up to four elements stagger in `.1s` steps. Underlines grow from zero width
 over `.35s` instead of fading.
 
+Two things answer the scroll position instead of a timer, and both use CSS scroll
+timelines with plain text or a finished line as the fallback. In the Approach section
+each word rises from `.24` opacity to full as the paragraph is read. In the
+pre-construction section the phase rail draws from left to right and each marker fills
+as the line reaches it.
+
+Pages cross-fade into one another over `.4s` through `@view-transition`. A project
+photograph that is clicked carries `view-transition-name:project-hero` and grows into
+the hero of its project page over `.65s`. The name is set at the click, because only
+one element on a page may hold it.
+
 Every animation stops under `prefers-reduced-motion:reduce`, and the opening logo
 sequence is skipped entirely.
 
@@ -148,23 +159,27 @@ sequence is skipped entirely.
 navy at `.24em` tracking, with the same 34px rule beside it. On dark sections it turns
 white at weight 600.
 
-**Button.** Navy fill, white text, `4px` radius, `.85rem 1.8rem` of padding, weight 600
-at `.04em`. Hover drops opacity to `.88`. The ghost variant is transparent with a 2px
+**Button.** Navy fill, white text, `6px` radius, `.85rem 1.8rem` of padding, weight 600
+at `.04em`. Hover drops opacity to `.88`. The ghost variant is transparent with a 1px
 navy border and fills with navy on hover.
 
 **Statistic.** A navy number in tabular figures above an uppercase label at `.14em` in
 `--muted`. Three across, divided by vertical hairlines, collapsing to one column at
 860px.
 
-**Card on dark.** `rgba(255,255,255,.06)` fill, `rgba(255,255,255,.1)` border, `4px`
+**Card on dark.** `rgba(255,255,255,.06)` fill, `rgba(255,255,255,.1)` border, `6px`
 radius, `1.2rem 1.4rem` of padding, a `#8faaff` uppercase label at `.12em`, then the
 value at `.92rem` in `rgba(255,255,255,.85)`.
 
-**Numbered list.** A counter in a 1.8rem circle outlined 2px in the accent, with the item
+**Numbered list.** A counter in a 1.8rem circle outlined 1px in the accent, with the item
 indented `2.8rem` and its lead phrase bold on its own line.
 
 **Bulleted list.** A 6px accent dot, absolutely placed at `.55em` from the top so it sits
 on the first line's center rather than above it.
+
+**Phase rail.** Steps in a sequence sit on one hairline, each under a 12px circle with a
+1px navy outline, with no box around them. Below 860px the rail runs down the left edge.
+Use it in place of a row of matching cards.
 
 **Watermark numeral.** The item's number set huge in navy at `.1` opacity behind the
 content, `user-select:none`.
@@ -228,7 +243,7 @@ the photographs already show.
   --gutter:clamp(1.2rem,4vw,3.5rem);
   --sec-y:clamp(4rem,11vh,9rem);
   --max:1280px;
-  --radius:4px;
+  --radius:6px;
 }
 body{
   font-family:'TT Commons Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -271,7 +286,8 @@ Run this against anything before it ships.
 - Navy appears two or three times on the page, not everywhere.
 - On a dark surface the accent is `#8faaff`, not navy.
 - Big type is tight and sentence case. Small type is wide and uppercase.
-- Corners are 4px, except circles and the two navigation pills.
+- Corners are 6px, except circles and the two navigation pills.
+- No border is thicker than 1px, and no link is underlined.
 - Structure is drawn with hairlines, not boxes and shadows.
 - Content is inside a 1280px column on the shared gutter.
 - Everything eases on `cubic-bezier(.2,.7,.2,1)`.

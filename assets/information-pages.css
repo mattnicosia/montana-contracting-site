@@ -25,7 +25,7 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 .page-logo{display:flex;align-items:center;min-height:44px}.page-logo img{width:240px;height:auto}
 .page-nav,.page-footer nav{display:flex;align-items:center;gap:.3rem 1.4rem;flex-wrap:wrap}
 .page-nav a,.page-footer a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem;text-underline-offset:5px}
-.page-nav a{text-decoration:none}.page-nav a:hover,.page-nav a[aria-current="page"]{color:var(--navy);text-decoration:underline}
+.page-nav a{text-decoration:none}.page-nav a:hover,.page-nav a[aria-current="page"]{color:var(--navy)}
 .sec{padding:clamp(3rem,7vw,6rem) clamp(1.2rem,4vw,3.5rem)}
 .sec__index{font-size:.85rem;color:var(--navy);margin-bottom:1rem}
 .page-title{font-size:clamp(2.6rem,6vw,5rem);line-height:1.03;letter-spacing:-.035em;font-weight:600;margin-bottom:clamp(2rem,4vw,3.5rem)}
@@ -41,13 +41,13 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 .finance__intro strong{color:#fff;font-weight:600}
 .finance__steps{list-style:none;counter-reset:fstep;display:flex;flex-direction:column;gap:1.6rem}
 .finance__steps li{counter-increment:fstep;font-size:.94rem;line-height:1.5;color:rgba(255,255,255,.7);padding-left:2.8rem;position:relative}
-.finance__steps li::before{content:counter(fstep);position:absolute;left:0;top:0;width:1.8rem;height:1.8rem;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:600;color:var(--navy)}
+.finance__steps li::before{content:counter(fstep);position:absolute;left:0;top:0;width:1.8rem;height:1.8rem;border:1px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:600;color:var(--navy)}
 .finance__steps li strong{color:#fff;font-weight:600;display:block;margin-bottom:.2rem}
 
 .finance__table{max-width:1280px;margin:0 auto clamp(2.8rem,5vw,4rem)}
 .finance__table h2,.finance__who h2{font-weight:600;font-size:1.06rem;letter-spacing:.02em;color:#fff;margin-bottom:1.2rem}
 .finance__cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.6rem)}
-.fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:1.2rem 1.4rem;border-radius:4px}
+.fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:1.2rem 1.4rem;border-radius:6px}
 .fcard__lab{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:600;margin-bottom:.35rem}
 .fcard__val{font-size:.92rem;line-height:1.35;color:rgba(255,255,255,.85)}
 
@@ -59,9 +59,9 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 .finance__cta{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,3vw,3rem)}
 .finance__cta-col strong{display:block;font-weight:600;font-size:1.05rem;letter-spacing:.02em;color:#fff;margin-bottom:.6rem}
 .finance__cta-col p{font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.7);margin-bottom:1.1rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;font-family:inherit;font-size:.84rem;font-weight:600;letter-spacing:.04em;border-radius:4px;background:var(--navy);color:#fff;text-decoration:none;transition:opacity .25s var(--ease)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;font-family:inherit;font-size:.84rem;font-weight:600;letter-spacing:.04em;border-radius:6px;background:var(--navy);color:#fff;text-decoration:none;transition:opacity .25s var(--ease)}
 .btn:hover{opacity:.88}
-.btn--ghost{background:transparent;color:#fff;border:2px solid var(--navy)}
+.btn--ghost{background:transparent;color:#fff;border:1px solid var(--navy)}
 .btn--ghost:hover{background:var(--navy);color:#fff}
 
 @media(max-width:860px){
@@ -86,3 +86,9 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 
 .values__preamble{font-size:1rem}.finance__head{margin-bottom:2.5rem}
 .finance__steps li::before{border-color:#8faaff;color:#8faaff}.fcard__lab{color:#8faaff}.finance__who li::before{background:#8faaff}.finance__col{display:grid;gap:1rem}
+/* Page to page: the browser cross-fades, and a project photograph grows into its page. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.4s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-group(project-hero){animation-duration:.65s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-old(project-hero),::view-transition-new(project-hero){height:100%;object-fit:cover}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
