@@ -74,7 +74,7 @@ test('homepage links do not depend on a JavaScript-only overlay', () => {
   assert.ok(html.includes('href="/projects/"'));
   for (const slug of ['piaule-catskill','hudson-river-house','gym-englewood','multi-generational-house','twisted-ridge']) assert.ok(html.includes(`href="/projects/${slug}/"`));
   assert.ok(html.includes('<noscript><style>#preloader{display:none}.reveal{opacity:1;transform:none}'));
-  const js = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m => m[0].includes('application/ld+json') ? '' : m[1]);
+  const js = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m => /application\/ld\+json|speculationrules/.test(m[0]) ? '' : m[1]);
   js.forEach(code => new vm.Script(code));
 });
 
