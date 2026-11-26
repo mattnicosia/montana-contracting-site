@@ -41,7 +41,7 @@ test('blog pages use the real site header and Contact footer', () => {
   for (const file of ['blog/index.html', 'blog/first-post/index.html']) {
     const html = f.get(file);
     assert.ok(html.includes('<nav class="nav nav--solid" id="nav"'), file);
-    assert.ok(html.includes('<a href="/blog/" aria-current="page">Blog</a>'), file);
+    assert.ok(/<a href="\/blog\/" aria-current="(page|true)">Blog<\/a>/.test(html), file);
     assert.ok(html.includes('<section class="sec contact" id="contact"'), file);
     assert.ok(html.includes('href="/assets/site-chrome.css"') && html.includes('src="/assets/site-nav.js"'), file);
     assert.ok(!html.includes('pd__bar') && !html.includes('pd__foot'), file);
@@ -105,4 +105,21 @@ test('post CSS: body bullets skip the contents list, body goes full width below 
   const narrow = articles.match(/@media\(max-width:1100px\)\{([\s\S]*?)\n\}/)[1];
   assert.match(narrow, /\.art__layout\{grid-template-columns:minmax\(0,1fr\)\}/);
   assert.match(narrow, /\.art__body>\*\{max-width:none\}/);
+});
+
+test('the active contents item does not change weight, so the list never re-wraps', () => {
+  const css = fs.readFileSync(path.join(__dirname, '../assets/project-pages.css'), 'utf8');
+  const rule = css.match(/\.art__toc a\[aria-current="true"\]\{([^}]*)\}/)[1];
+  assert.ok(!/font-weight/.test(rule), rule);
+});
+
+test('impossible dates are rejected', () => {
+  assert.throws(() => build([{...a, date:'2026-13-01'}]), /date/);
+  assert.throws(() => build([{...a, date:'2026-02-30'}]), /date/);
+});
+
+test('the Blog menu link is the current page on the index and the current section on posts', () => {
+  const {f} = build([a]);
+  assert.ok(f.get('blog/index.html').includes('<a href="/blog/" aria-current="page">Blog</a>'));
+  assert.ok(f.get('blog/first-post/index.html').includes('<a href="/blog/" aria-current="true">Blog</a>'));
 });

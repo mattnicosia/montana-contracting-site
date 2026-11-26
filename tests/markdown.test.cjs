@@ -38,3 +38,24 @@ test('asterisks with spaces, underscores inside words and links stay as they are
   assert.equal(renderMarkdown('[a](https://en.wikipedia.org/wiki/Superintendent_(construction)) and [b](https://x.com/a_b_c)'),
     '<p><a href="https://en.wikipedia.org/wiki/Superintendent_(construction)" target="_blank" rel="noopener">a</a> and <a href="https://x.com/a_b_c" target="_blank" rel="noopener">b</a></p>');
 });
+test('numbered lists become ordered lists', () => {
+  assert.equal(renderMarkdown('Steps:\n1. Plan\n2. Build'), '<p>Steps:</p>\n<ol><li>Plan</li><li>Build</li></ol>');
+});
+test('unsupported syntax fails the build instead of publishing as plain text', () => {
+  for (const src of ['# Title', '#### Small', '* item', '+ item']) assert.throws(() => renderMarkdown(src), /Unsupported Markdown/, src);
+});
+test('heading ids and contents text ignore inline markup, never empty, never clash with the page', () => {
+  const src = '## **Bold** [x](https://y.com) heading\n\n## ???\n\n## Contact';
+  assert.deepEqual(headingsOf(src), [{id:'bold-x-heading', text:'Bold x heading'}, {id:'section-2', text:'???'}, {id:'contact-2', text:'Contact'}]);
+  assert.ok(renderMarkdown(src).includes('<h2 id="bold-x-heading"><strong>Bold</strong> <a href="https://y.com" target="_blank" rel="noopener">x</a> heading</h2>'));
+});
+test('only web, mail, phone and on-site link addresses become links', () => {
+  assert.equal(renderMarkdown('[x](javascript:alert(1)) [m](mailto:a@b.com)'), '<p>x <a href="mailto:a@b.com">m</a></p>');
+});
+test('www and http site links become root-relative too', () => {
+  assert.equal(renderMarkdown('[a](https://www.montanacontracting.com/people/) [b](http://montanacontracting.com/#story)'),
+    '<p><a href="/people/">a</a> <a href="/#story">b</a></p>');
+});
+test('a link title becomes a title attribute, not part of the address', () => {
+  assert.equal(renderMarkdown('[a](https://montanacontracting.com/people/ "Our team")'), '<p><a href="/people/" title="Our team">a</a></p>');
+});

@@ -204,9 +204,9 @@ const arrow = '<span class="art__arrow" aria-hidden="true"></span>';
 
 // Blog pages use the homepage's main menu and Contact section. Their styles are
 // mirrored from index.html into assets/site-chrome.css; change both together.
-function siteNav() {
+function siteNav(current = 'page') {
   const links = [['/#story','Approach'],['/core-values/','Values'],['/people/','People'],['/#featured','Work'],['/blog/','Blog'],['/#precon','Pre-Con'],['/financing/','Financing'],['/#contact','Contact']];
-  return `<nav class="nav nav--solid" id="nav" aria-label="Main navigation"><a href="/" class="nav__logo"><img class="logo-dark" src="/assets/montana-logo.svg" alt="Montana Contracting home"></a><div class="nav__links" id="main-nav-links">${links.map(([href, label]) => `<a href="${href}"${label === 'Blog' ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</div><a href="/#start-project" class="nav__cta">Start a Project</a><a href="${phoneHref}" class="nav__call" aria-label="Call Montana Contracting at ${phone}">Call</a><button type="button" class="nav__burger" aria-expanded="false" aria-controls="main-nav-links">Menu</button></nav>`;
+  return `<nav class="nav nav--solid" id="nav" aria-label="Main navigation"><a href="/" class="nav__logo"><img class="logo-dark" src="/assets/montana-logo.svg" alt="Montana Contracting home"></a><div class="nav__links" id="main-nav-links">${links.map(([href, label]) => `<a href="${href}"${label === 'Blog' ? ` aria-current="${current}"` : ''}>${label}</a>`).join('')}</div><a href="/#start-project" class="nav__cta">Start a Project</a><a href="${phoneHref}" class="nav__call" aria-label="Call Montana Contracting at ${phone}">Call</a><button type="button" class="nav__burger" aria-expanded="false" aria-controls="main-nav-links">Menu</button></nav>`;
 }
 function siteFooter() {
   return `<section class="sec contact" id="contact" aria-labelledby="contact-title">
@@ -218,7 +218,7 @@ function siteFooter() {
 <nav class="contact__page-links" aria-label="More about Montana"><a href="/core-values/">Our values</a><a href="/blog/">Blog</a><a href="/financing/">Financing</a><a href="/privacy/">Privacy</a><a href="https://www.linkedin.com/company/montana-contracting-corp/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://www.instagram.com/montanacontracting/" rel="me noopener" target="_blank">Instagram</a></nav></div>
 </section>`;
 }
-const chrome = main => `<div class="has-site-nav">${siteNav()}\n${main}\n${siteFooter()}</div>`;
+const chrome = (main, current) => `<div class="has-site-nav">${siteNav(current)}\n${main}\n${siteFooter()}</div>`;
 const chromeHead = '<link rel="stylesheet" href="/assets/site-chrome.css">\n<script src="/assets/site-nav.js" defer></script>\n';
 const jsonLd = graph => `<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c')}</script>\n`;
 const publisher = {'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'};
@@ -249,14 +249,15 @@ function articlePage(a, next, body) {
     {'@type':'BlogPosting','headline':a.title,'description':a.description,'datePublished':a.date,'author':{'@type':'Person','name':a.author},
       'publisher':publisher,'mainEntityOfPage':origin + articlePath(a),'image':origin + asset(articleImage)}];
   const head = chromeHead + (toc ? '<script src="/assets/article-toc.js" defer></script>\n' : '') + jsonLd(graph);
-  return documentHTML(a.title, a.description, articlePath(a), articleImage, chrome(`<main id="main"><article class="art"><header class="art__head"><h1 class="art__title">${esc(a.title)}</h1>${a.dek ? `<p class="art__dek">${esc(a.dek)}</p>` : ''}<p class="art__meta">By ${byline(a)}</p></header><div class="art__layout"><div class="art__body">${tocMobile}${renderMarkdown(body)}</div>${tocDesktop}</div>${nextLink}</article></main>`), false, head, 'article');
+  return documentHTML(a.title, a.description, articlePath(a), articleImage, chrome(`<main id="main"><article class="art"><header class="art__head"><h1 class="art__title">${esc(a.title)}</h1>${a.dek ? `<p class="art__dek">${esc(a.dek)}</p>` : ''}<p class="art__meta">By ${byline(a)}</p></header><div class="art__layout"><div class="art__body">${tocMobile}${renderMarkdown(body)}</div>${tocDesktop}</div>${nextLink}</article></main>`, 'true'), false, head, 'article');
 }
 
 function articleOutputs(files, data, readBody) {
   const slugs = new Set();
   for (const a of data.articles) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.slug) || slugs.has(a.slug)) throw new Error('Invalid or duplicate article slug: ' + a.slug);
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(a.date)) throw new Error('Article date must be YYYY-MM-DD: ' + a.slug);
+    const d = /^\d{4}-\d{2}-\d{2}$/.test(a.date) && new Date(a.date + 'T00:00:00Z');
+    if (!d || isNaN(d) || d.toISOString().slice(0, 10) !== a.date) throw new Error('Article date must be a real YYYY-MM-DD date: ' + a.slug);
     slugs.add(a.slug);
   }
   const list = [...data.articles].sort((x, y) => y.date.localeCompare(x.date));
