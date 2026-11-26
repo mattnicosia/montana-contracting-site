@@ -39,7 +39,7 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects)/index.html",
+      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects|blog)/index.html",
       "destination": "/:dir/",
       "permanent": true
     },
@@ -49,8 +49,18 @@
       "permanent": true
     },
     {
-      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects)",
+      "source": "/:dir(pre-construction|custom-homes|commercial|core-values|people|financing|privacy|projects|blog)",
       "destination": "/:dir/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug([a-z0-9-]+)/index.html",
+      "destination": "/blog/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug([a-z0-9-]+)",
+      "destination": "/blog/:slug/",
       "permanent": true
     },
     {
