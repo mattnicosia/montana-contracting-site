@@ -97,3 +97,12 @@ test('blog focus rings are visible on the navy Contact section and 3px as DESIGN
   const articles = css.slice(css.indexOf('ARTICLES (Blog)'));
   assert.ok(!/outline:\s*2px solid #719bff/.test(articles), 'article focus rings use 3px');
 });
+
+test('post CSS: body bullets skip the contents list, body goes full width below 1100px', () => {
+  const css = fs.readFileSync(path.join(__dirname, '../assets/project-pages.css'), 'utf8');
+  const articles = css.slice(css.indexOf('ARTICLES (Blog)'));
+  assert.ok(!/\.art__body li[{:+]/.test(articles), 'bullet rules are scoped to ul > li, not every li in the body');
+  const narrow = articles.match(/@media\(max-width:1100px\)\{([\s\S]*?)\n\}/)[1];
+  assert.match(narrow, /\.art__layout\{grid-template-columns:minmax\(0,1fr\)\}/);
+  assert.match(narrow, /\.art__body>\*\{max-width:none\}/);
+});
