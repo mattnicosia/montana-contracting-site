@@ -89,3 +89,11 @@ test('every hand-written page links to the Blog in its main menu', () => {
     assert.ok(nav.includes('<a href="/blog/">Blog</a>'), page);
   }
 });
+
+test('blog focus rings are visible on the navy Contact section and 3px as DESIGN.md asks', () => {
+  const chrome = fs.readFileSync(path.join(__dirname, '../assets/site-chrome.css'), 'utf8');
+  assert.match(chrome, /\.contact a:focus-visible[^{]*\{[^}]*outline:\s*3px solid #fff/);
+  const css = fs.readFileSync(path.join(__dirname, '../assets/project-pages.css'), 'utf8');
+  const articles = css.slice(css.indexOf('ARTICLES (Blog)'));
+  assert.ok(!/outline:\s*2px solid #719bff/.test(articles), 'article focus rings use 3px');
+});

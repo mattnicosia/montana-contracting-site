@@ -25,3 +25,7 @@ test('external links open in a new tab and keep balanced parentheses', () => {
   assert.equal(renderMarkdown('A [job site superintendent](https://en.wikipedia.org/wiki/Superintendent_(construction)).'),
     '<p>A <a href="https://en.wikipedia.org/wiki/Superintendent_(construction)" target="_blank" rel="noopener">job site superintendent</a>.</p>');
 });
+test('a bracket before a link stays text and the link keeps its own words', () => {
+  assert.equal(renderMarkdown('Montana [sic] hired a [superintendent](https://x.com/a).'),
+    '<p>Montana [sic] hired a <a href="https://x.com/a" target="_blank" rel="noopener">superintendent</a>.</p>');
+});

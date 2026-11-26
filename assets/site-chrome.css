@@ -57,3 +57,5 @@
 .contact__page-links{display:flex;flex-wrap:wrap;gap:1.5rem}
 .contact__page-links a{display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,.78);transition:color .25s var(--ease)}
 .contact__page-links a:hover{color:#fff}
+/* Keyboard focus on the navy Contact section (pages that also load project-pages.css get a navy ring otherwise). */
+.contact a:focus-visible,.contact button:focus-visible{outline:3px solid #fff;outline-offset:4px}

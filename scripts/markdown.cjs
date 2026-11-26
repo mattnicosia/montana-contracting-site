@@ -20,10 +20,10 @@ function links(text) {
   let out = '';
   let i = 0;
   while (i < text.length) {
-    const open = text.indexOf('[', i);
-    if (open === -1) break;
-    const close = text.indexOf('](', open);
+    // Find "](" first, then the nearest "[" before it, so "[sic]" earlier in the line stays text.
+    const close = text.indexOf('](', i);
     if (close === -1) break;
+    const open = text.lastIndexOf('[', close);
     let depth = 1;
     let j = close + 2;
     while (j < text.length && depth > 0) {
@@ -31,7 +31,7 @@ function links(text) {
       else if (text[j] === ')') depth--;
       if (depth > 0) j++;
     }
-    if (depth !== 0) break;
+    if (open < i || depth !== 0) { out += text.slice(i, close + 2); i = close + 2; continue; }
     out += text.slice(i, open) + `<a ${linkAttrs(text.slice(close + 2, j))}>${text.slice(open + 1, close)}</a>`;
     i = j + 1;
   }
