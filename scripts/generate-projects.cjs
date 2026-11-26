@@ -86,10 +86,6 @@ function bar(index = false) {
   return `<header class="pd__bar"><a href="/" class="pd__logo"><img src="/assets/montana-logo.svg" alt="Montana Contracting home"></a><a class="back" href="${index ? '/#featured' : '/projects/'}"><i aria-hidden="true"></i>${index ? 'Back to Home' : 'Back to Projects'}</a></header>`;
 }
 
-function cta(heading) {
-  return `<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">${esc(heading)}</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>`;
-}
-
 function detail(p, next) {
   const facts = [['Category',p.category],['Location',p.location],['Type',p.type], ...(p.architect ? [['Architect',p.architect]] : [])];
   const paragraphs = p.placeholder
@@ -120,7 +116,7 @@ ${press}
 <div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
 ${gallery ? `<section class="pd__gallery" aria-labelledby="gallery-title"><h2 class="pd__gallery-head" id="gallery-title"><i aria-hidden="true"></i>Gallery</h2><div class="pd__grid">${gallery}</div></section>` : ''}
 </div>
-${cta('Have a project like this?')}
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
 </main>
 <footer class="pd__foot"><a class="back" href="/projects/"><i aria-hidden="true"></i>Back to Projects</a><div class="pd__next"><div class="k">Next Project</div><a href="${projectPath(next)}">${esc(next.title)}</a></div></footer>`, true, extra);
 }
@@ -169,7 +165,7 @@ function landingPage({route, title, tags, h1, heroSlug, projectSlugs, full, curr
 <div class="pd__precon-link"><i aria-hidden="true"></i><a href="/pre-construction/">Built with our pre-construction process.</a></div>
 ${landingNav(current)}
 </div>
-${cta('Have a project like this?')}
+<section class="pd__cta" aria-labelledby="cta-title"><div class="pd__cta-inner"><div class="pd__cta-k"><i aria-hidden="true"></i>Start a Project</div><h2 id="cta-title">Have a project like this?</h2><p>Tell us what you're planning. One of the three principals will call you back personally.</p><div class="pd__cta-actions"><a class="pd__cta-btn pd__cta-btn--solid" href="${phoneHref}">Call ${phone}</a><a class="pd__cta-btn" href="/#start-project">Let's Connect</a></div><p class="pd__cta-addr">${address} · Since 1984 · <a href="/privacy/">Privacy</a></p></div></section>
 </main>
 <footer class="pd__foot"><a class="back" href="/"><i aria-hidden="true"></i>Back to Home</a><div class="pd__next"><div class="k">All Work</div><a href="/projects/">See every project</a></div></footer>`, false, extra);
 }
