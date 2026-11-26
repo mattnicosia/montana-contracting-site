@@ -81,3 +81,11 @@ test('Vercel redirects cover article routes without a trailing slash', () => {
   assert.ok(v.redirects.some(r => r.source === '/blog/:slug([a-z0-9-]+)' && r.destination === '/blog/:slug/'));
   assert.ok(v.redirects.some(r => r.source.includes('|blog)') && r.destination === '/:dir/'));
 });
+
+test('every hand-written page links to the Blog in its main menu', () => {
+  for (const page of ['index.html','pre-construction/index.html','core-values/index.html','people/index.html','financing/index.html','privacy/index.html']) {
+    const html = fs.readFileSync(path.join(__dirname,'..',page),'utf8');
+    const nav = html.match(/<nav[^>]*(?:id="nav"|class="page-nav")[^>]*>[\s\S]*?<\/nav>/)[0];
+    assert.ok(nav.includes('<a href="/blog/">Blog</a>'), page);
+  }
+});
