@@ -29,3 +29,12 @@ test('a bracket before a link stays text and the link keeps its own words', () =
   assert.equal(renderMarkdown('Montana [sic] hired a [superintendent](https://x.com/a).'),
     '<p>Montana [sic] hired a <a href="https://x.com/a" target="_blank" rel="noopener">superintendent</a>.</p>');
 });
+test('single asterisks and underscores become italics', () => {
+  assert.equal(renderMarkdown('It was *really* hard and _very_ slow, **bold *and italic***.'),
+    '<p>It was <em>really</em> hard and <em>very</em> slow, <strong>bold <em>and italic</em></strong>.</p>');
+});
+test('asterisks with spaces, underscores inside words and links stay as they are', () => {
+  assert.equal(renderMarkdown('5 * 3 * 2 in file_name_here'), '<p>5 * 3 * 2 in file_name_here</p>');
+  assert.equal(renderMarkdown('[a](https://en.wikipedia.org/wiki/Superintendent_(construction)) and [b](https://x.com/a_b_c)'),
+    '<p><a href="https://en.wikipedia.org/wiki/Superintendent_(construction)" target="_blank" rel="noopener">a</a> and <a href="https://x.com/a_b_c" target="_blank" rel="noopener">b</a></p>');
+});

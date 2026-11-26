@@ -38,7 +38,13 @@ function links(text) {
   return out + text.slice(i);
 }
 
-const inline = text => links(esc(text)).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+// Bold first (a closing ** never followed by another *, so "***" ends bold and italic together),
+// then *italic* and _italic_. Markers must touch the words they wrap, so "5 * 3" and
+// file_name or Superintendent_(construction) in a link address stay as they are.
+const inline = text => links(esc(text))
+  .replace(/\*\*(?=\S)(.+?)(?<=\S)\*\*(?!\*)/g, '<strong>$1</strong>')
+  .replace(/(^|[^*\w])\*(?=[^\s*])([^*]*?[^\s*])\*(?![*\w])/g, '$1<em>$2</em>')
+  .replace(/(^|[\s(>])_(?=\S)([^_]*?\S)_(?=[\s.,;:!?)<]|$)/g, '$1<em>$2</em>');
 
 function blocks(source) {
   const result = [];
