@@ -123,3 +123,11 @@ test('the Blog menu link is the current page on the index and the current sectio
   assert.ok(f.get('blog/index.html').includes('<a href="/blog/" aria-current="page">Blog</a>'));
   assert.ok(f.get('blog/first-post/index.html').includes('<a href="/blog/" aria-current="true">Blog</a>'));
 });
+
+test('numbered lists in posts follow the DESIGN.md recipe (counter in a 1.8rem outlined circle)', () => {
+  const css = fs.readFileSync(path.join(__dirname, '../assets/project-pages.css'), 'utf8');
+  const rule = css.match(/\.art__body>ol>li::before\{([^}]*)\}/);
+  assert.ok(rule, 'circle counter rule exists');
+  assert.match(rule[1], /content:counter\(/);
+  assert.match(rule[1], /width:1\.8rem;height:1\.8rem;border:1px solid var\(--navy\);border-radius:50%/);
+});

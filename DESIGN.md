@@ -184,6 +184,35 @@ Use it in place of a row of matching cards.
 **Watermark numeral.** The item's number set huge in navy at `.1` opacity behind the
 content, `user-select:none`.
 
+### Blog (`/blog/`, styles in `assets/project-pages.css` under ARTICLES)
+
+Blog pages use the homepage's solid nav and Contact section (`assets/site-chrome.css`,
+mirrored from `index.html`; change both together). Their content sits in the 1280px column
+with the gutter outside it (`box-sizing:content-box`), like the homepage sections.
+
+**Lead article card.** The newest post only: a full-width `--dark` card, `6px` radius,
+split `1fr / 1.1fr` and bottom-aligned (one column at 860px). White 600 title at -.02em,
+a `#8faaff` uppercase byline at `.12em`, the summary at `rgba(255,255,255,.7)`, and the
+ghost button translated to dark (1px `#8faaff` border, fills `#8faaff` on hover). It is
+the page's one dark surface; never put navy on it.
+
+**Article card.** Older posts, three across (two at 860px, one at 600px): white, 1px
+`--line` border, `6px` radius. Title at list-headline scale, summary in `--muted`, then
+the byline and an outlined navy "Read article" button pinned together at the bottom.
+Hover darkens the border to `--ink` and underlines the title.
+
+**Drawn arrow.** A 22px by 1px line with a rotated 8px corner at its end, the site's
+`.back` arrow pointing forward. It grows to 34px on hover.
+
+**Reading column.** Body copy at `clamp(1.02rem,1.2vw,1.125rem)` / 1.7 in a 44rem column
+on desktop, full width below 1100px. The first paragraph is a size larger. Links are navy
+and underlined. Lists follow the bulleted and numbered recipes above.
+
+**Contents list ("In this article").** Above 1100px, a sticky column beside the text with
+a 1px `--line` rule on its left; the section being read turns navy with a 1px navy mark
+on that rule, at the same weight so the list never re-wraps. Below 1100px it becomes a
+collapsible `<details>` at the top of the post, without bullets.
+
 ## Photography
 
 Photographs run full bleed and are cropped with `object-fit:cover`, never letterboxed.
