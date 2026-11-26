@@ -293,7 +293,7 @@ a:focus-visible,button:focus-visible,video:focus-visible{outline:3px solid var(-
 .art__toc a{position:relative}
 .art__toc a::before{content:'';position:absolute;left:calc(-1.2rem - 1px);top:.35rem;bottom:.35rem;width:1px;background:transparent;transition:background .25s var(--ease)}
 .art__toc a:hover,.art__toc-m a:hover{color:var(--ink)}
-.art__toc a[aria-current="true"]{color:var(--ink)}
+.art__toc a[aria-current="true"]{color:var(--navy)}
 .art__toc a[aria-current="true"]::before{background:var(--navy)}
 .art__toc a:focus-visible,.art__toc-m a:focus-visible,.art__toc-m summary:focus-visible{outline:3px solid #719bff;outline-offset:2px;border-radius:2px}
 .art__toc-m{display:none;margin:-1rem 0 2rem;border-bottom:1px solid var(--line)}
