@@ -49,9 +49,8 @@ logo against navy.
 | `--plate` | `#0b0c0d` | The photographic surface on the people pages: the backdrop behind a portrait, the gradient that fades it out, and the series band |
 | `--line` | `rgba(10,13,24,.10)` | Every hairline rule and border on light surfaces |
 
-Four more values exist for specific jobs. `#8faaff` is the accent on dark surfaces.
-`#002bd4` is the flood blue of the opening logo animation. `#719bff` is the focus ring.
-`#a32323` is the only error color.
+Three more values exist for specific jobs. `#8faaff` is the accent on dark surfaces.
+`#719bff` is the focus ring. `#a32323` is the only error color.
 
 **The rule people get wrong:** navy on near-black does not pass contrast. On a `--dark`
 section, swap every navy accent for `#8faaff`, and set body copy to
@@ -147,8 +146,19 @@ photograph that is clicked carries `view-transition-name:project-hero` and grows
 the hero of its project page over `.65s`. The name is set at the click, because only
 one element on a page may hold it.
 
-Every animation stops under `prefers-reduced-motion:reduce`, and the opening logo
-sequence is skipped entirely.
+The home page opens once per session on screens wider than 860px. The M lands in
+`#0028cc` at the centre of a white sheet, grows from the centre until it is about 85% of
+the screen height, and rests there as glass: the blue drops to 62% and the hero
+photograph shows through the letter. Then the glass clears and the letter opens around a
+point in its diagonal until the photograph fills the screen. The five beats are named
+constants in `assets/logo-intro.js`: land `500ms`, beat `50ms`, grow `600ms`, hold
+`500ms`, open `700ms`, so the photograph is clear at `2.35s`. The grow eases on
+`cubic-bezier(.6,0,.2,1)` and the open on `cubic-bezier(.65,0,.3,1)`. The M is the vector
+path in the page, redrawn on every frame so its edges stay sharp. A click, a scroll, a
+touch or a key press ends the opening at once.
+
+Every animation stops under `prefers-reduced-motion:reduce`, and the opening is skipped
+entirely.
 
 ## Component recipes
 
