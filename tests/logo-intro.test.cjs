@@ -2,36 +2,44 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const source = fs.readFileSync(require('node:path').join(__dirname, '../assets/logo-intro.js'), 'utf8');
-function setup({seen=false,reduce=false,hash='',review=false,storageError=false,animated=false,animationError=false,hostname='127.0.0.1',missing='',overflow='',navInert=false,navMissing=false,imagesReady=true,brokenImage=false,legacyMedia=false,phone=false}={}) {
+const path = require('node:path');
+const source = fs.readFileSync(path.join(__dirname, '../assets/logo-intro.js'), 'utf8');
+const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+const css = fs.readFileSync(path.join(__dirname, '../assets/logo-intro.css'), 'utf8');
+
+// The opening's beats in milliseconds: the M lands by 500, grows from 550 to 1150, rests to 1650 and is open at 2350.
+const LAND=500,RESTING=1400,HEADLINE=2084,FULL=2350;
+
+function setup({seen=false,reduce=false,hash='',review=false,storageError=false,frames=true,drawError=false,hostname='127.0.0.1',missing='',overflow='',navInert=false,legacyMedia=false,phone=false,width=1440,height=900}={}) {
   const timers = new Map();let next=0,now=0;
   const windowEvents={},stored=[];
   function node(tagName='DIV'){
     const classes=new Set();
-    return {tagName,hidden:true,inert:false,disabled:false,events:{},style:{overflow:'',setProperty(){}},children:[],
-      appendChild(child){this.children.push(child);},setAttribute(){},remove(){this.removed=true;},
+    return {tagName,hidden:true,inert:false,disabled:false,events:{},attrs:{},style:{overflow:'',display:'',setProperty(){}},children:[],
+      setAttribute(k,v){if(drawError)throw Error('Drawing unavailable');this.attrs[k]=String(v);},
       classList:{add(...x){x.forEach(v=>classes.add(v));},remove(...x){x.forEach(v=>classes.delete(v));},contains(x){return classes.has(x);}},
-      addEventListener(k,fn){this.events[k]=fn;},removeEventListener(k,fn){if(this.events[k]===fn)delete this.events[k];},dispatch(k){this.events[k]?.();},focus(){if(!this.disabled)document.activeElement=this;},blur(){if(document.activeElement===this)document.activeElement=document.body;}};
+      addEventListener(k,fn){this.events[k]=fn;},focus(){if(!this.disabled)document.activeElement=this;},blur(){if(document.activeElement===this)document.activeElement=document.body;}};
   }
-  const intro=node(),hero=node(),replay=node('BUTTON'),slow=node('BUTTON'),previous=node('BUTTON'),controls=node(),nav=node();
-  const imgs=Array.from({length:3},()=>Object.assign(node('IMG'),{complete:imagesReady,naturalWidth:imagesReady?1361:0})),img=imgs[0];
-  if(brokenImage)img.naturalWidth=0;
+  const intro=node(),hero=node(),replay=node('BUTTON'),slow=node('BUTTON'),previous=node('BUTTON'),controls=node(),nav=node(),photo=node('IMG');
+  const parts={'.intro__place':node('g'),'.intro__sheet':node('path'),'.intro__plug':node('rect'),'.intro__glass':node('g'),'.intro__piece--left':node('path'),'.intro__piece--right':node('path')};
   const media={matches:reduce,...(legacyMedia?{addListener(fn){this.change=fn;}}:{addEventListener(k,fn){this.change=fn;}})};
-  const mark={getBoundingClientRect:()=>({left:500,top:300,width:156,height:132}),cloneNode:()=>node()};
-  const panelAnimations=[];
-  const animation={cancelled:false,finished:{then(fn){animation.complete=fn;}},cancel(){this.cancelled=true;}};
-  if(animated)intro.animate=(frames,options)=>{animation.frames=frames;animation.options=options;return animation;};
-  intro.querySelector=s=>s==='.intro__mark'?mark:null;intro.querySelectorAll=()=>imgs;intro.contains=x=>x===intro;
-  controls.querySelector=s=>s==='[data-replay]'?replay:s==='[data-slow]'?slow:previous;controls.querySelectorAll=()=>[replay,slow,previous];
-  const document={events:{},body:node('BODY'),createElement(){const panel=node();panel.animate=(frames,options)=>{if(animationError)throw Error('Animation unavailable');let resolve;const result={frames,options,cancelled:false,finished:new Promise(r=>resolve=r),complete:()=>resolve(),cancel(){this.cancelled=true;}};panelAnimations.push(result);return result;};return panel;},getElementById:id=>id===missing?null:({preloader:intro,hero,introReview:controls}[id]),querySelector:()=>navMissing?null:nav,addEventListener(k,fn){this.events[k]=fn;}};
+  const settles=[];
+  photo.animate=(keyframes,options)=>{const a={keyframes,options,cancelled:false,cancel(){this.cancelled=true;}};settles.push(a);return a;};
+  intro.clientWidth=width;intro.clientHeight=height;
+  intro.querySelector=s=>s===missing?null:parts[s];intro.contains=x=>x===intro;
+  hero.querySelector=()=>photo;
+  controls.querySelector=s=>s==='[data-replay]'?replay:slow;controls.querySelectorAll=()=>[replay,slow,previous];
+  const document={events:{},body:node('BODY'),getElementById:id=>id===missing?null:({preloader:intro,hero,introReview:controls}[id]),addEventListener(k,fn){this.events[k]=fn;}};
   const script=node('SCRIPT'),style=node('STYLE'),link=node('LINK');
   document.body.children=[intro,controls,nav,hero,script,style,link];document.activeElement=document.body;
   document.body.style.overflow=overflow;nav.inert=navInert;
   let hidden=true;Object.defineProperty(intro,'hidden',{get:()=>hidden,set(value){hidden=value;if(value&&document.activeElement===intro)document.activeElement=document.body;}});
-  vm.runInNewContext(source,{document,window:{innerWidth:1280,innerHeight:720,scrollTo(){document.scrolledToTop=true;},matchMedia:q=>q.includes('max-width')?{matches:phone}:media,addEventListener(k,fn){windowEvents[k]=fn;}},location:{hostname,hash,search:review?'?intro=preview':''},URLSearchParams,
+  let pending=null,began=false;
+  const window={innerWidth:width,innerHeight:height,scrollTo(){document.scrolledToTop=true;},matchMedia:q=>q.includes('max-width')?{matches:phone}:media,addEventListener(k,fn){windowEvents[k]=fn;},cancelAnimationFrame(){pending=null;}};
+  if(frames)window.requestAnimationFrame=fn=>{pending=fn;return 1;};
+  vm.runInNewContext(source,{document,window,location:{hostname,hash,search:review?'?intro=preview':''},URLSearchParams,
     sessionStorage:{getItem(){if(storageError)throw Error();return seen?'seen':null;},setItem(key,value){if(storageError)throw Error();stored.push([key,value]);}},
     setTimeout(fn,ms){timers.set(++next,{fn,ms,at:now+ms});return next;},clearTimeout:id=>timers.delete(id)});
-  // Advance elapsed time, including timers scheduled by another timer before the target.
   function tick(ms){
     const target=now+ms;
     for(;;){
@@ -41,108 +49,135 @@ function setup({seen=false,reduce=false,hash='',review=false,storageError=false,
     }
     now=target;
   }
+  // Paints the frame the browser would show this many milliseconds after the opening's first frame.
+  function paint(ms){
+    const run=at=>{const fn=pending;pending=null;fn(1000+at);};
+    if(!began){began=true;run(0);}
+    run(ms);
+  }
+  const move=part=>{const m=parts[part].attrs.transform.match(/^translate\((\S+) (\S+)\) scale\((\S+)\)$/);return {x:+m[1],y:+m[2],scale:+m[3]};};
   const dismiss=()=>document.events.keydown({key:'Escape',preventDefault(){}});
-  return {intro,hero,dismiss,nav,replay,slow,previous,controls,document,media,tick,img,imgs,timers,animation,panelAnimations,windowEvents,stored,script,style,link};
+  const waiting=()=>pending!==null;
+  return {intro,hero,dismiss,nav,replay,slow,previous,controls,document,media,tick,paint,move,waiting,parts,photo,settles,timers,windowEvents,stored,script,style,link};
 }
-test('intro ends without animation support and restores the page',()=>{
-  const s=setup();s.tick(1800);assert.equal(s.intro.hidden,true);assert.equal(s.nav.inert,false);
-  assert.equal(s.document.body.style.overflow,'');assert.equal(s.timers.size,0);
+const body=s=>s.document.body.classList;
+
+test('a first desktop visit plays the opening, then shows the headline and the navigation',()=>{
+  const s=setup();
+  assert.equal(s.intro.hidden,false);assert.equal(s.hero.classList.contains('intro-await'),true);assert.equal(body(s).contains('intro-brand'),true);
+  assert.equal(s.nav.inert,true);assert.equal(s.document.body.style.overflow,'hidden');
+  s.tick(HEADLINE-1);assert.equal(s.hero.classList.contains('in'),false);
+  s.tick(1);assert.equal(s.hero.classList.contains('in'),true);assert.equal(s.hero.classList.contains('intro-await'),false);
+  assert.equal(s.intro.hidden,false);
+  s.tick(FULL-HEADLINE-1);assert.equal(s.intro.hidden,false);
+  s.tick(1);assert.equal(s.intro.hidden,true);
+  assert.equal(body(s).contains('intro-brand'),false);assert.equal(body(s).contains('intro-brand-fade'),true);
+  assert.equal(s.nav.inert,false);assert.equal(s.document.body.style.overflow,'');assert.equal(s.timers.size,0);assert.equal(s.waiting(),false);
 });
-test('repeat visits, direct anchors, and reduced motion skip the introduction',()=>{
-  for(const options of [{seen:true},{hash:'#featured'},{reduce:true}]){
+
+test('the M lands small at the centre of the screen behind a solid sheet',()=>{
+  const s=setup();
+  const placed=s.move('.intro__place');
+  assert.equal(placed.x,720);assert.equal(placed.y,450);assert.ok(Math.abs(placed.scale-1.17)<1e-9);
+  assert.deepEqual(s.move('.intro__sheet'),{x:0,y:0,scale:1});assert.equal(s.parts['.intro__plug'].style.display,'');
+  assert.equal(s.parts['.intro__piece--left'].attrs.opacity,'0');
+  s.paint(LAND-1);assert.equal(s.parts['.intro__plug'].style.display,'');
+  s.paint(LAND+40);assert.equal(s.parts['.intro__plug'].style.display,'none');
+  assert.equal(s.parts['.intro__piece--left'].attrs.transform,'translate(0 0)');assert.equal(s.parts['.intro__piece--right'].attrs.opacity,'1');
+  assert.equal(s.parts['.intro__glass'].attrs.opacity,'1');
+});
+
+test('the M rests centred as blue glass with the photograph visible through it',()=>{
+  const s=setup();s.paint(RESTING);
+  const sheet=s.move('.intro__sheet');
+  assert.equal(sheet.x,0);assert.equal(sheet.y,0);assert.ok(sheet.scale>5.6&&sheet.scale<6);
+  assert.deepEqual(s.move('.intro__glass'),sheet);assert.equal(s.parts['.intro__glass'].attrs.opacity,'0.62');
+  // 111.5 units tall: the resting M fits inside the screen with room above and below.
+  assert.ok(111.5*1.17*sheet.scale<900*.9);
+});
+
+test('the M opens around a fixed point until the glass is gone and the blue clears every corner',()=>{
+  for(const [width,height] of [[1440,900],[1280,720],[1920,1080],[3440,1440],[900,1200]]){
+    const s=setup({width,height}),unit=Math.min(width/1600,height/1000)*1.3;
+    s.paint(1900);const mid=s.move('.intro__sheet');
+    assert.ok(mid.scale>6);assert.ok(Math.abs(mid.x+mid.scale*-3-6*-3)<1e-6);assert.ok(Math.abs(mid.y+mid.scale*-14-6*-14)<1e-6);
+    s.paint(FULL);const end=s.move('.intro__sheet');
+    assert.equal(s.parts['.intro__glass'].attrs.opacity,'0');
+    const pinX=width/2-3*unit*6,pinY=height/2-14*unit*6;
+    const reach=Math.hypot(Math.max(pinX,width-pinX),Math.max(pinY,height-pinY));
+    assert.ok(16.6*unit*end.scale>reach,`${width}x${height} leaves white in a corner`);
+  }
+});
+
+test('the photograph eases back to rest behind the glass and is left to run out',()=>{
+  const s=setup();assert.equal(s.settles.length,1);
+  assert.equal(s.settles[0].options.delay,550);assert.equal(s.settles[0].options.duration,2200);assert.equal(s.settles[0].options.fill,'backwards');
+  s.tick(FULL);assert.equal(s.settles[0].cancelled,false);
+});
+
+test('repeat visits, direct anchors, reduced motion and phones go straight to the headline',()=>{
+  for(const options of [{seen:true},{hash:'#featured'},{reduce:true},{phone:true}]){
     const s=setup(options);assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('in'),true);
+    assert.equal(s.document.body.style.overflow,'');assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);assert.equal(s.waiting(),false);
   }
-});
-test('review waits for input and always replays at the top',()=>{
-  const s=setup({review:true,hash:'#featured'});assert.equal(s.intro.hidden,true);
-  s.replay.events.click();assert.equal(s.document.scrolledToTop,true);assert.equal(s.replay.disabled,true);
-  s.dismiss();assert.equal(s.replay.disabled,false);
-});
-test('assembly leads to a full blue field, held headline, then photo and navigation',()=>{
-  const s=setup({animated:true});s.tick(1799);assert.equal(s.panelAnimations.length,0);
-  s.tick(1);assert.equal(s.panelAnimations.length,1);
-  const a=s.panelAnimations[0];assert.equal(a.options.duration,850);
-  assert.deepEqual(JSON.parse(JSON.stringify(a.frames)),[{opacity:0},{opacity:1}]);
-  s.tick(850);assert.equal(s.hero.classList.contains('intro-blue-title'),true);
-  assert.equal(s.intro.children[0].hidden,true);assert.equal(s.hero.classList.contains('intro-blue-fade'),false);
-  s.tick(1099);assert.equal(s.hero.classList.contains('intro-blue-fade'),false);
-  s.tick(1);assert.equal(s.hero.classList.contains('intro-blue-fade'),true);
-  assert.equal(s.document.body.classList.contains('intro-brand-fade'),false);
-  s.tick(449);assert.equal(s.document.body.classList.contains('intro-brand-fade'),false);
-  s.tick(1);assert.equal(s.document.body.classList.contains('intro-brand-fade'),true);
-  s.tick(749);assert.equal(s.intro.hidden,false);
-  s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('intro-blue-settled'),true);
-  assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);assert.ok(a.cancelled);
-});
-test('Escape cleans up at every stage and restores replay focus',()=>{
-  for(const stage of [0,850,1950,2400]){
-    const s=setup({animated:true,review:true});s.replay.focus();s.replay.events.click();s.tick(1800);
-    if(stage)s.tick(stage);s.document.events.keydown({key:'Escape',preventDefault(){}});
-    assert.equal(s.intro.hidden,true);assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);
-    assert.equal(s.document.activeElement,s.replay);assert.ok(s.panelAnimations.every(a=>a.cancelled));
-    assert.ok(s.intro.children.every(n=>n.removed));assert.equal(s.hero.classList.contains('intro-blue'),false);
-  }
-});
-test('slow replay scales every stage and finishes before the safety deadline',()=>{
-  const s=setup({animated:true,review:true});s.slow.events.click();s.tick(5399);
-  assert.equal(s.panelAnimations.length,0);s.tick(1);
-  assert.equal(s.panelAnimations[0].options.duration,2550);
-  s.tick(2549);assert.equal(s.hero.classList.contains('intro-blue-title'),false);
-  s.tick(1);assert.equal(s.hero.classList.contains('intro-blue-title'),true);
-  s.tick(3300);assert.equal(s.hero.classList.contains('intro-blue-fade'),true);
-  s.tick(1350);assert.equal(s.document.body.classList.contains('intro-brand-fade'),true);
-  s.tick(2249);assert.equal(s.intro.hidden,false);
-  s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
-});
-test('storage errors, missing artwork, and preference changes cannot trap the visitor',()=>{
-  const s=setup({storageError:true});s.img.events.error();assert.equal(s.intro.hidden,true);
-  const a=setup({animated:true});a.tick(1800);a.media.matches=true;a.media.change();
-  assert.equal(a.intro.hidden,true);assert.equal(a.nav.inert,false);assert.equal(a.timers.size,0);
-});
-test('opening has no project-navigation or diagonal-reveal code',()=>{
-  assert.doesNotMatch(source,/twisted-ridge|openSignature|clipPath|data-previous/);
-  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-  assert.doesNotMatch(html,/project-transition|Compare diagonal/);
+  assert.deepEqual(setup({phone:true}).stored,[]);
 });
 
-test('the safety deadline releases the page if the assembly callback is lost',()=>{
-  for(const rate of [1,3]){
-    const s=setup({animated:true,review:true});(rate===1?s.replay:s.slow).events.click();
-    // Simulate an interrupted assembly task without removing the independent watchdog.
-    for(const [id,timer] of s.timers)if(timer.ms===1800*rate)s.timers.delete(id);
-    s.tick(5500*rate-1);assert.equal(s.intro.hidden,false);
-    s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
-    assert.equal(s.nav.inert,false);assert.equal(s.document.body.style.overflow,'');
+test('a browser without animation frames or with missing artwork shows the page without the opening',()=>{
+  for(const options of [{frames:false},{missing:'.intro__sheet'}]){
+    const s=setup(options);assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('in'),true);
+    assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);
   }
 });
 
-test('Tab traps focus during the opening and idle keyboard events remain untouched',()=>{
+test('a drawing failure releases focus and scroll and shows the headline',()=>{
+  const s=setup({drawError:true});
+  assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);
+  assert.equal(s.document.activeElement,s.document.body);assert.equal(s.document.body.style.overflow,'');
+  assert.equal(s.hero.classList.contains('in'),true);
+});
+
+test('click, wheel, touch and any other key end the opening at once, in every stage',()=>{
+  for(const kind of ['click','wheel','touchstart','key','escape'])for(const elapsed of [0,400,RESTING,2000,2200]){
+    const s=setup();s.tick(elapsed);assert.equal(s.intro.hidden,false);
+    if(kind==='key')s.document.events.keydown({key:' ',preventDefault(){}});
+    else if(kind==='escape')s.dismiss();
+    else s.document.events[kind]({target:s.hero});
+    assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('in'),true);assert.equal(s.hero.classList.contains('intro-await'),false);
+    assert.equal(body(s).contains('intro-brand'),false);assert.equal(body(s).contains('intro-brand-fade'),true);
+    assert.equal(s.nav.inert,false);assert.equal(s.document.body.style.overflow,'');assert.equal(s.timers.size,0);assert.equal(s.waiting(),false);
+  }
+});
+
+test('modifier keys and the replay button do not skip the opening',()=>{
+  const s=setup();
+  for(const key of ['Shift','Meta','Control','Alt','CapsLock'])s.document.events.keydown({key,preventDefault(){}});
+  assert.equal(s.intro.hidden,false);
+  const r=setup({review:true});r.controls.contains=n=>n===r.replay;
+  r.replay.events.click();r.document.events.click({target:r.replay});assert.equal(r.intro.hidden,false);
+  r.document.events.click({target:r.hero});assert.equal(r.intro.hidden,true);
+});
+
+test('Tab keeps focus on the opening and idle keyboard events remain untouched',()=>{
   const s=setup();let prevented=0;
   for(const shiftKey of [false,true]){
     s.document.activeElement=s.nav;
     s.document.events.keydown({key:'Tab',shiftKey,preventDefault(){prevented++;}});
-    assert.equal(s.document.activeElement,s.intro);
+    assert.equal(s.document.activeElement,s.intro);assert.equal(s.intro.hidden,false);
   }
-  s.document.events.keydown({key:'ArrowDown',preventDefault(){prevented++;}});
-  assert.equal(prevented,2);s.dismiss();
-  for(const key of ['Tab','Escape'])s.document.events.keydown({key,preventDefault(){prevented++;}});
+  s.dismiss();
+  for(const key of ['Tab','Escape','ArrowDown'])s.document.events.keydown({key,preventDefault(){prevented++;}});
   assert.equal(prevented,2);
 });
 
-test('pagehide and resize release the page during assembly and the blue field',()=>{
-  for(const event of ['pagehide','resize'])for(const elapsed of [0,1800,2650]){
-    const s=setup({animated:true});s.tick(elapsed);s.windowEvents[event]();
-    assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);
-    assert.ok(s.panelAnimations.every(a=>a.cancelled));assert.ok(s.intro.children.every(n=>n.removed));
-    s.windowEvents[event]();assert.equal(s.intro.hidden,true);
+test('pagehide, resize and a change to reduced motion release the page at any stage',()=>{
+  for(const event of ['pagehide','resize','motion'])for(const elapsed of [0,RESTING,2200]){
+    const s=setup({legacyMedia:elapsed===0});s.tick(elapsed);
+    if(event==='motion'){s.media.change();assert.equal(s.intro.hidden,false);s.media.matches=true;s.media.change();}
+    else s.windowEvents[event]();
+    assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);assert.equal(s.waiting(),false);
+    if(event!=='motion'){s.windowEvents[event]();assert.equal(s.intro.hidden,true);}
   }
-});
-
-test('animation failures release focus, scroll, and the added blue panel',()=>{
-  const s=setup({animated:true,animationError:true});s.tick(1800);
-  assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);
-  assert.equal(s.document.activeElement,s.document.body);assert.equal(s.document.body.style.overflow,'');
-  assert.ok(s.intro.children.every(n=>n.removed));assert.equal(s.hero.classList.contains('in'),true);
 });
 
 test('cleanup restores prior inert and overflow values without stealing outside focus',()=>{
@@ -152,18 +187,51 @@ test('cleanup restores prior inert and overflow values without stealing outside 
   s.document.activeElement=s.previous;s.dismiss();
   assert.equal(s.nav.inert,true);assert.equal(s.hero.inert,false);
   assert.equal(s.document.body.style.overflow,'clip');assert.equal(s.document.activeElement,s.previous);
-  const noTarget=setup({navMissing:true});noTarget.dismiss();
-  assert.equal(noTarget.intro.hidden,true);assert.equal(noTarget.document.activeElement,noTarget.document.body);
+});
+
+test('the opening takes focus without a visible skip control and gives it back',()=>{
+  assert.doesNotMatch(html,/intro__skip|Skip introduction/);
+  assert.match(html,/id="preloader"[^>]*tabindex="-1"/);
+  assert.match(css,/#preloader:focus\{outline:none\}/);
+  for(const action of ['finish','escape']){
+    const s=setup();assert.equal(s.document.activeElement,s.intro);
+    if(action==='finish')s.tick(FULL);else s.dismiss();
+    assert.equal(s.intro.hidden,true);assert.equal(s.document.activeElement,s.document.body);
+  }
+});
+
+test('review waits for input, replays at the top and restores focus to the replay button',()=>{
+  const s=setup({review:true,hash:'#featured'});assert.equal(s.intro.hidden,true);assert.equal(s.controls.hidden,false);
+  s.replay.focus();s.replay.events.click();
+  assert.equal(s.document.scrolledToTop,true);assert.equal(s.replay.disabled,true);assert.equal(s.intro.hidden,false);
+  assert.equal(s.hero.classList.contains('in'),false);
+  s.dismiss();assert.equal(s.replay.disabled,false);assert.equal(s.document.activeElement,s.replay);
+});
+
+test('slow replay stretches every beat by three',()=>{
+  const s=setup({review:true});s.slow.events.click();
+  s.paint(RESTING*3);const sheet=s.move('.intro__sheet');
+  assert.ok(sheet.scale>5.6&&sheet.scale<6);assert.equal(s.parts['.intro__glass'].attrs.opacity,'0.62');
+  assert.equal(s.settles[0].options.duration,6600);
+  s.tick(HEADLINE*3-1);assert.equal(s.hero.classList.contains('in'),false);
+  s.tick(1);assert.equal(s.hero.classList.contains('in'),true);
+  s.tick((FULL-HEADLINE)*3-1);assert.equal(s.intro.hidden,false);
+  s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
 });
 
 test('duplicate replay events do not restart the clock and replay works again after finish',()=>{
-  const s=setup({review:true,animated:true});s.replay.events.click();s.tick(900);
+  const s=setup({review:true});s.replay.events.click();s.tick(900);
   const pending=s.timers.size;s.slow.events.click();assert.equal(s.timers.size,pending);
-  s.tick(900);assert.equal(s.panelAnimations.length,1);assert.equal(s.panelAnimations[0].options.duration,850);
-  s.tick(3150);assert.equal(s.hero.classList.contains('intro-blue-settled'),true);
-  s.replay.events.click();assert.equal(s.hero.classList.contains('intro-blue-settled'),false);
-  assert.equal(s.intro.hidden,false);s.dismiss();
-  assert.deepEqual(s.stored,[['montana-m-intro-v2','seen'],['montana-m-intro-v2','seen']]);
+  s.tick(FULL-900);assert.equal(s.intro.hidden,true);
+  s.replay.events.click();assert.equal(s.intro.hidden,false);assert.equal(body(s).contains('intro-brand-fade'),false);
+  assert.equal(s.settles[0].cancelled,true);assert.equal(s.settles.length,2);
+  s.dismiss();
+  assert.deepEqual(s.stored,[['montana-m-intro-v3','seen'],['montana-m-intro-v3','seen']]);
+});
+
+test('reduced motion prevents a replay',()=>{
+  const s=setup({review:true,reduce:true});s.replay.events.click();
+  assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.document.scrolledToTop,undefined);
 });
 
 test('preview controls require a local host and may be absent',()=>{
@@ -175,6 +243,11 @@ test('preview controls require a local host and may be absent',()=>{
   noControls.dismiss();assert.equal(noControls.intro.hidden,true);
 });
 
+test('storage errors do not stop the opening or trap the visitor',()=>{
+  const s=setup({storageError:true});assert.equal(s.intro.hidden,false);
+  s.tick(FULL);assert.equal(s.intro.hidden,true);assert.equal(s.nav.inert,false);
+});
+
 test('missing introduction or hero exits without changing the page',()=>{
   for(const missing of ['preloader','hero']){
     const s=setup({missing});assert.equal(s.timers.size,0);assert.equal(s.document.scrolledToTop,undefined);
@@ -182,17 +255,7 @@ test('missing introduction or hero exits without changing the page',()=>{
   }
 });
 
-test('reduced motion can prevent a replay or finish an active opening on legacy browsers',()=>{
-  const s=setup({review:true,reduce:true});s.replay.events.click();
-  assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.document.scrolledToTop,undefined);
-  const old=setup({animated:true,legacyMedia:true});old.media.change();assert.equal(old.intro.hidden,false);
-  old.media.matches=true;old.media.change();assert.equal(old.intro.hidden,true);assert.equal(old.timers.size,0);
-  const changed=setup({animated:true});changed.media.matches=true;changed.tick(1800);
-  assert.equal(changed.intro.hidden,true);assert.equal(changed.panelAnimations.length,0);
-});
-
 test('the page stays available when scripts are disabled or the introduction script fails',()=>{
-  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
   assert.match(html,/<div id="preloader" hidden role="dialog" aria-modal="true"/);
   assert.match(html,/<noscript><style>#preloader\{display:none\}\.reveal\{opacity:1;transform:none\}<\/style><\/noscript>/);
   const handler=html.match(/<script src="assets\/logo-intro\.js" onerror="([^"]+)"/)[1];
@@ -200,63 +263,15 @@ test('the page stays available when scripts are disabled or the introduction scr
   assert.equal(s.hero.classList.contains('in'),true);assert.equal(s.intro.hidden,true);
 });
 
-test('assembly waits for all artwork and starts once after the final image loads',()=>{
-  const s=setup({animated:true,imagesReady:false});s.tick(400);
-  for(const img of s.imgs.slice(0,2)){img.complete=true;img.naturalWidth=1361;img.dispatch('load');}
-  s.tick(400);assert.equal(s.intro.classList.contains('intro--playing'),false);
-  const last=s.imgs[2];last.complete=true;last.naturalWidth=1361;const queuedLoad=last.events.load;last.dispatch('load');
-  assert.equal(s.intro.classList.contains('intro--playing'),true);
-  assert.ok(s.imgs.every(img=>img.events.load===undefined));
-  queuedLoad();s.tick(1799);assert.equal(s.panelAnimations.length,0);
-  s.tick(1);assert.equal(s.panelAnimations.length,1);
-  s.tick(3150);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
-});
-
-test('artwork failures and the load deadline release the page and late loads stay idle',()=>{
-  for(const options of [{imagesReady:false},{brokenImage:true},{imagesReady:false,fail:true}]){
-    const s=setup({...options,animated:true});
-    if(options.fail)s.img.events.error();
-    if(!options.brokenImage&&!options.fail){s.tick(1199);assert.equal(s.intro.hidden,false);s.tick(1);}
-    else s.tick(1200);
-    assert.equal(s.intro.hidden,true);assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);
-    assert.ok(s.imgs.every(img=>img.events.load===undefined));
-    for(const img of s.imgs){img.complete=true;img.naturalWidth=1361;img.dispatch('load');}
-    s.tick(6000);assert.equal(s.intro.hidden,true);assert.equal(s.panelAnimations.length,0);
-  }
-});
-
-test('first-visit completion and Escape do not move focus to the header wordmark',()=>{
-  for(const action of ['finish','escape','failure']){
-    const s=setup({animated:true});
-    if(action==='finish')s.tick(4950);
-    if(action==='escape')s.document.events.keydown({key:'Escape',preventDefault(){}});
-    if(action==='failure')s.img.events.error();
-    assert.equal(s.intro.hidden,true);
-    assert.equal(s.document.activeElement,s.document.body);
-    assert.equal(s.nav.inert,false);
-  }
+test('the M is drawn from the vector path in the page and waits on no image',()=>{
+  const opening=html.slice(html.indexOf('<div id="preloader"'),html.indexOf('<div class="intro-review"'));
+  for(const part of ['intro__place','intro__sheet','intro__plug','intro__glass','intro__piece--left','intro__piece--right'])assert.match(opening,new RegExp(`class="${part}"`));
+  assert.doesNotMatch(opening,/<img|href=/);
+  assert.doesNotMatch(html,/montana-m-original/);
+  assert.match(opening,/<svg class="intro__svg" aria-hidden="true" focusable="false">/);
 });
 
 test('headline uses the smaller desktop size and keeps the mobile size',()=>{
-  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
   assert.match(html,/font-size:clamp\(2\.8rem,5\.92vw,5\.28rem\);max-width:16ch/);
   assert.match(html,/@media\(max-width:600px\)\{\.hero h1\{font-size:clamp\(2\.6rem,7\.4vw,6\.6rem\)\}\}/);
-});
-
-test('opening has no visible skip control and focuses its borderless dialog',()=>{
-  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-  const css=fs.readFileSync(require('node:path').join(__dirname,'../assets/logo-intro.css'),'utf8');
-  assert.doesNotMatch(html,/intro__skip|Skip introduction/);
-  assert.match(html,/id="preloader"[^>]*tabindex="-1"/);
-  assert.match(css,/#preloader:focus\{outline:none\}/);
-  const s=setup({animated:true});
-  assert.equal(s.document.activeElement,s.intro);
-  s.dismiss();assert.equal(s.document.activeElement,s.document.body);
-});
-test('phones skip the opening and show the headline at once; desktop still plays it',()=>{
-  const p=setup({phone:true});
-  assert.equal(p.intro.hidden,true);assert.equal(p.hero.classList.contains('in'),true);
-  assert.equal(p.document.body.style.overflow,'');assert.equal(p.nav.inert,false);assert.deepEqual(p.stored,[]);
-  const d=setup();assert.equal(d.intro.hidden,false);
-  const r=setup({phone:true,review:true});r.replay.events.click();assert.equal(r.intro.hidden,false,'local review still replays on a phone');
 });
