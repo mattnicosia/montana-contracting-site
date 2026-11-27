@@ -15,10 +15,10 @@
 .hero.intro-blue-title h1 .ln:nth-child(2)>span{animation-delay:calc(80ms * var(--intro-rate))}
 .hero.intro-blue-title h1 .ln:nth-child(3)>span{animation-delay:calc(160ms * var(--intro-rate))}
 @keyframes introHeadline{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.hero.intro-blue-fade::after{animation:introBlueFade calc(1200ms * var(--intro-rate)) cubic-bezier(.4,0,.2,1) both}
+.hero.intro-blue-fade::after{animation:introBlueFade calc(900ms * var(--intro-rate)) cubic-bezier(.4,0,.2,1) both}
 @keyframes introBlueFade{from{opacity:1}to{opacity:0}}
 .intro-brand .nav,.intro-brand .hero__eyebrow,.intro-brand .hero__scroll{opacity:0}
-.intro-brand-fade .nav,.intro-brand-fade .hero__eyebrow,.intro-brand-fade .hero__scroll{animation:introChrome calc(650ms * var(--intro-rate)) ease-out both}
+.intro-brand-fade .nav,.intro-brand-fade .hero__eyebrow,.intro-brand-fade .hero__scroll{animation:introChrome calc(550ms * var(--intro-rate)) ease-out both}
 @keyframes introChrome{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .hero.intro-blue-settled h1 .ln>span{animation:none;transform:none;opacity:1}
 .intro__mark{position:relative;width:156px;aspect-ratio:774/654;isolation:isolate;--assembly-scale:2.2}
@@ -27,8 +27,8 @@
 .intro__piece--left{clip-path:polygon(0 0,26% 0,68% 54%,49.4% 76%,23% 43%,24% 100%,0 100%);--ix:-36px;--iy:24px}
 .intro__piece--top{clip-path:polygon(50.5% 26.7%,73% 0,100% 0,100% 13.5%,68.8% 50.5%);--ix:32px;--iy:-32px;--delay:55ms}
 .intro__piece--right{clip-path:polygon(75% 47%,100% 18%,100% 100%,75% 100%);--ix:18px;--iy:36px;--delay:100ms}
-.intro--playing .intro__mark{animation:introCompact calc(450ms * var(--intro-rate)) cubic-bezier(.65,0,.35,1) both;animation-delay:calc(1100ms * var(--intro-rate))}
-.intro--playing .intro__piece{animation:introAssemble calc(1000ms * var(--intro-rate)) cubic-bezier(.25,.65,.3,1) both;animation-delay:calc(var(--delay,0ms) * var(--intro-rate))}
+.intro--playing .intro__mark{animation:introCompact calc(330ms * var(--intro-rate)) cubic-bezier(.65,0,.35,1) both;animation-delay:calc(330ms * var(--intro-rate))}
+.intro--playing .intro__piece{animation:introAssemble calc(520ms * var(--intro-rate)) cubic-bezier(.25,.65,.3,1) both;animation-delay:calc(var(--delay,0ms) * var(--intro-rate))}
 @keyframes introCompact{from{transform:scale(var(--assembly-scale))}to{transform:scale(1)}}
 @keyframes introAssemble{0%{opacity:0;transform:translate(var(--ix),var(--iy))}18%{opacity:1}100%{opacity:1;transform:translate(0,0)}}
 .hero.intro-await h1 .ln>span{animation:none;transform:translateY(105%);opacity:0}

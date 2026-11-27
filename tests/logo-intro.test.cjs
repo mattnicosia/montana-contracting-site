@@ -59,24 +59,24 @@ test('review waits for input and always replays at the top',()=>{
   s.dismiss();assert.equal(s.replay.disabled,false);
 });
 test('assembly leads to a full blue field, held headline, then photo and navigation',()=>{
-  const s=setup({animated:true});s.tick(1799);assert.equal(s.panelAnimations.length,0);
+  const s=setup({animated:true});s.tick(799);assert.equal(s.panelAnimations.length,0);
   s.tick(1);assert.equal(s.panelAnimations.length,1);
-  const a=s.panelAnimations[0];assert.equal(a.options.duration,850);
+  const a=s.panelAnimations[0];assert.equal(a.options.duration,500);
   assert.deepEqual(JSON.parse(JSON.stringify(a.frames)),[{opacity:0},{opacity:1}]);
-  s.tick(850);assert.equal(s.hero.classList.contains('intro-blue-title'),true);
+  s.tick(500);assert.equal(s.hero.classList.contains('intro-blue-title'),true);
   assert.equal(s.intro.children[0].hidden,true);assert.equal(s.hero.classList.contains('intro-blue-fade'),false);
-  s.tick(1099);assert.equal(s.hero.classList.contains('intro-blue-fade'),false);
+  s.tick(699);assert.equal(s.hero.classList.contains('intro-blue-fade'),false);
   s.tick(1);assert.equal(s.hero.classList.contains('intro-blue-fade'),true);
   assert.equal(s.document.body.classList.contains('intro-brand-fade'),false);
-  s.tick(449);assert.equal(s.document.body.classList.contains('intro-brand-fade'),false);
+  s.tick(349);assert.equal(s.document.body.classList.contains('intro-brand-fade'),false);
   s.tick(1);assert.equal(s.document.body.classList.contains('intro-brand-fade'),true);
-  s.tick(749);assert.equal(s.intro.hidden,false);
+  s.tick(549);assert.equal(s.intro.hidden,false);
   s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('intro-blue-settled'),true);
   assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);assert.ok(a.cancelled);
 });
 test('Escape cleans up at every stage and restores replay focus',()=>{
-  for(const stage of [0,850,1950,2400]){
-    const s=setup({animated:true,review:true});s.replay.focus();s.replay.events.click();s.tick(1800);
+  for(const stage of [0,500,1200,1550]){
+    const s=setup({animated:true,review:true});s.replay.focus();s.replay.events.click();s.tick(800);
     if(stage)s.tick(stage);s.document.events.keydown({key:'Escape',preventDefault(){}});
     assert.equal(s.intro.hidden,true);assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);
     assert.equal(s.document.activeElement,s.replay);assert.ok(s.panelAnimations.every(a=>a.cancelled));
@@ -84,19 +84,19 @@ test('Escape cleans up at every stage and restores replay focus',()=>{
   }
 });
 test('slow replay scales every stage and finishes before the safety deadline',()=>{
-  const s=setup({animated:true,review:true});s.slow.events.click();s.tick(5399);
+  const s=setup({animated:true,review:true});s.slow.events.click();s.tick(2399);
   assert.equal(s.panelAnimations.length,0);s.tick(1);
-  assert.equal(s.panelAnimations[0].options.duration,2550);
-  s.tick(2549);assert.equal(s.hero.classList.contains('intro-blue-title'),false);
+  assert.equal(s.panelAnimations[0].options.duration,1500);
+  s.tick(1499);assert.equal(s.hero.classList.contains('intro-blue-title'),false);
   s.tick(1);assert.equal(s.hero.classList.contains('intro-blue-title'),true);
-  s.tick(3300);assert.equal(s.hero.classList.contains('intro-blue-fade'),true);
-  s.tick(1350);assert.equal(s.document.body.classList.contains('intro-brand-fade'),true);
-  s.tick(2249);assert.equal(s.intro.hidden,false);
+  s.tick(2100);assert.equal(s.hero.classList.contains('intro-blue-fade'),true);
+  s.tick(1050);assert.equal(s.document.body.classList.contains('intro-brand-fade'),true);
+  s.tick(1649);assert.equal(s.intro.hidden,false);
   s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
 });
 test('storage errors, missing artwork, and preference changes cannot trap the visitor',()=>{
   const s=setup({storageError:true});s.img.events.error();assert.equal(s.intro.hidden,true);
-  const a=setup({animated:true});a.tick(1800);a.media.matches=true;a.media.change();
+  const a=setup({animated:true});a.tick(800);a.media.matches=true;a.media.change();
   assert.equal(a.intro.hidden,true);assert.equal(a.nav.inert,false);assert.equal(a.timers.size,0);
 });
 test('opening has no project-navigation or diagonal-reveal code',()=>{
@@ -109,8 +109,8 @@ test('the safety deadline releases the page if the assembly callback is lost',()
   for(const rate of [1,3]){
     const s=setup({animated:true,review:true});(rate===1?s.replay:s.slow).events.click();
     // Simulate an interrupted assembly task without removing the independent watchdog.
-    for(const [id,timer] of s.timers)if(timer.ms===1800*rate)s.timers.delete(id);
-    s.tick(5500*rate-1);assert.equal(s.intro.hidden,false);
+    for(const [id,timer] of s.timers)if(timer.ms===800*rate)s.timers.delete(id);
+    s.tick(3600*rate-1);assert.equal(s.intro.hidden,false);
     s.tick(1);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
     assert.equal(s.nav.inert,false);assert.equal(s.document.body.style.overflow,'');
   }
@@ -130,7 +130,7 @@ test('Tab traps focus during the opening and idle keyboard events remain untouch
 });
 
 test('pagehide and resize release the page during assembly and the blue field',()=>{
-  for(const event of ['pagehide','resize'])for(const elapsed of [0,1800,2650]){
+  for(const event of ['pagehide','resize'])for(const elapsed of [0,800,1300]){
     const s=setup({animated:true});s.tick(elapsed);s.windowEvents[event]();
     assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);assert.equal(s.nav.inert,false);
     assert.ok(s.panelAnimations.every(a=>a.cancelled));assert.ok(s.intro.children.every(n=>n.removed));
@@ -159,8 +159,8 @@ test('cleanup restores prior inert and overflow values without stealing outside 
 test('duplicate replay events do not restart the clock and replay works again after finish',()=>{
   const s=setup({review:true,animated:true});s.replay.events.click();s.tick(900);
   const pending=s.timers.size;s.slow.events.click();assert.equal(s.timers.size,pending);
-  s.tick(900);assert.equal(s.panelAnimations.length,1);assert.equal(s.panelAnimations[0].options.duration,850);
-  s.tick(3150);assert.equal(s.hero.classList.contains('intro-blue-settled'),true);
+  s.tick(900);assert.equal(s.panelAnimations.length,1);assert.equal(s.panelAnimations[0].options.duration,500);
+  s.tick(2100);assert.equal(s.hero.classList.contains('intro-blue-settled'),true);
   s.replay.events.click();assert.equal(s.hero.classList.contains('intro-blue-settled'),false);
   assert.equal(s.intro.hidden,false);s.dismiss();
   assert.deepEqual(s.stored,[['montana-m-intro-v2','seen'],['montana-m-intro-v2','seen']]);
@@ -207,9 +207,9 @@ test('assembly waits for all artwork and starts once after the final image loads
   const last=s.imgs[2];last.complete=true;last.naturalWidth=1361;const queuedLoad=last.events.load;last.dispatch('load');
   assert.equal(s.intro.classList.contains('intro--playing'),true);
   assert.ok(s.imgs.every(img=>img.events.load===undefined));
-  queuedLoad();s.tick(1799);assert.equal(s.panelAnimations.length,0);
+  queuedLoad();s.tick(799);assert.equal(s.panelAnimations.length,0);
   s.tick(1);assert.equal(s.panelAnimations.length,1);
-  s.tick(3150);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
+  s.tick(2100);assert.equal(s.intro.hidden,true);assert.equal(s.timers.size,0);
 });
 
 test('artwork failures and the load deadline release the page and late loads stay idle',()=>{
@@ -259,4 +259,21 @@ test('phones skip the opening and show the headline at once; desktop still plays
   assert.equal(p.document.body.style.overflow,'');assert.equal(p.nav.inert,false);assert.deepEqual(p.stored,[]);
   const d=setup();assert.equal(d.intro.hidden,false);
   const r=setup({phone:true,review:true});r.replay.events.click();assert.equal(r.intro.hidden,false,'local review still replays on a phone');
+});
+
+test('click, wheel, touch and any other key end the opening at once, in every stage',()=>{
+  for(const kind of ['click','wheel','touchstart','key'])for(const elapsed of [0,800,1300,2000]){
+    const s=setup({animated:true});s.tick(elapsed);assert.equal(s.intro.hidden,false);
+    if(kind==='key')s.document.events.keydown({key:' ',preventDefault(){}});else s.document.events[kind]({target:s.hero});
+    assert.equal(s.intro.hidden,true);assert.equal(s.hero.classList.contains('in'),true);
+    assert.equal(s.nav.inert,false);assert.equal(s.timers.size,0);assert.ok(s.panelAnimations.every(a=>a.cancelled));
+  }
+});
+test('modifier keys and the replay button do not skip the opening',()=>{
+  const s=setup({animated:true});
+  for(const key of ['Shift','Meta','Control','Alt'])s.document.events.keydown({key,preventDefault(){}});
+  assert.equal(s.intro.hidden,false);
+  const r=setup({review:true});r.controls.contains=n=>n===r.replay;
+  r.replay.events.click();r.document.events.click({target:r.replay});assert.equal(r.intro.hidden,false);
+  r.document.events.click({target:r.hero});assert.equal(r.intro.hidden,true);
 });

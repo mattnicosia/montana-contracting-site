@@ -47,7 +47,7 @@
       intro.appendChild(flood);
       // The whole field changes together. No growing polygon or diagonal seam.
       animations.push(flood.animate([{opacity:0},{opacity:1}],{
-        duration:850*rate,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'
+        duration:500*rate,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'
       }));
       intro.classList.add('intro--filling');
       later(function(){
@@ -55,10 +55,10 @@
         hero.classList.remove('intro-await');
         intro.classList.add('intro--blue-ready');
         flood.hidden=true;
-      },850*rate);
-      later(function(){hero.classList.add('intro-blue-fade');},1950*rate);
-      later(function(){document.body.classList.add('intro-brand-fade');},2400*rate);
-      later(finish,3150*rate);
+      },500*rate);
+      later(function(){hero.classList.add('intro-blue-fade');},1200*rate);
+      later(function(){document.body.classList.add('intro-brand-fade');},1550*rate);
+      later(finish,2100*rate);
     }catch(error){finish();}
   }
   function start(rate){
@@ -85,8 +85,8 @@
       stopWaiting();
       void intro.offsetWidth;
       intro.classList.add('intro--playing');
-      later(function(){fillBlue(rate);},1800*rate);
-      later(finish,5500*rate);
+      later(function(){fillBlue(rate);},800*rate);
+      later(finish,3600*rate);
     }
     stopWaiting=function(){artwork.forEach(function(img){img.removeEventListener('load',assemble);});};
     artwork.forEach(function(img){img.addEventListener('load',assemble,{once:true});});
@@ -97,11 +97,19 @@
     },1200);
     assemble();
   }
+  var modifiers=/^(Shift|Control|Alt|Meta|CapsLock|Tab)$/;
   document.addEventListener('keydown',function(event){
     if(!running)return;
-    if(event.key==='Escape'){event.preventDefault();finish();}
-    if(event.key==='Tab'){event.preventDefault();intro.focus();}
+    if(event.key==='Tab'){event.preventDefault();intro.focus();return;}
+    if(!modifiers.test(event.key))finish();
   });
+  // Any click, scroll or touch ends the opening. The replay button in review mode is excluded.
+  function skip(event){
+    if(!running)return;
+    if(event&&event.target&&controls&&controls.contains&&controls.contains(event.target))return;
+    finish();
+  }
+  ['click','wheel','touchstart'].forEach(function(type){document.addEventListener(type,skip,{passive:true});});
   function motionChanged(){if(reduced.matches)finish();}
   if(reduced.addEventListener)reduced.addEventListener('change',motionChanged);
   else if(reduced.addListener)reduced.addListener(motionChanged);
