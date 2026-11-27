@@ -43,7 +43,7 @@ function img(src, target, sizes, attrs) {
 }
 const largest = src => sized(src, 99999);
 
-function documentHTML(title, summary, route, image, body, gallery = false, extra = '') {
+function documentHTML(title, summary, route, image, body, gallery = false, extra = '', ogType = 'website') {
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -51,7 +51,7 @@ function documentHTML(title, summary, route, image, body, gallery = false, extra
 <title>${esc(title)} | Montana Contracting</title>
 <meta name="description" content="${esc(summary)}">
 <link rel="canonical" href="${origin}${route}">
-${extra}<meta property="og:type" content="website">
+${extra}<meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="Montana Contracting">
 <meta property="og:title" content="${esc(title)} | Montana Contracting">
 <meta property="og:description" content="${esc(summary)}">
@@ -184,9 +184,88 @@ function landingOutputs(files) {
   return [...landing.services.map(servicePath), ...landing.areas.map(areaPath)];
 }
 
+// Blog. Metadata lives in data/articles.json, bodies in data/articles/<slug>.md.
+// Each new article ships as its own pull request on its publish date, so there is no date gating.
+const articles = require('../data/articles.json');
+const {renderMarkdown, headingsOf} = require('./markdown.cjs');
+const articlePath = a => '/blog/' + a.slug + '/';
+const articleImage = 'assets/photos/piaule-catskill.jpg';
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function formatDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+}
+const byline = a => `${esc(a.author)} · <time datetime="${esc(a.date)}">${formatDate(a.date)}</time>`;
+const arrow = '<span class="art__arrow" aria-hidden="true"></span>';
+
+// Blog pages use the homepage's main menu and Contact section. Their styles are
+// mirrored from index.html into assets/site-chrome.css; change both together.
+function siteNav(current = 'page') {
+  const links = [['/#story','Approach'],['/core-values/','Values'],['/people/','People'],['/#featured','Work'],['/blog/','Blog'],['/#precon','Pre-Con'],['/financing/','Financing'],['/#contact','Contact']];
+  return `<nav class="nav nav--solid" id="nav" aria-label="Main navigation"><a href="/" class="nav__logo"><img class="logo-dark" src="/assets/montana-logo.svg" alt="Montana Contracting home"></a><div class="nav__links" id="main-nav-links">${links.map(([href, label]) => `<a href="${href}"${label === 'Blog' ? ` aria-current="${current}"` : ''}>${label}</a>`).join('')}</div><a href="/#start-project" class="nav__cta">Start a Project</a><a href="${phoneHref}" class="nav__call" aria-label="Call Montana Contracting at ${phone}">Call</a><button type="button" class="nav__burger" aria-expanded="false" aria-controls="main-nav-links">Menu</button></nav>`;
+}
+function siteFooter() {
+  return `<section class="sec contact" id="contact" aria-labelledby="contact-title">
+<div class="contact__grid"><div><div class="sec__index"><i aria-hidden="true"></i>Contact</div><h2 id="contact-title">Start a project.</h2><a href="/#start-project" class="contact__cta">Let's Talk <i aria-hidden="true"></i></a></div>
+<div class="contact__details"><div class="cdetail"><div class="cdetail__lab">Phone</div><a href="${phoneHref}">${phone}</a></div><div class="cdetail"><div class="cdetail__lab">Address</div><p>${address}</p></div><div class="cdetail"><div class="cdetail__lab">Email</div><a href="mailto:info@montanacontracting.com">info@montanacontracting.com</a></div></div></div>
+<div class="contact__foot"><span>© 2026 <b>Montana Contracting</b> · The Hudson Valley's Most Ambitious Work</span><span>General contractor since 1984</span>
+<nav class="contact__page-links" aria-label="Services"><a href="/custom-homes/">Custom Homes</a><a href="/commercial/">Commercial</a><a href="/pre-construction/">Pre-Construction</a></nav>
+<nav class="contact__page-links" aria-label="Where we build">${landing.areas.map(x => `<a href="${areaPath(x)}">${esc(x.name.replace(/ County$/, ''))}</a>`).join(' ')}</nav>
+<nav class="contact__page-links" aria-label="More about Montana"><a href="/core-values/">Our values</a><a href="/blog/">Blog</a><a href="/financing/">Financing</a><a href="/privacy/">Privacy</a><a href="https://www.linkedin.com/company/montana-contracting-corp/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://www.instagram.com/montanacontracting/" rel="me noopener" target="_blank">Instagram</a></nav></div>
+</section>`;
+}
+const chrome = (main, current) => `<div class="has-site-nav">${siteNav(current)}\n${main}\n${siteFooter()}</div>`;
+const chromeHead = '<link rel="stylesheet" href="/assets/site-chrome.css">\n<script src="/assets/site-nav.js" defer></script>\n';
+const jsonLd = graph => `<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c')}</script>\n`;
+const publisher = {'@type':'GeneralContractor','@id':origin + '/#business','name':'Montana Contracting'};
+
+function articleIndex(page, list) {
+  const [lead, ...older] = list;
+  const h1 = esc(page.h1).replace(/\S+-\S+/g, word => `<span class="art__nw">${word}</span>`);
+  let items = '<p class="art__empty">New articles are on the way.</p>';
+  if (lead) {
+    items = `<a class="art__lead" href="${articlePath(lead)}"><div><h2>${esc(lead.title)}</h2><p class="art__lead-meta">${byline(lead)}</p></div><div><p class="art__lead-dek">${esc(lead.dek || lead.description)}</p><span class="art__btn">Read article${arrow}</span></div></a>`;
+    if (older.length) items += `<div class="art__grid">${older.map(a => `<a class="art__card" href="${articlePath(a)}"><h3>${esc(a.title)}</h3><p>${esc(a.dek || a.description)}</p><p class="art__meta">${byline(a)}</p><span class="art__more">Read article${arrow}</span></a>`).join('')}</div>`;
+  }
+  const graph = [
+    {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem',position:1,name:'Home',item:origin + '/'},{'@type':'ListItem',position:2,name:'Blog',item:origin + '/blog/'}]},
+    {'@type':'Blog','name':page.title,'description':page.description,'url':origin + '/blog/','publisher':publisher}];
+  return documentHTML(page.title, page.description, '/blog/', articleImage, chrome(`<main id="main"><div class="pall__head art__index-head"><div class="pall__k"><i aria-hidden="true"></i>${esc(page.eyebrow)}</div><h1>${h1}</h1><p>${esc(page.intro)}</p></div><div class="art__index">${items}</div></main>`), false, chromeHead + jsonLd(graph));
+}
+
+function articlePage(a, next, body) {
+  const heads = headingsOf(body);
+  const items = heads.map(h => `<li><a href="#${h.id}">${esc(h.text)}</a></li>`).join('');
+  const toc = heads.length >= 2;
+  const tocDesktop = toc ? `<nav class="art__toc" aria-labelledby="toc-label"><p class="art__toc-label" id="toc-label">In this article</p><ol>${items}</ol></nav>` : '';
+  const tocMobile = toc ? `<details class="art__toc-m"><summary>In this article</summary><nav aria-label="In this article"><ol>${items}</ol></nav></details>` : '';
+  const nextLink = next ? `<nav class="art__next" aria-label="Next article"><div class="art__next-k">Next article</div><a href="${articlePath(next)}">${esc(next.title)}</a></nav>` : '';
+  const graph = [
+    {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem',position:1,name:'Home',item:origin + '/'},{'@type':'ListItem',position:2,name:'Blog',item:origin + '/blog/'},{'@type':'ListItem',position:3,name:a.title,item:origin + articlePath(a)}]},
+    {'@type':'BlogPosting','headline':a.title,'description':a.description,'datePublished':a.date,'author':{'@type':'Person','name':a.author},
+      'publisher':publisher,'mainEntityOfPage':origin + articlePath(a),'image':origin + asset(articleImage)}];
+  const head = chromeHead + (toc ? '<script src="/assets/article-toc.js" defer></script>\n' : '') + jsonLd(graph);
+  return documentHTML(a.title, a.description, articlePath(a), articleImage, chrome(`<main id="main"><article class="art"><header class="art__head"><h1 class="art__title">${esc(a.title)}</h1>${a.dek ? `<p class="art__dek">${esc(a.dek)}</p>` : ''}<p class="art__meta">By ${byline(a)}</p></header><div class="art__layout"><div class="art__body">${tocMobile}${renderMarkdown(body)}</div>${tocDesktop}</div>${nextLink}</article></main>`, 'true'), false, head, 'article');
+}
+
+function articleOutputs(files, data, readBody) {
+  const slugs = new Set();
+  for (const a of data.articles) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.slug) || slugs.has(a.slug)) throw new Error('Invalid or duplicate article slug: ' + a.slug);
+    const d = /^\d{4}-\d{2}-\d{2}$/.test(a.date) && new Date(a.date + 'T00:00:00Z');
+    if (!d || isNaN(d) || d.toISOString().slice(0, 10) !== a.date) throw new Error('Article date must be a real YYYY-MM-DD date: ' + a.slug);
+    slugs.add(a.slug);
+  }
+  const list = [...data.articles].sort((x, y) => y.date.localeCompare(x.date));
+  files.set('blog/index.html', articleIndex(data.page, list));
+  list.forEach((a, i) => files.set(`blog/${a.slug}/index.html`, articlePage(a, list.length > 1 ? list[(i + 1) % list.length] : null, readBody(a.slug))));
+  return ['/blog/', ...list.map(articlePath)];
+}
+
 function outputs() {
   const files = new Map([['projects/index.html', index()]]);
   const landingRoutes = landingOutputs(files);
+  const articleRoutes = articleOutputs(files, articles, slug => fs.readFileSync(path.join(root, 'data/articles', slug + '.md'), 'utf8'));
   const slugs = new Set();
   projects.forEach((p,i) => {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) || slugs.has(p.slug)) throw new Error('Invalid or duplicate project slug: ' + p.slug);
@@ -199,7 +278,7 @@ function outputs() {
     files.set(`projects/${p.slug}/index.html`, detail(p, next));
   });
   files.set('assets/legacy-project-routes.js', `/* Generated from data/projects.json. */\n(function(){\n  var routes=${JSON.stringify(Object.fromEntries([['all','/projects/'],['values','/core-values/'],['people','/people/'],['financing','/financing/'], ...projects.map(p => [p.slug,projectPath(p)])]))};\n  function route(){var slug=location.hash.slice(1);if(Object.prototype.hasOwnProperty.call(routes,slug))location.replace(routes[slug]+location.search);}\n  route();window.addEventListener('hashchange',route);\n})();\n`);
-  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/privacy/', '/projects/', ...landingRoutes, ...published.map(projectPath)];
+  const routes = ['/', '/pre-construction/', '/core-values/', '/people/', '/financing/', '/privacy/', '/projects/', ...landingRoutes, ...articleRoutes, ...published.map(projectPath)];
   files.set('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.map(route => `  <url><loc>${origin}${route}</loc></url>`).join('\n')}\n</urlset>\n`);
   return files;
 }
@@ -212,4 +291,4 @@ if (require.main === module) {
   }
   console.log(`Generated ${projects.length} project pages and their index.`);
 }
-module.exports = {outputs, projects, published, trimDescription, landing};
+module.exports = {outputs, projects, published, trimDescription, landing, articles, articleOutputs, formatDate};

@@ -1,0 +1,62 @@
+/* Main navigation and Contact section for pages outside the homepage (the Blog).
+   Mirrored from the inline styles in index.html: change both together. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem clamp(1.2rem,4vw,3.5rem);
+  transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease);}
+.nav--solid{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);padding-top:1rem;padding-bottom:1rem;box-shadow:0 1px 0 var(--line)}
+.nav__logo{display:flex;align-items:center;height:28px}
+.nav__logo img{height:100%;width:auto;display:block}
+.nav__logo .logo-dark{display:none}
+.nav--solid .nav__logo .logo-light{display:none}
+.nav--solid .nav__logo .logo-dark{display:block}
+.nav .nav__logo,.nav .nav__links a,.nav .nav__cta,.nav .nav__burger{color:#fff}
+.nav--solid .nav__logo,.nav--solid .nav__links a{color:var(--ink)}
+.nav__logo{text-shadow:0 1px 18px rgba(0,0,0,.35)}
+.nav--solid .nav__logo{text-shadow:none}
+.nav__links{display:flex;gap:2.2rem;align-items:center}
+/* Eight menu links: tighter spacing until the burger takes over at 1100px. */
+@media(max-width:1280px){.nav__links{gap:1.6rem}}
+@media(max-width:1180px){.nav__links{gap:1rem}}
+.nav__links a{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;position:relative;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+.nav--solid .nav__links a{text-shadow:none}
+.nav__links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:currentColor;transition:width .35s var(--ease)}
+.nav__links a:hover::after{width:100%}
+.nav__cta{border:1px solid currentColor;padding:.55rem 1.2rem;border-radius:40px;font-size:.78rem;
+  letter-spacing:.1em;text-transform:uppercase;transition:background .3s var(--ease),color .3s var(--ease);}
+.nav--solid .nav__cta{color:var(--navy);border-color:var(--navy)}
+.nav__cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.nav__burger{display:none}
+.nav__call{display:none}
+.nav__links a:focus-visible,.nav__burger:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:1100px){.nav{gap:1rem}.nav__logo{min-width:0}.nav__logo img{object-fit:contain}.nav__links{display:none}.nav__cta{display:none}.nav__burger{display:block;flex-shrink:0;background:none;font:inherit;cursor:pointer;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:.5rem .9rem;border-radius:30px}.nav--solid .nav__burger{color:var(--ink)}.nav__call{display:inline-flex;align-items:center;margin-left:auto;flex-shrink:0;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.5rem .95rem;border-radius:30px;background:#fff;color:var(--navy)!important;border:1px solid #fff}.nav--solid .nav__call{background:var(--navy);color:#fff!important;border-color:var(--navy)}.nav__call:focus-visible{outline:2px solid currentColor;outline-offset:4px}.nav--open .nav__links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:.75rem clamp(1.2rem,4vw,3.5rem) 1.25rem;background:rgba(255,255,255,.98);border-top:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.12)}.nav--open .nav__links a{color:var(--ink);padding:.8rem 0;text-shadow:none}}
+.sec{padding:clamp(4rem,11vh,9rem) clamp(1.2rem,4vw,3.5rem);position:relative;z-index:2}
+.sec__index{display:flex;align-items:center;gap:1rem;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--navy);margin-bottom:1.8rem}
+.sec__index i{width:34px;height:1px;background:var(--navy)}
+.contact{background:var(--navy);color:#fff;padding-top:clamp(6rem,18vh,14rem);padding-bottom:clamp(6rem,18vh,14rem)}
+.contact .sec__index{color:rgba(255,255,255,.7);margin-bottom:clamp(2rem,5vh,3.4rem)}
+.contact .sec__index i{background:rgba(255,255,255,.7)}
+.contact__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:end}
+.contact h2{font-weight:700;font-size:clamp(3.2rem,9vw,8rem);letter-spacing:-.035em;line-height:.92;margin-bottom:clamp(2rem,5vh,3.4rem)}
+.contact__cta{display:inline-flex;align-items:center;gap:.9rem;margin-top:.4rem;
+  background:#fff;color:var(--navy);font-weight:600;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:1.1rem 2.2rem;border-radius:44px;border:1px solid #fff;cursor:pointer;
+  transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease);}
+.contact__cta:hover{background:transparent;color:#fff;transform:translateY(-2px)}
+.contact__cta i{width:22px;height:1px;background:currentColor;transition:width .35s var(--ease)}
+.contact__cta:hover i{width:38px}
+.contact__details{display:flex;flex-direction:column;gap:1.8rem}
+.cdetail__lab{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.5rem}
+.cdetail a,.cdetail p{font-size:clamp(1.1rem,1.9vw,1.5rem);font-weight:700;letter-spacing:-.01em;transition:color .3s var(--ease)}
+.cdetail a:hover{color:#cdd6ff}
+@media(max-width:860px){.contact__grid{grid-template-columns:1fr;gap:2.4rem}}
+.contact__foot{max-width:1280px;margin:clamp(3rem,7vh,5rem) auto 0;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,.2);
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+  font-size:.78rem;letter-spacing:.1em;color:rgba(255,255,255,.6);}
+.contact__foot b{color:#fff;font-weight:600}
+.contact__page-links{display:flex;flex-wrap:wrap;gap:1.5rem}
+.contact__page-links a{display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,.78);transition:color .25s var(--ease)}
+.contact__page-links a:hover{color:#fff}
+/* Keyboard focus on the navy Contact section (pages that also load project-pages.css get a navy ring otherwise). */
+.contact a:focus-visible,.contact button:focus-visible{outline:3px solid #fff;outline-offset:4px}

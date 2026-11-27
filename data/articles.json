@@ -1,0 +1,19 @@
+{
+  "_note": "Article bodies live in data/articles/<slug>.md. The index lists the newest date first. Each new article ships as its own pull request on its publish date.",
+  "page": {
+    "eyebrow": "Blog",
+    "title": "Construction Insights Blog",
+    "h1": "Insights on luxury home and custom high-end construction.",
+    "intro": "What we're seeing on job sites, in pre-construction, and across the industry. Straight talk from the Montana team for the architects, owners, and developers we build with.",
+    "description": "Straight talk from Montana Contracting on high-end residential and commercial construction, pre-construction, and where the industry is headed."
+  },
+  "articles": [
+    {
+      "slug": "what-does-a-job-site-superintendent-do",
+      "title": "What Does a Job Site Superintendent Do?",
+      "description": "What a construction superintendent does in New York and New Jersey, and why job site leadership drives schedule, safety, quality, and success.",
+      "author": "Matt Nicosia",
+      "date": "2026-11-30"
+    }
+  ]
+}
