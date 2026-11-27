@@ -22,7 +22,7 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 .skip{position:absolute;left:1rem;top:-5rem;background:white;padding:1rem}.skip:focus{top:1rem}
 .page-header{background:#fff;padding:1rem clamp(1.2rem,4vw,3.5rem);border-bottom:1px solid var(--line)}
 .page-header__inner,.page-footer__inner{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.page-logo{display:flex;align-items:center;min-height:44px}.page-logo img{width:240px;height:auto}
+.page-logo{display:flex;align-items:center;min-height:44px}.page-logo img{width:auto;height:40px}
 .page-nav,.page-footer nav{display:flex;align-items:center;gap:.3rem 1.4rem;flex-wrap:wrap}
 .page-nav a,.page-footer a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem;text-underline-offset:5px}
 .page-nav a{text-decoration:none}.page-nav a:hover,.page-nav a[aria-current="page"]{color:var(--navy)}
@@ -30,7 +30,7 @@ a:focus-visible{outline:3px solid #719bff;outline-offset:5px}
 .sec__index{font-size:.85rem;color:var(--navy);margin-bottom:1rem}
 .page-title{font-size:clamp(2.6rem,6vw,5rem);line-height:1.03;letter-spacing:-.035em;font-weight:600;margin-bottom:clamp(2rem,4vw,3.5rem)}
 .page-footer{background:var(--navy);color:#fff;padding:2.5rem clamp(1.2rem,4vw,3.5rem)}
-@media(max-width:600px){.page-nav{gap:0 .7rem}.page-nav a{font-size:.86rem}.page-logo img{width:230px}.page-header__inner{gap:.25rem}}
+@media(max-width:600px){.page-nav{gap:0 .7rem}.page-nav a{font-size:.86rem}.page-logo img{height:36px}.page-header__inner{gap:.25rem}}
 .finance{background:var(--dark);color:#fff}
 .finance__head{max-width:1280px;margin:0 auto 1rem}
 .finance__head .sec__index{color:#fff;font-weight:600}
