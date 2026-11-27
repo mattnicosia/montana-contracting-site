@@ -23,13 +23,16 @@ commit.
 
 | File | Use |
 | --- | --- |
-| `assets/montana-logo.svg` | Dark logo on white and off-white |
-| `assets/montana-logo-white.svg` | White logo on photography and on dark sections |
-| `assets/montana-logo-white.png` | White logo where SVG will not render |
-| `assets/montana-logo-email.png` | Email signatures and mail templates |
+| `assets/montana-logo.svg` | The M alone in brand blue `#0028cc`, on white and off-white. It replaces the old wordmark in every header |
+| `assets/montana-logo-white.svg` | The M alone in white, over photography and on dark sections |
+| `assets/montana-logo-white.png` | Old wordmark, not yet updated. No page uses it |
+| `assets/montana-logo-email.png` | Old wordmark, not yet updated. Email signatures and mail templates |
+| `favicon.svg` | The M in blue on a white tile, white on a blue tile in a dark browser. Pages request it as `/favicon.svg?v=montana-m-2` |
 
-The logo sits 28px tall in the fixed home navigation and 240px wide in the header of an
-information page, dropping to 230px below 600px. Over photography the white logo carries
+The M sits 40px tall in the fixed home navigation and in the header of an information page
+(36px below 600px). A project page header shows it 36px tall (30px below 420px). The words
+"Montana Contracting" no longer sit beside it, so each logo link carries
+`aria-label="Montana Contracting Corp home"`. Over photography the white logo carries
 `text-shadow:0 1px 18px rgba(0,0,0,.35)` so it holds its edge against a bright sky. That
 shadow comes off the moment the background turns solid.
 
